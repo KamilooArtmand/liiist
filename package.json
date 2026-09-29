@@ -1,0 +1,51 @@
+{
+  "name": "liiist",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "dev:worker": "wrangler dev --port 8787 --ip 0.0.0.0",
+    "build": "vite build",
+    "typecheck": "tsc -p .",
+    "preview": "npm run build && wrangler dev --port 8787 --ip 0.0.0.0",
+    "db:migrate": "wrangler d1 migrations apply liiist --local",
+    "db:migrate:remote": "wrangler d1 migrations apply liiist --remote",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KamilooArtmand/liiist.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KamilooArtmand/liiist/issues"
+  },
+  "homepage": "https://github.com/KamilooArtmand/liiist#readme",
+  "dependencies": {
+    "@tanstack/react-query": "^5.104.0",
+    "hono": "^4.13.11",
+    "lucide-react": "^1.48.0",
+    "motion": "^13.4.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router": "^8.4.0",
+    "sonner": "^2.0.8",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260929.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vite-plugin-pwa": "^1.3.0",
+    "wrangler": "^4.143.1"
+  },
+  "type": "module",
+  "private": true
+}

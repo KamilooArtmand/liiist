@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-soft: var(--soft);
+}
+
+:root {
+  --bg: #fafafa;
+  --fg: #0a0a0a;
+  --muted: #8a8a8a;
+  --line: #ececec;
+  --card: #ffffff;
+  --soft: #f2f2f2;
+  color-scheme: light;
+}
+.dark {
+  --bg: #0a0a0a;
+  --fg: #f5f5f5;
+  --muted: #7a7a7a;
+  --line: #1f1f1f;
+  --card: #121212;
+  --soft: #181818;
+  color-scheme: dark;
+}
+html[lang="fa"] { --font-sans: "Vazirmatn", "Inter", ui-sans-serif, system-ui, sans-serif; }
+html, body { background: var(--bg); color: var(--fg); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+::selection { background: var(--fg); color: var(--bg); }
+input, textarea { background: transparent; outline: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.pt-safe { padding-top: env(safe-area-inset-top); }
+.hue { --h: 250; }
+.accent-bg { background: oklch(0.72 0.16 var(--h)); }
+.accent-text { color: oklch(0.62 0.18 var(--h)); }
+.dark .accent-text { color: oklch(0.78 0.14 var(--h)); }
+.accent-soft { background: oklch(0.95 0.04 var(--h)); }
+.dark .accent-soft { background: oklch(0.24 0.05 var(--h)); }
+.glow { background: radial-gradient(60% 60% at 50% 0%, oklch(0.8 0.15 var(--h) / .35), transparent 70%); }
