@@ -66,8 +66,8 @@ export const AutonomousKernelModal: React.FC<AutonomousKernelModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-3xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 flex flex-col max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-200">
+      <div className="w-full max-w-3xl bg-white dark:bg-stone-950  rounded-3xl  border border-stone-200 dark:border-stone-800 flex flex-col max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-stone-200/80 dark:border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -166,7 +166,7 @@ export const AutonomousKernelModal: React.FC<AutonomousKernelModalProps> = ({
               ]).map((routine, i) => (
                 <div
                   key={i}
-                  className="p-3 rounded-2xl bg-stone-50/80 dark:bg-stone-900/80 border border-stone-200 dark:border-stone-800 flex items-center gap-2 text-xs font-medium text-stone-800 dark:text-stone-200"
+                  className="p-3 rounded-2xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 flex items-center gap-2 text-xs font-medium text-stone-800 dark:text-stone-200"
                 >
                   <CheckCircle2 className="w-4 h-4 text-stone-900 dark:text-stone-100 shrink-0" />
                   <span className="truncate">{routine}</span>
@@ -185,7 +185,7 @@ export const AutonomousKernelModal: React.FC<AutonomousKernelModalProps> = ({
               <span className="text-[10px] text-stone-400 font-mono">Live Audited</span>
             </div>
 
-            <div className="divide-y divide-stone-100 dark:divide-stone-800 max-h-48 overflow-y-auto bg-stone-50/60 dark:bg-stone-900/40 rounded-2xl border border-stone-200 dark:border-stone-800 p-2">
+            <div className="divide-y divide-stone-100 dark:divide-stone-800 max-h-48 overflow-y-auto bg-stone-50 dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 p-2">
               {(telemetry?.autonomousLog || []).map(entry => (
                 <div key={entry.id} className="py-2.5 px-3 flex items-start gap-3 text-xs">
                   <span className="mt-0.5 px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200">
@@ -206,7 +206,7 @@ export const AutonomousKernelModal: React.FC<AutonomousKernelModalProps> = ({
         </div>
 
         {/* Footer with Manual Trigger Button */}
-        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-between bg-stone-50/80 dark:bg-stone-900/80">
+        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-between bg-stone-50 dark:bg-stone-900">
           <span className="text-xs text-stone-400 flex items-center gap-1.5 font-mono">
             <ShieldCheck className="w-4 h-4 text-stone-700 dark:text-stone-300" /> 100% Autonomous
           </span>
@@ -214,7 +214,7 @@ export const AutonomousKernelModal: React.FC<AutonomousKernelModalProps> = ({
             type="button"
             disabled={healing}
             onClick={handleSelfHeal}
-            className="px-4 py-2 text-xs font-bold rounded-full bg-black text-white dark:bg-white dark:text-black transition flex items-center gap-2 shadow-xs cursor-pointer hover:opacity-90 disabled:opacity-50"
+            className="px-4 py-2 text-xs font-bold rounded-full bg-black text-white dark:bg-white dark:text-black transition flex items-center gap-2  cursor-pointer hover:opacity-90 disabled:opacity-50"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${healing ? 'animate-spin' : ''}`} />
             <span>{healing ? 'Running Self-Heal...' : 'Execute Self-Healing Cycle'}</span>

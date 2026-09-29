@@ -44,8 +44,8 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 bg-stone-900/60 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="w-full max-w-2xl bg-white dark:bg-stone-900 rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[75vh]">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 bg-stone-900  animate-in fade-in duration-150">
+      <div className="w-full max-w-2xl bg-white dark:bg-stone-900 rounded-2xl  border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[75vh]">
         {/* Search Bar Input */}
         <div className="flex items-center px-4 py-3 border-b border-stone-100 dark:border-stone-800 gap-3">
           <Search className="w-5 h-5 text-stone-400" />
@@ -88,7 +88,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                   onSelectItem(list.id, item);
                   onClose();
                 }}
-                className="p-3 hover:bg-stone-50 dark:hover:bg-stone-800/60 rounded-xl cursor-pointer transition flex items-center justify-between group gap-3"
+                className="p-3 hover:bg-stone-50 dark:hover:bg-stone-800 rounded-xl cursor-pointer transition flex items-center justify-between group gap-3"
               >
                 <div className="flex items-start gap-3 min-w-0">
                   <div className="mt-0.5 text-stone-400">
@@ -139,7 +139,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2.5 bg-stone-50 dark:bg-stone-950/40 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-400 flex items-center justify-between">
+        <div className="px-4 py-2.5 bg-stone-50 dark:bg-stone-950 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-400 flex items-center justify-between">
           <span>Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''}</span>
           <span>Click any item to view or edit</span>
         </div>

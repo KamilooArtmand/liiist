@@ -45,8 +45,8 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl rounded-3xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl border border-stone-200 dark:border-stone-800 shadow-2xl overflow-hidden flex flex-col h-[85vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl rounded-3xl bg-white dark:bg-stone-950  border border-stone-200 dark:border-stone-800  overflow-hidden flex flex-col h-[85vh]">
         {/* Header */}
         <div className="px-6 py-4 border-b border-stone-200/80 dark:border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -69,7 +69,7 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
         </div>
 
         {/* Toolbar */}
-        <div className="p-4 border-b border-stone-100 dark:border-stone-800/80 bg-stone-50/50 dark:bg-stone-900/30 flex items-center justify-between gap-3">
+        <div className="p-4 border-b border-stone-100 dark:border-stone-800/80 bg-stone-50 dark:bg-stone-900 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 flex-1 px-3 py-1.5 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
             <Search className="w-3.5 h-3.5 text-stone-400" />
             <input
@@ -87,7 +87,7 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
               onCreateNewList();
               onClose();
             }}
-            className="px-4 py-2 rounded-2xl bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition flex items-center gap-1.5 shrink-0 shadow-xs cursor-pointer hover:opacity-90"
+            className="px-4 py-2 rounded-2xl bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition flex items-center gap-1.5 shrink-0  cursor-pointer hover:opacity-90"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Create New List</span>
@@ -102,7 +102,7 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
             return (
               <div
                 key={list.id}
-                className="p-3.5 rounded-2xl bg-stone-50/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-stone-800 hover:border-stone-400 dark:hover:border-stone-600 transition flex items-center justify-between gap-3 group"
+                className="p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900 border border-stone-200/60 dark:border-stone-800 hover:border-stone-400 dark:hover:border-stone-600 transition flex items-center justify-between gap-3 group"
               >
                 <div
                   onClick={() => {
@@ -125,7 +125,7 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
                       <span className="text-[10px] font-mono text-stone-400">
                         {list.items.length} items ({completedCount} done)
                       </span>
-                      <span className="text-[10px] uppercase font-bold px-1.5 py-0.2 rounded bg-stone-200/60 dark:bg-stone-800 text-stone-600 dark:text-stone-400">
+                      <span className="text-[10px] uppercase font-bold px-1.5 py-0.2 rounded bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-400">
                         {list.type}
                       </span>
                     </div>
@@ -136,7 +136,7 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
                   <button
                     type="button"
                     onClick={() => onExportList(list)}
-                    className="p-2 rounded-xl text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 hover:bg-stone-200/60 dark:hover:bg-stone-800 transition"
+                    className="p-2 rounded-xl text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 hover:bg-stone-200 dark:hover:bg-stone-800 transition"
                     title="Export List"
                   >
                     <Share2 className="w-3.5 h-3.5" />
@@ -148,7 +148,7 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
                         onDeleteList(list.id);
                       }
                     }}
-                    className="p-2 rounded-xl text-stone-400 hover:text-red-500 hover:bg-stone-200/60 dark:hover:bg-stone-800 transition"
+                    className="p-2 rounded-xl text-stone-400 hover:text-red-500 hover:bg-stone-200 dark:hover:bg-stone-800 transition"
                     title="Delete List"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -166,7 +166,7 @@ export const ContentManagerModal: React.FC<ContentManagerModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3.5 border-t border-stone-200/80 dark:border-stone-800 bg-stone-50/60 dark:bg-stone-900/60 flex items-center justify-between text-xs text-stone-400">
+        <div className="px-6 py-3.5 border-t border-stone-200/80 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex items-center justify-between text-xs text-stone-400">
           <span>{filteredLists.length} lists listed</span>
           <span>Click any list to open in Workspace</span>
         </div>

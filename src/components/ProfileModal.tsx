@@ -20,8 +20,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-lg rounded-3xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl border border-stone-200 dark:border-stone-800 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-200">
+      <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-stone-950  border border-stone-200 dark:border-stone-800  overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
         <div className="px-6 py-4 border-b border-stone-200/80 dark:border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -42,8 +42,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         {/* Body */}
         <div className="p-6 space-y-6 overflow-y-auto">
           {/* Identity Card */}
-          <div className="flex items-center gap-4 p-4 rounded-2xl bg-stone-100/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-stone-800">
-            <div className="w-16 h-16 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-black text-2xl shadow-md shrink-0">
+          <div className="flex items-center gap-4 p-4 rounded-2xl bg-stone-100 dark:bg-stone-900 border border-stone-200/60 dark:border-stone-800">
+            <div className="w-16 h-16 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-black text-2xl  shrink-0">
               K
             </div>
             <div className="min-w-0">
@@ -125,7 +125,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex justify-end bg-stone-50/60 dark:bg-stone-900/60">
+        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex justify-end bg-stone-50 dark:bg-stone-900">
           <button
             type="button"
             onClick={onClose}

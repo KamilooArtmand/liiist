@@ -90,8 +90,8 @@ export const CreateListModal: React.FC<CreateListModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
-      <div className="w-full max-w-lg bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-150">
+      <div className="w-full max-w-lg bg-white dark:bg-stone-950  rounded-3xl  border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200/80 dark:border-stone-800">
           <div className="flex items-center gap-2">
@@ -154,8 +154,8 @@ export const CreateListModal: React.FC<CreateListModalProps> = ({
                   onClick={() => setType(item.type)}
                   className={`text-left p-3 rounded-2xl border text-sm transition flex flex-col gap-1 cursor-pointer ${
                     type === item.type
-                      ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black shadow-xs'
-                      : 'border-stone-200 dark:border-stone-800 bg-stone-50/50 dark:bg-stone-900/40 text-stone-600 dark:text-stone-300 hover:border-stone-400'
+                      ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black '
+                      : 'border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 text-stone-600 dark:text-stone-300 hover:border-stone-400'
                   }`}
                 >
                   <div className="flex items-center gap-2 font-bold text-xs">
@@ -183,7 +183,7 @@ export const CreateListModal: React.FC<CreateListModalProps> = ({
                   onClick={() => setIcon(em)}
                   className={`w-8 h-8 flex items-center justify-center text-base rounded-xl transition ${
                     icon === em
-                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      ? 'bg-black text-white dark:bg-white dark:text-black '
                       : 'hover:bg-stone-200 dark:hover:bg-stone-800'
                   }`}
                 >
@@ -205,7 +205,7 @@ export const CreateListModal: React.FC<CreateListModalProps> = ({
             <button
               type="submit"
               disabled={!title.trim()}
-              className="px-5 py-2 text-xs font-bold text-white dark:text-black bg-black dark:bg-white hover:opacity-90 disabled:opacity-40 rounded-full shadow-xs transition cursor-pointer"
+              className="px-5 py-2 text-xs font-bold text-white dark:text-black bg-black dark:bg-white hover:opacity-90 disabled:opacity-40 rounded-full  transition cursor-pointer"
             >
               {initialData ? 'Save Changes' : 'Create List'}
             </button>

@@ -42,7 +42,7 @@ export const CapsuleBreadcrumb: React.FC<CapsuleBreadcrumbProps> = ({
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex items-center justify-between px-3 sm:px-4 py-1.5 rounded-full bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 backdrop-blur-2xl shadow-xs transition-all ${className}`}
+      className={`flex items-center justify-between px-3 sm:px-4 py-1.5 rounded-full bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800   transition-all ${className}`}
     >
       {/* Left side: Back affordance (optional) + Path Segments with 3 Distinct Color Tones */}
       <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-mono overflow-x-auto no-scrollbar py-0.5 min-w-0">
@@ -67,7 +67,7 @@ export const CapsuleBreadcrumb: React.FC<CapsuleBreadcrumbProps> = ({
           // 3. Subdivision (عناوینی که زیرمجموعه و جلوترند): Subtle, muted, faded opacity
           const toneClass =
             tone === 'current'
-              ? 'font-bold text-neutral-950 dark:text-white bg-neutral-200/90 dark:bg-neutral-800/90 px-2 py-0.5 rounded-md shadow-2xs whitespace-nowrap'
+              ? 'font-bold text-neutral-950 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-md whitespace-nowrap'
               : tone === 'ancestor'
               ? 'font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white whitespace-nowrap'
               : 'font-normal text-neutral-400 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400 opacity-60 whitespace-nowrap';
@@ -111,7 +111,7 @@ export const CapsuleBreadcrumb: React.FC<CapsuleBreadcrumbProps> = ({
             }}
             className={`p-1 sm:p-1.5 rounded-full transition cursor-pointer flex items-center justify-center ${
               isBookmarked
-                ? 'text-black dark:text-white bg-neutral-200/60 dark:bg-neutral-800'
+                ? 'text-black dark:text-white bg-neutral-200 dark:bg-neutral-800'
                 : 'text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'
             }`}
             title={isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks'}

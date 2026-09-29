@@ -84,7 +84,7 @@ export const StatesDirectoryPage: React.FC<StatesDirectoryPageProps> = ({
         {/* Main Content Area: Directory Header & States Grid */}
         <div className="flex-1 w-full space-y-6">
           {/* Header Card */}
-          <div className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+          <div className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
@@ -115,7 +115,7 @@ export const StatesDirectoryPage: React.FC<StatesDirectoryPageProps> = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Filter states by name, code or capital..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-full bg-neutral-100/70 dark:bg-neutral-950/70 border border-neutral-200/60 dark:border-neutral-800/60 text-xs text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-full bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/60 dark:border-neutral-800/60 text-xs text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-400"
                 />
               </div>
 
@@ -177,7 +177,7 @@ export const StatesDirectoryPage: React.FC<StatesDirectoryPageProps> = ({
                 <div
                   key={state.code}
                   onClick={() => onSelectState(state)}
-                  className="liquid-glass-card rounded-3xl overflow-hidden bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all cursor-pointer group flex flex-col justify-between"
+                  className="liquid-glass-card rounded-3xl overflow-hidden bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all cursor-pointer group flex flex-col justify-between"
                 >
                   {/* State Card Mini Cover Photo Header with Flag */}
                   <div className="relative w-full h-32 overflow-hidden bg-neutral-200 dark:bg-neutral-800">
@@ -196,19 +196,19 @@ export const StatesDirectoryPage: React.FC<StatesDirectoryPageProps> = ({
                       <USStateFlag
                         code={state.code}
                         name={state.name}
-                        className="w-12 h-7.5 rounded-md shadow-md border border-white/40"
+                        className="w-12 h-7.5 rounded-md border border-white/40"
                       />
-                      <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-md bg-black/60 text-white backdrop-blur-xs">
+                      <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-md bg-black text-white">
                         {state.code} • {state.admissionYear}
                       </span>
                     </div>
 
                     {/* Bottom row over cover: State name */}
                     <div className="absolute bottom-2.5 left-3 right-3">
-                      <h3 className="text-lg font-bold text-white tracking-tight drop-shadow-sm truncate">
+                      <h3 className="text-lg font-bold text-white tracking-tight truncate">
                         {state.name}
                       </h3>
-                      <p className="text-[10px] text-white/80 font-mono truncate">
+                      <p className="text-[10px] text-white/70 font-mono truncate">
                         "{state.nickname}"
                       </p>
                     </div>

@@ -9,7 +9,7 @@ interface CountryFlagProps {
 
 export const CountryFlag: React.FC<CountryFlagProps> = ({
   code,
-  className = 'w-6 h-4.5 rounded-sm overflow-hidden inline-block shrink-0 shadow-2xs',
+  className = 'w-6 h-4.5 rounded-sm overflow-hidden inline-block shrink-0',
   title
 }) => {
   const upperCode = code.toUpperCase();

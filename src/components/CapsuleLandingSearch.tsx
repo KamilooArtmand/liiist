@@ -136,7 +136,7 @@ export const CapsuleLandingSearch: React.FC<CapsuleLandingSearchProps> = ({
   return (
     <div className="flex-1 flex flex-col items-center justify-center min-h-[82vh] px-4 sm:px-6 relative">
       {/* Background Soft Glow Aura */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 sm:w-160 h-96 sm:h-160 rounded-full bg-stone-300/30 dark:bg-stone-800/20 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 sm:w-160 h-96 sm:h-160 rounded-full bg-stone-300 dark:bg-stone-800 blur-3xl pointer-events-none -z-10" />
 
       <div className="w-full max-w-2xl flex flex-col items-center text-center space-y-6">
         {/* Minimalist Monogram Header */}
@@ -153,7 +153,7 @@ export const CapsuleLandingSearch: React.FC<CapsuleLandingSearchProps> = ({
         <div className="w-full relative">
           <form
             onSubmit={handleSubmit}
-            className={`w-full capsule-bar px-5 py-3.5 sm:py-4.5 bg-white/95 dark:bg-stone-900/95 border border-stone-200 dark:border-stone-800 flex items-center gap-3.5 transition-all duration-300 ${
+            className={`w-full capsule-bar px-5 py-3.5 sm:py-4.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 flex items-center gap-3.5 transition-all duration-300 ${
               isFocused ? 'ring-2 ring-black dark:ring-white scale-101' : ''
             }`}
           >
@@ -187,7 +187,7 @@ export const CapsuleLandingSearch: React.FC<CapsuleLandingSearchProps> = ({
             <button
               type="submit"
               disabled={isSynthesizing}
-              className="p-2 sm:px-4 sm:py-2 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition hover:opacity-90 flex items-center gap-2 shrink-0 shadow-md cursor-pointer disabled:opacity-40"
+              className="p-2 sm:px-4 sm:py-2 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition hover:opacity-90 flex items-center gap-2 shrink-0  cursor-pointer disabled:opacity-40"
               title="Search or Synthesize with AI"
             >
               {isSynthesizing ? (
@@ -213,7 +213,7 @@ export const CapsuleLandingSearch: React.FC<CapsuleLandingSearchProps> = ({
                 key={seed.id}
                 type="button"
                 onClick={() => onOpenCosmicList(seed.id)}
-                className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/80 dark:bg-stone-900/80 border border-stone-200/80 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:border-transparent transition shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:border-transparent transition flex items-center gap-1.5 cursor-pointer"
               >
                 <span>{seed.icon}</span>
                 <span>{seed.label}</span>
@@ -223,11 +223,11 @@ export const CapsuleLandingSearch: React.FC<CapsuleLandingSearchProps> = ({
 
           {/* Live Search & Synthesize Dropdown Drawer */}
           {query.trim() && (
-            <div className="absolute top-full left-0 right-0 mt-3 rounded-3xl bg-white/95 dark:bg-stone-900/95 backdrop-blur-2xl border border-stone-200 dark:border-stone-800 shadow-2xl overflow-hidden z-30 p-2 space-y-1 text-left rtl:text-right animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="absolute top-full left-0 right-0 mt-3 rounded-3xl bg-white dark:bg-stone-900  border border-stone-200 dark:border-stone-800  overflow-hidden z-30 p-2 space-y-1 text-left rtl:text-right animate-in fade-in slide-in-from-top-2 duration-150">
               {/* AI Synthesizer Action Item */}
               <div
                 onClick={handleSubmit}
-                className="p-3.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition flex items-center justify-between cursor-pointer group"
+                className="p-3.5 rounded-2xl bg-stone-100 dark:bg-stone-800 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition flex items-center justify-between cursor-pointer group"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-black text-white dark:bg-white dark:text-black group-hover:bg-stone-800 group-hover:text-white dark:group-hover:bg-stone-200 dark:group-hover:text-black flex items-center justify-center shrink-0">
@@ -265,7 +265,7 @@ export const CapsuleLandingSearch: React.FC<CapsuleLandingSearchProps> = ({
                       onExpandNode(res.itemObj, res.parentTitle);
                     }
                   }}
-                  className="p-3 rounded-2xl hover:bg-stone-100 dark:hover:bg-stone-800/80 transition flex items-center justify-between gap-3 cursor-pointer group"
+                  className="p-3 rounded-2xl hover:bg-stone-100 dark:hover:bg-stone-800 transition flex items-center justify-between gap-3 cursor-pointer group"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <span className="text-xl shrink-0">{res.icon || '📄'}</span>

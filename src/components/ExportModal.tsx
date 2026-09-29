@@ -48,8 +48,8 @@ export const ExportModal: React.FC<ExportModalProps> = ({ list, isOpen, onClose 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
-      <div className="w-full max-w-xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[85vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-150">
+      <div className="w-full max-w-xl bg-white dark:bg-stone-950  rounded-3xl  border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200/80 dark:border-stone-800">
           <div className="flex items-center gap-2">
@@ -76,7 +76,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ list, isOpen, onClose 
             onClick={() => setFormat('markdown')}
             className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${
               format === 'markdown'
-                ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                ? 'bg-black text-white dark:bg-white dark:text-black '
                 : 'text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800'
             }`}
           >
@@ -87,7 +87,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ list, isOpen, onClose 
             onClick={() => setFormat('text')}
             className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${
               format === 'text'
-                ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                ? 'bg-black text-white dark:bg-white dark:text-black '
                 : 'text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800'
             }`}
           >
@@ -98,7 +98,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ list, isOpen, onClose 
             onClick={() => setFormat('json')}
             className={`px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${
               format === 'json'
-                ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                ? 'bg-black text-white dark:bg-white dark:text-black '
                 : 'text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800'
             }`}
           >
@@ -107,14 +107,14 @@ export const ExportModal: React.FC<ExportModalProps> = ({ list, isOpen, onClose 
         </div>
 
         {/* Content Preview */}
-        <div className="p-6 overflow-y-auto flex-1 font-mono text-xs text-stone-800 dark:text-stone-200 bg-stone-50 dark:bg-stone-900/60">
+        <div className="p-6 overflow-y-auto flex-1 font-mono text-xs text-stone-800 dark:text-stone-200 bg-stone-50 dark:bg-stone-900">
           <pre className="whitespace-pre-wrap select-all font-mono leading-relaxed">
             {exportContent}
           </pre>
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-between bg-stone-50/60 dark:bg-stone-900/60">
+        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-between bg-stone-50 dark:bg-stone-900">
           <span className="text-xs text-stone-400 font-mono">
             {list.items.length} items
           </span>
@@ -137,7 +137,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ list, isOpen, onClose 
             <button
               type="button"
               onClick={handleDownload}
-              className="px-4 py-2 text-xs font-bold flex items-center gap-1.5 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 rounded-full shadow-xs transition cursor-pointer"
+              className="px-4 py-2 text-xs font-bold flex items-center gap-1.5 bg-black text-white dark:bg-white dark:text-black hover:opacity-90 rounded-full  transition cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" /> Download File
             </button>

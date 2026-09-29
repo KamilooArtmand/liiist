@@ -64,7 +64,7 @@ const WIKIMEDIA_STATE_FLAGS: Record<string, string> = {
 export const USStateFlag: React.FC<USStateFlagProps> = ({
   code,
   name,
-  className = 'w-16 h-10 rounded-lg shadow-sm object-cover border border-neutral-200/60 dark:border-neutral-700/60 shrink-0',
+  className = 'w-16 h-10 rounded-lg  object-cover border border-neutral-200/60 dark:border-neutral-700/60 shrink-0',
   flagUrl
 }) => {
   const [hasError, setHasError] = useState(false);

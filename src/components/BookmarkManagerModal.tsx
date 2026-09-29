@@ -46,8 +46,8 @@ export const BookmarkManagerModal: React.FC<BookmarkManagerModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl rounded-3xl bg-white/95 dark:bg-neutral-900/95 backdrop-blur-2xl border border-neutral-200 dark:border-neutral-800 shadow-2xl overflow-hidden flex flex-col h-[80vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl rounded-3xl bg-white dark:bg-neutral-900  border border-neutral-200 dark:border-neutral-800  overflow-hidden flex flex-col h-[80vh]">
         {/* Header */}
         <div className="px-6 py-4 border-b border-neutral-200/80 dark:border-neutral-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -86,7 +86,7 @@ export const BookmarkManagerModal: React.FC<BookmarkManagerModalProps> = ({
                       onSelectBookmarkedPage?.(page);
                       onClose();
                     }}
-                    className="p-3.5 rounded-2xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/60 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition cursor-pointer flex items-center justify-between gap-3 group"
+                    className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/60 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition cursor-pointer flex items-center justify-between gap-3 group"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-8 h-8 rounded-xl bg-white dark:bg-neutral-800 flex items-center justify-center text-neutral-900 dark:text-white border border-neutral-200/60 dark:border-neutral-700/60 shrink-0">
@@ -157,7 +157,7 @@ export const BookmarkManagerModal: React.FC<BookmarkManagerModalProps> = ({
                     onSelectCosmicList(cl.id);
                     onClose();
                   }}
-                  className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/60 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition cursor-pointer flex items-center gap-3 group"
+                  className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/60 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition cursor-pointer flex items-center gap-3 group"
                 >
                   <span className="text-xl shrink-0">{cl.icon}</span>
                   <div className="min-w-0 flex-1">
@@ -175,7 +175,7 @@ export const BookmarkManagerModal: React.FC<BookmarkManagerModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3.5 border-t border-neutral-200/80 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60 flex items-center justify-end">
+        <div className="px-6 py-3.5 border-t border-neutral-200/80 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 flex items-center justify-end">
           <button
             type="button"
             onClick={onClose}

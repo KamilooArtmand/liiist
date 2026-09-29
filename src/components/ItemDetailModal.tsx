@@ -107,8 +107,8 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
   const dateBadge = formatDueDate(dueDate);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
-      <div className="w-full max-w-2xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-150">
+      <div className="w-full max-w-2xl bg-white dark:bg-stone-950  rounded-3xl  border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200/80 dark:border-stone-800">
           <div className="flex items-center gap-3">
@@ -168,7 +168,7 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
           </div>
 
           {/* Quick Properties Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-stone-50 dark:bg-stone-900/60 rounded-2xl border border-stone-200 dark:border-stone-800">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-stone-50 dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800">
             {/* Priority Selector */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-stone-400 mb-1.5">
@@ -182,7 +182,7 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
                     onClick={() => setPriority(p)}
                     className={`flex-1 py-1.5 px-2 text-xs font-bold rounded-xl border transition cursor-pointer ${
                       priority === p
-                        ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                        ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black '
                         : 'border-stone-200 dark:border-stone-700 text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800'
                     }`}
                   >
@@ -381,7 +381,7 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-end gap-3 bg-stone-50/60 dark:bg-stone-900/60">
+        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-end gap-3 bg-stone-50 dark:bg-stone-900">
           <button
             type="button"
             onClick={onClose}
@@ -393,7 +393,7 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
             type="button"
             onClick={handleSave}
             disabled={!title.trim()}
-            className="px-5 py-2 text-xs font-bold text-white dark:text-black bg-black dark:bg-white hover:opacity-90 disabled:opacity-40 rounded-full shadow-xs transition cursor-pointer"
+            className="px-5 py-2 text-xs font-bold text-white dark:text-black bg-black dark:bg-white hover:opacity-90 disabled:opacity-40 rounded-full  transition cursor-pointer"
           >
             Save Changes
           </button>

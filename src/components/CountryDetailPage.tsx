@@ -92,12 +92,12 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
         {/* Main Bento Cards Container */}
         <div className="flex-1 w-full space-y-6">
           {/* Bento Card 1: Hero Identity Card (Full Width) */}
-          <div id="overview" className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+          <div id="overview" className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
               {/* High-fidelity Vector SVG Flag */}
               <CountryFlag
                 code={country.code}
-                className="w-24 h-16 sm:w-28 sm:h-18 rounded-lg shadow-lg shrink-0"
+                className="w-24 h-16 sm:w-28 sm:h-18 rounded-lg  shrink-0"
                 title={country.name}
               />
 
@@ -128,13 +128,13 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
 
             {/* Quick Tag Badges with Direct Access Badge to States */}
             <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-mono">
-              <span className="px-2.5 py-1 rounded-xl bg-neutral-100 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 border border-neutral-200/40 dark:border-neutral-800/40">
+              <span className="px-2.5 py-1 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200/40 dark:border-neutral-800/40">
                 {country.continent}
               </span>
-              <span className="px-2.5 py-1 rounded-xl bg-neutral-100 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 border border-neutral-200/40 dark:border-neutral-800/40">
+              <span className="px-2.5 py-1 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200/40 dark:border-neutral-800/40">
                 Capital: {country.capital}
               </span>
-              <span className="px-2.5 py-1 rounded-xl bg-neutral-100 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 border border-neutral-200/40 dark:border-neutral-800/40">
+              <span className="px-2.5 py-1 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200/40 dark:border-neutral-800/40">
                 Currency: {country.currency.code} ({country.currency.symbol})
               </span>
 
@@ -143,7 +143,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                 <button
                   type="button"
                   onClick={onOpenStatesDirectory}
-                  className="px-3 py-1 rounded-xl bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 font-bold hover:opacity-90 transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+                  className="px-3 py-1 rounded-xl bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 font-bold hover:opacity-90 transition-all flex items-center gap-1.5 cursor-pointer "
                   title="Explore States and Subdivisions directory"
                 >
                   <Layers className="w-3.5 h-3.5" />
@@ -155,13 +155,13 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
           </div>
 
           {/* Bento Grid: Statistics & Specs */}
-          <div id="demographics" className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+          <div id="demographics" className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block">
               Population, Landmass & Demographics
             </span>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
-              <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <div className="flex items-center gap-1.5 text-neutral-400 text-[10px] mb-1">
                   <Users className="w-3.5 h-3.5" />
                   <span>POPULATION</span>
@@ -171,7 +171,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <div className="flex items-center gap-1.5 text-neutral-400 text-[10px] mb-1">
                   <Maximize2 className="w-3.5 h-3.5" />
                   <span>AREA (SQ KM)</span>
@@ -181,7 +181,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <div className="flex items-center gap-1.5 text-neutral-400 text-[10px] mb-1">
                   <Building2 className="w-3.5 h-3.5" />
                   <span>CAPITAL</span>
@@ -191,7 +191,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <div className="flex items-center gap-1.5 text-neutral-400 text-[10px] mb-1">
                   <Calendar className="w-3.5 h-3.5" />
                   <span>FOUNDED</span>
@@ -208,14 +208,14 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
           {/* Bento 2 Columns: History & Culture */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* History & Genesis */}
-            <div id="history" className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+            <div id="history" className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
                 <BookOpen className="w-3.5 h-3.5" />
                 History & Genesis
               </span>
 
               <div className="space-y-3 text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
-                <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40">
+                <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                   <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block mb-1">
                     Historical Emergence & Origin
                   </span>
@@ -225,7 +225,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40">
+                <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                   <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block mb-1">
                     Revolutions & Transformations
                   </span>
@@ -238,13 +238,13 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
             </div>
 
             {/* Culture & Heritage */}
-            <div id="culture" className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+            <div id="culture" className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
                 <Palette className="w-3.5 h-3.5" />
                 Culture, Arts & Heritage
               </span>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono leading-relaxed text-neutral-700 dark:text-neutral-300">
+              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono leading-relaxed text-neutral-700 dark:text-neutral-300">
                 <p>
                   {mergedCountry.cultureHeritage ||
                     `${country.name} possesses rich cultural heritage, vibrant linguistic traditions, indigenous folklore, world-acclaimed culinary art, and celebrated literature.`}
@@ -252,7 +252,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
               </div>
 
               {/* Language Section */}
-              <div id="language" className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono">
+              <div id="language" className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono">
                 <div className="flex items-center gap-1.5 text-neutral-400 text-[10px] mb-1">
                   <Languages className="w-3.5 h-3.5" />
                   <span>OFFICIAL LANGUAGES</span>
@@ -267,13 +267,13 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
           {/* Bento 2 Columns: Politics/Government & Luminaries */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Government, Politics & Parties */}
-            <div id="government" className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+            <div id="government" className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
                 <Scale className="w-3.5 h-3.5" />
                 Government & Leadership
               </span>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono space-y-1">
+              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono space-y-1">
                 <div className="font-bold text-neutral-900 dark:text-white">
                   {mergedCountry.politics?.system || 'Constitutional Republic & Democratic Framework'}
                 </div>
@@ -284,7 +284,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                 )}
               </div>
 
-              <div id="parties" className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono">
+              <div id="parties" className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono">
                 <span className="text-[10px] text-neutral-400 uppercase tracking-wider block mb-1 flex items-center gap-1">
                   <Flag className="w-3 h-3 text-neutral-400" />
                   Political Spectrum & Parliaments
@@ -296,7 +296,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
             </div>
 
             {/* Luminaries */}
-            <div id="luminaries" className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+            <div id="luminaries" className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
                 <Award className="w-3.5 h-3.5" />
                 Celebrated Figures & Luminaries
@@ -321,13 +321,13 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
           {/* Bento 2 Columns: Economy/Brands & Sports/Tourism */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Economy & Brands */}
-            <div id="economy" className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+            <div id="economy" className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
                 <Coins className="w-3.5 h-3.5" />
                 Economy & Currency
               </span>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono space-y-1">
+              <div className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono space-y-1">
                 <div className="font-bold text-neutral-900 dark:text-white">
                   Currency: {country.currency.name} ({country.currency.code} - {country.currency.symbol})
                 </div>
@@ -358,7 +358,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
             </div>
 
             {/* Sports & Tourism */}
-            <div id="tourism" className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+            <div id="tourism" className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
                 <Compass className="w-3.5 h-3.5" />
                 Tourism, Landmarks & Sports
@@ -378,7 +378,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                 ))}
               </div>
 
-              <div id="sports" className="p-3.5 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono">
+              <div id="sports" className="p-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 text-xs font-mono">
                 <span className="text-[10px] text-neutral-400 uppercase tracking-wider block mb-1 flex items-center gap-1">
                   <Trophy className="w-3 h-3 text-neutral-400" />
                   Athletics & Sports Culture
@@ -391,7 +391,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
           </div>
 
           {/* Full Encyclopedia Text & Verifiable Wikipedia Source Widget */}
-          <div id="wikipedia-article" className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-5">
+          <div id="wikipedia-article" className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-5">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-neutral-200/60 dark:border-neutral-800/60">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
@@ -408,7 +408,7 @@ export const CountryDetailPage: React.FC<CountryDetailPageProps> = ({
                 href={wikipediaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5 py-2 rounded-2xl bg-neutral-100/90 dark:bg-neutral-800/90 hover:bg-neutral-200 dark:hover:bg-neutral-700 border border-neutral-200/80 dark:border-neutral-700/80 transition-all flex items-center gap-2 text-xs font-mono text-neutral-800 dark:text-neutral-200 group shrink-0"
+                className="px-3.5 py-2 rounded-2xl bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 border border-neutral-200/80 dark:border-neutral-700/80 transition-all flex items-center gap-2 text-xs font-mono text-neutral-800 dark:text-neutral-200 group shrink-0"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Source: Wikipedia ({country.name})</span>

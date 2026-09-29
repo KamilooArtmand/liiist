@@ -23,8 +23,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const t = TRANSLATIONS[lang];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-xl rounded-3xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl border border-stone-200 dark:border-stone-800 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-200">
+      <div className="w-full max-w-xl rounded-3xl bg-white dark:bg-stone-950  border border-stone-200 dark:border-stone-800  overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
         <div className="px-6 py-4 border-b border-stone-200/80 dark:border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -63,7 +63,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     onClick={() => onSelectLang(langKey)}
                     className={`p-3 rounded-2xl border text-xs font-bold transition flex items-center justify-between ${
                       isSelected
-                        ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                        ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black '
                         : 'border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-900'
                     }`}
                   >
@@ -92,7 +92,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 }}
                 className={`p-3.5 rounded-2xl border text-xs font-bold flex items-center justify-center gap-2 transition ${
                   !isDarkMode
-                    ? 'border-black bg-black text-white shadow-xs'
+                    ? 'border-black bg-black text-white '
                     : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-900'
                 }`}
               >
@@ -107,7 +107,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 }}
                 className={`p-3.5 rounded-2xl border text-xs font-bold flex items-center justify-center gap-2 transition ${
                   isDarkMode
-                    ? 'border-white bg-white text-black shadow-xs'
+                    ? 'border-white bg-white text-black '
                     : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-900'
                 }`}
               >
@@ -157,7 +157,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 bg-stone-50/60 dark:bg-stone-900/60 flex justify-end">
+        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex justify-end">
           <button
             type="button"
             onClick={onClose}

@@ -30,7 +30,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
       <div
         key={item.id}
         onClick={() => onSelectItem(item)}
-        className="group p-3.5 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-xs hover:border-black dark:hover:border-white transition cursor-pointer flex flex-col gap-2"
+        className="group p-3.5 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800  hover:border-black dark:hover:border-white transition cursor-pointer flex flex-col gap-2"
       >
         <div className="flex items-start gap-2.5">
           <button
@@ -102,7 +102,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {/* Column 1: Urgent */}
-      <div className="flex flex-col bg-stone-100/70 dark:bg-stone-900/60 rounded-3xl p-4 border border-stone-200/60 dark:border-stone-800/80">
+      <div className="flex flex-col bg-stone-100 dark:bg-stone-900 rounded-3xl p-4 border border-stone-200/60 dark:border-stone-800/80">
         <div className="flex items-center justify-between mb-3 px-1">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-black dark:bg-white"></span>
@@ -110,7 +110,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
               Priority & Urgent
             </h3>
           </div>
-          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 shadow-xs">
+          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 ">
             {highPriority.length}
           </span>
         </div>
@@ -125,7 +125,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
       </div>
 
       {/* Column 2: In Queue */}
-      <div className="flex flex-col bg-stone-100/70 dark:bg-stone-900/60 rounded-3xl p-4 border border-stone-200/60 dark:border-stone-800/80">
+      <div className="flex flex-col bg-stone-100 dark:bg-stone-900 rounded-3xl p-4 border border-stone-200/60 dark:border-stone-800/80">
         <div className="flex items-center justify-between mb-3 px-1">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-stone-500"></span>
@@ -133,7 +133,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
               In Queue
             </h3>
           </div>
-          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 shadow-xs">
+          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 ">
             {normalPriority.length}
           </span>
         </div>
@@ -148,7 +148,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
       </div>
 
       {/* Column 3: Completed */}
-      <div className="flex flex-col bg-stone-100/70 dark:bg-stone-900/60 rounded-3xl p-4 border border-stone-200/60 dark:border-stone-800/80">
+      <div className="flex flex-col bg-stone-100 dark:bg-stone-900 rounded-3xl p-4 border border-stone-200/60 dark:border-stone-800/80">
         <div className="flex items-center justify-between mb-3 px-1">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-stone-400"></span>
@@ -156,7 +156,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
               Completed
             </h3>
           </div>
-          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 shadow-xs">
+          <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 ">
             {completedItems.length}
           </span>
         </div>

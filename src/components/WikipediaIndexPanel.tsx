@@ -1,79 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
-  BookOpen,
-  Landmark,
-  Languages,
-  Users,
-  Coins,
-  Award,
-  Scale,
-  Trophy,
-  Palette,
-  Flag,
-  Factory,
-  Compass,
-  Trees,
-  Layers,
-  ChevronRight,
-  ListFilter
+  BookOpen, Landmark, Languages, Users, Coins, Award,
+  Scale, Trophy, Palette, Flag, Factory, Compass,
+  Trees, Layers, ListFilter, Building2,
 } from 'lucide-react';
 import { EntityType, IndexSection } from '../types/hierarchy';
+import { ENTITY_INDEX_PRESETS } from '../data/entityIndexPresets';
 
-// Pure English Wikipedia-style Index presets
-export const ENTITY_INDEX_PRESETS: Record<EntityType, IndexSection[]> = {
-  country: [
-    { id: 'history', title: 'History & Genesis', iconName: 'BookOpen' },
-    { id: 'culture', title: 'Culture & Heritage', iconName: 'Palette' },
-    { id: 'language', title: 'Official Languages', iconName: 'Languages' },
-    { id: 'demographics', title: 'Population & Demographics', iconName: 'Users' },
-    { id: 'economy', title: 'Economy & Monetary', iconName: 'Coins' },
-    { id: 'brands', title: 'Global Brands & Industry', iconName: 'Factory' },
-    { id: 'luminaries', title: 'Notable Luminaries', iconName: 'Award' },
-    { id: 'government', title: 'Government & Leadership', iconName: 'Scale' },
-    { id: 'parties', title: 'Political Parties & Systems', iconName: 'Flag' },
-    { id: 'sports', title: 'Sports & Athletics', iconName: 'Trophy' },
-    { id: 'wikipedia-article', title: 'Wikipedia Encyclopedia Record', iconName: 'BookOpen' },
-    { id: 'tourism', title: 'Tourism & Landmarks', iconName: 'Compass' }
-  ],
-  state: [
-    { id: 'overview', title: 'State Profile & Identity', iconName: 'Landmark' },
-    { id: 'counties', title: 'Counties & Boroughs', iconName: 'Layers' },
-    { id: 'cities', title: 'Municipalities & Cities', iconName: 'Building2' },
-    { id: 'history', title: 'Statehood & History', iconName: 'BookOpen' },
-    { id: 'culture', title: 'State Culture', iconName: 'Palette' },
-    { id: 'demographics', title: 'Population & Density', iconName: 'Users' },
-    { id: 'economy', title: 'GDP & Key Sectors', iconName: 'Coins' },
-    { id: 'brands', title: 'Iconic Enterprises', iconName: 'Factory' },
-    { id: 'luminaries', title: 'Distinguished People', iconName: 'Award' },
-    { id: 'landmarks', title: 'Landmarks & Parks', iconName: 'Compass' }
-  ],
-  city: [
-    { id: 'overview', title: 'City Profile', iconName: 'Landmark' },
-    { id: 'demographics', title: 'Population & Metro Area', iconName: 'Users' },
-    { id: 'economy', title: 'Municipal Economy', iconName: 'Coins' },
-    { id: 'attractions', title: 'Iconic Attractions', iconName: 'Compass' },
-    { id: 'districts', title: 'Boroughs & Districts', iconName: 'Layers' }
-  ],
-  brand: [
-    { id: 'history', title: 'Founding & Genesis', iconName: 'BookOpen' },
-    { id: 'products', title: 'Product Ecosystem', iconName: 'Layers' },
-    { id: 'leadership', title: 'Leadership & Executives', iconName: 'Scale' },
-    { id: 'financials', title: 'Valuation & Revenue', iconName: 'Coins' },
-    { id: 'globalReach', title: 'International Footprint', iconName: 'Compass' }
-  ],
-  person: [
-    { id: 'biography', title: 'Early Life & Heritage', iconName: 'BookOpen' },
-    { id: 'achievements', title: 'Major Contributions', iconName: 'Award' },
-    { id: 'philosophy', title: 'Ethos & Philosophy', iconName: 'Scale' },
-    { id: 'legacy', title: 'Enduring Impact', iconName: 'Landmark' }
-  ],
-  product: [
-    { id: 'specs', title: 'Technical Specifications', iconName: 'Layers' },
-    { id: 'design', title: 'Industrial Design', iconName: 'Palette' },
-    { id: 'ecosystem', title: 'Compatibility', iconName: 'Compass' },
-    { id: 'origin', title: 'Manufacturing Origin', iconName: 'Factory' }
-  ]
-};
+export { ENTITY_INDEX_PRESETS } from '../data/entityIndexPresets';
 
 interface WikipediaIndexPanelProps {
   entityType?: EntityType;
@@ -83,155 +17,212 @@ interface WikipediaIndexPanelProps {
   className?: string;
 }
 
+/* ─── icon renderer ─── */
+function Icon({ name }: { name?: string }) {
+  const cls = 'w-[14px] h-[14px] flex-none';
+  switch (name) {
+    case 'BookOpen':   return <BookOpen   className={cls} />;
+    case 'Palette':    return <Palette    className={cls} />;
+    case 'Languages':  return <Languages  className={cls} />;
+    case 'Users':      return <Users      className={cls} />;
+    case 'Coins':      return <Coins      className={cls} />;
+    case 'Factory':    return <Factory    className={cls} />;
+    case 'Award':      return <Award      className={cls} />;
+    case 'Scale':      return <Scale      className={cls} />;
+    case 'Flag':       return <Flag       className={cls} />;
+    case 'Trophy':     return <Trophy     className={cls} />;
+    case 'Landmark':   return <Landmark   className={cls} />;
+    case 'Layers':     return <Layers     className={cls} />;
+    case 'Compass':    return <Compass    className={cls} />;
+    case 'Trees':      return <Trees      className={cls} />;
+    case 'Building2':  return <Building2  className={cls} />;
+    default:           return <ListFilter className={cls} />;
+  }
+}
+
+/* ─── constants ─── */
+const PILL_W   = 34;   // collapsed width  (px)
+const OPEN_W   = 218;  // expanded width   (px)
+const EASE     = 'cubic-bezier(0.4, 0, 0.2, 1)';
+const DUR_OPEN  = '300ms';
+const DUR_CLOSE = '260ms';
+
+/* ─── component ─── */
 export const WikipediaIndexPanel: React.FC<WikipediaIndexPanelProps> = ({
   entityType = 'country',
   customSections,
   onNavigateSection,
   activeSectionId,
-  className = ''
+  className = '',
 }) => {
-  const sections = customSections || ENTITY_INDEX_PRESETS[entityType] || ENTITY_INDEX_PRESETS.country;
-  const [currentActive, setCurrentActive] = useState<string>(activeSectionId || sections[0]?.id || '');
-  
-  // Hover expansion state: Default is closed bar pill. Mouse enter smoothly expands to full width; mouse leave closes back!
-  const [isHovered, setIsHovered] = useState(false);
+  const sections = customSections ?? ENTITY_INDEX_PRESETS[entityType] ?? ENTITY_INDEX_PRESETS.country;
+
+  const [active, setActive] = useState(activeSectionId ?? sections[0]?.id ?? '');
+  const [open, setOpen] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (activeSectionId) {
-      setCurrentActive(activeSectionId);
-    }
+    if (activeSectionId) setActive(activeSectionId);
   }, [activeSectionId]);
 
-  // Handle smooth jump to targeted section ID
-  const handleItemClick = (sectionId: string) => {
-    setCurrentActive(sectionId);
+  const clear = () => { if (timer.current) { clearTimeout(timer.current); timer.current = null; } };
+
+  const onEnter = () => { clear(); setOpen(true); };
+  const onLeave = () => { timer.current = setTimeout(() => setOpen(false), 100); };
+
+  const navigate = (id: string) => {
+    setActive(id);
     if (onNavigateSection) {
-      onNavigateSection(sectionId);
+      onNavigateSection(id);
     } else {
-      const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
-  const activeSection = sections.find((s) => s.id === currentActive) || sections[0];
-
-  const renderIcon = (name?: string) => {
-    switch (name) {
-      case 'BookOpen': return <BookOpen className="w-3.5 h-3.5" />;
-      case 'Palette': return <Palette className="w-3.5 h-3.5" />;
-      case 'Languages': return <Languages className="w-3.5 h-3.5" />;
-      case 'Users': return <Users className="w-3.5 h-3.5" />;
-      case 'Coins': return <Coins className="w-3.5 h-3.5" />;
-      case 'Factory': return <Factory className="w-3.5 h-3.5" />;
-      case 'Award': return <Award className="w-3.5 h-3.5" />;
-      case 'Scale': return <Scale className="w-3.5 h-3.5" />;
-      case 'Flag': return <Flag className="w-3.5 h-3.5" />;
-      case 'Trophy': return <Trophy className="w-3.5 h-3.5" />;
-      case 'Landmark': return <Landmark className="w-3.5 h-3.5" />;
-      case 'Layers': return <Layers className="w-3.5 h-3.5" />;
-      case 'Compass': return <Compass className="w-3.5 h-3.5" />;
-      case 'Trees': return <Trees className="w-3.5 h-3.5" />;
-      default: return <ListFilter className="w-3.5 h-3.5" />;
-    }
-  };
+  const dur = open ? DUR_OPEN : DUR_CLOSE;
 
   return (
     <aside
-      aria-label="Wikipedia Entity Index"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`shrink-0 transition-all duration-300 ease-out rounded-full sticky top-20 shadow-md border border-neutral-200/80 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-2xl z-30 ${
-        isHovered
-          ? 'w-72 sm:w-80 rounded-3xl p-4 space-y-2'
-          : 'w-auto min-w-[130px] px-3.5 py-2 flex items-center justify-between gap-3 cursor-pointer'
-      } ${className}`}
+      aria-label="Page Index"
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      style={{
+        width: open ? OPEN_W : PILL_W,
+        transition: `width ${dur} ${EASE}`,
+      }}
+      className={[
+        'shrink-0 sticky top-20 z-30 overflow-hidden',
+        'bg-white dark:bg-neutral-950',
+        'border border-neutral-200 dark:border-neutral-800',
+        'rounded-[17px]',
+        className,
+      ].join(' ')}
     >
-      {!isHovered ? (
-        /* Default Closed State: A completely round pill bar displaying INDEX and current active item */
-        <div className="flex items-center justify-between w-full gap-2.5 select-none">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-neutral-900 dark:bg-neutral-100 animate-pulse shrink-0" />
-            <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 font-bold">
-              INDEX
-            </span>
-          </div>
 
-          {activeSection && (
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-semibold shadow-xs">
-              <span className="shrink-0">{renderIcon(activeSection.iconName)}</span>
-              <span className="text-[11px] font-mono tracking-tight truncate max-w-[110px]">
-                {activeSection.title}
+      {/* ───── header: dot + "INDEX" ───── */}
+      <div
+        className="flex items-center px-[10px] select-none"
+        style={{ height: 40, gap: open ? 8 : 0, transition: `gap ${dur} ${EASE}` }}
+      >
+        {/* live dot */}
+        <span className={[
+          'block rounded-full flex-none',
+          'bg-neutral-300 dark:bg-neutral-600',
+          open ? 'w-[6px] h-[6px]' : 'w-[6px] h-[6px]',
+        ].join(' ')} />
+
+        {/* "INDEX" word */}
+        <span
+          aria-hidden
+          className="text-[9.5px] font-mono tracking-[.17em] uppercase font-semibold text-neutral-400 dark:text-neutral-500 whitespace-nowrap"
+          style={{
+            maxWidth: open ? 120 : 0,
+            opacity: open ? 1 : 0,
+            overflow: 'hidden',
+            transition: `max-width ${dur} ${EASE}, opacity ${open ? '220ms' : '120ms'} ease`,
+          }}
+        >
+          INDEX
+        </span>
+      </div>
+
+      {/* hairline */}
+      <div className="mx-[10px] h-px bg-black/[0.05] dark:bg-white" />
+
+      {/* ───── item list ───── */}
+      <nav
+        className="flex flex-col py-[6px] overflow-y-auto"
+        style={{ maxHeight: 'calc(100vh - 180px)' }}
+      >
+        {sections.map((sec, i) => {
+          const isActive = active === sec.id;
+          const stagger = `${i * 14}ms`;
+
+          return (
+            <button
+              key={sec.id}
+              type="button"
+              title={open ? undefined : sec.title}
+              onClick={() => navigate(sec.id)}
+              style={{
+                height: 32,
+                padding: open ? '0 10px' : '0',
+                gap: open ? 9 : 0,
+                transition: `padding ${dur} ${EASE}, gap ${dur} ${EASE}`,
+              }}
+              className={[
+                'group relative flex items-center w-full cursor-pointer outline-none',
+                !open && 'justify-center',
+              ].filter(Boolean).join(' ')}
+            >
+
+              {/* ── background layer (active / hover) ── */}
+              <span
+                aria-hidden
+                className={[
+                  'absolute inset-x-[6px] inset-y-[3px] rounded-[10px]',
+                  'transition-opacity duration-[140ms]',
+                  isActive
+                    ? 'opacity-100 bg-neutral-950 dark:bg-white'
+                    : 'opacity-0 group-hover:opacity-100 bg-neutral-100 dark:bg-white',
+                ].join(' ')}
+              />
+
+              {/* ── icon ── */}
+              <span
+                aria-hidden
+                className={[
+                  'relative z-10 flex-none flex items-center justify-center',
+                  'transition-colors duration-[140ms]',
+                  isActive
+                    ? 'text-white dark:text-neutral-950'
+                    : 'text-neutral-400 dark:text-neutral-500 group-hover:text-neutral-700 dark:group-hover:text-neutral-300',
+                ].join(' ')}
+              >
+                <Icon name={sec.iconName} />
               </span>
-            </div>
-          )}
 
-          <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
-        </div>
-      ) : (
-        /* Expanded Flyout on Mouse Hover */
-        <div className="animate-in fade-in zoom-in-95 duration-200 space-y-2.5">
-          {/* Header Bar */}
-          <div className="flex items-center justify-between pb-2 border-b border-neutral-200/60 dark:border-neutral-800/60 select-none">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-neutral-900 dark:bg-neutral-100 animate-pulse shrink-0" />
-              <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-900 dark:text-neutral-100 font-bold">
-                INDEX
+              {/* ── label ── */}
+              <span
+                className={[
+                  'relative z-10 text-[11.5px] leading-none font-[450] tracking-[-0.01em]',
+                  'whitespace-nowrap overflow-hidden',
+                  'transition-colors duration-[140ms]',
+                  isActive
+                    ? 'text-white dark:text-neutral-950'
+                    : 'text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-white',
+                ].join(' ')}
+                style={{
+                  maxWidth: open ? 160 : 0,
+                  opacity: open ? 1 : 0,
+                  transition: [
+                    `max-width ${dur} ${EASE} ${stagger}`,
+                    `opacity ${open ? '200ms' : '80ms'} ease ${open ? stagger : '0ms'}`,
+                  ].join(', '),
+                }}
+              >
+                {sec.title}
               </span>
-            </div>
-            <span className="text-[10px] font-mono text-neutral-400">
-              {sections.length} Sections
-            </span>
-          </div>
+            </button>
+          );
+        })}
+      </nav>
 
-          {/* List of Navigation Items */}
-          <nav className="space-y-1 max-h-[70vh] overflow-y-auto no-scrollbar py-0.5">
-            {sections.map((sec, idx) => {
-              const isActive = currentActive === sec.id;
-              return (
-                <button
-                  key={sec.id}
-                  type="button"
-                  onClick={() => handleItemClick(sec.id)}
-                  title={sec.title}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-2xl text-left transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 shadow-sm font-semibold'
-                      : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100/80 dark:hover:bg-neutral-800/60 hover:text-neutral-950 dark:hover:text-white'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <span
-                      className={`shrink-0 ${
-                        isActive
-                          ? 'text-white dark:text-neutral-950'
-                          : 'text-neutral-400 group-hover:text-neutral-700 dark:group-hover:text-neutral-300'
-                      }`}
-                    >
-                      {renderIcon(sec.iconName)}
-                    </span>
-                    <span className="text-xs truncate leading-snug">
-                      {sec.title}
-                    </span>
-                  </div>
+      {/* ───── footer: section count ───── */}
+      <div
+        className="overflow-hidden"
+        style={{
+          maxHeight: open ? 28 : 0,
+          opacity: open ? 1 : 0,
+          transition: `max-height ${dur} ${EASE}, opacity ${open ? '220ms' : '100ms'} ease`,
+        }}
+      >
+        <div className="mx-[10px] h-px bg-black/[0.04] dark:bg-white" />
+        <p className="px-[14px] py-[7px] text-[9.5px] font-mono text-neutral-300 dark:text-neutral-600 tracking-wider">
+          {sections.length}&nbsp;sections
+        </p>
+      </div>
 
-                  <div className="flex items-center gap-1.5 shrink-0 ml-1">
-                    <span className="font-mono text-[10px] opacity-40">
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    <ChevronRight
-                      className={`w-3.5 h-3.5 transition-transform ${
-                        isActive ? 'text-white dark:text-neutral-950 translate-x-0.5' : 'text-neutral-400 opacity-60'
-                      }`}
-                    />
-                  </div>
-                </button>
-              );
-            })}
-          </nav>
-        </div>
-      )}
     </aside>
   );
 };

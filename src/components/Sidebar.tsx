@@ -70,8 +70,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         onClick={() => onSelectList(list.id)}
         className={`w-full group px-3 py-2.5 rounded-xl text-left flex items-center justify-between gap-3 text-sm font-medium transition ${
           isSelected
-            ? `${colorStyle.light} border shadow-xs font-semibold`
-            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800/60'
+            ? `${colorStyle.light} border  font-semibold`
+            : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 hover:bg-stone-100 dark:hover:bg-stone-800'
         }`}
       >
         <div className="flex items-center gap-2.5 min-w-0">
@@ -103,7 +103,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Brand Header */}
       <div className="p-4 sm:p-5 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-xl shadow-xs">
+          <div className="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-xl ">
             L
           </div>
           <div>
@@ -117,7 +117,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button
           type="button"
           onClick={onToggleDarkMode}
-          className="p-2 rounded-xl text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 hover:bg-stone-200/60 dark:hover:bg-stone-800 transition"
+          className="p-2 rounded-xl text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 hover:bg-stone-200 dark:hover:bg-stone-800 transition"
           title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
           {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
@@ -129,7 +129,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button
           type="button"
           onClick={onOpenSearch}
-          className="w-full px-3 py-2 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 text-xs font-medium flex items-center justify-between shadow-xs transition"
+          className="w-full px-3 py-2 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 text-xs font-medium flex items-center justify-between  transition"
         >
           <span className="flex items-center gap-2">
             <Search className="w-3.5 h-3.5" /> Search all items...
@@ -173,7 +173,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Bottom Actions & Stats */}
-      <div className="p-4 border-t border-stone-200 dark:border-stone-800 bg-stone-100/60 dark:bg-stone-950/40 space-y-3">
+      <div className="p-4 border-t border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-950 space-y-3">
         {/* Overall Completion Mini Bar */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs text-stone-500 font-medium">
@@ -196,7 +196,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button
           type="button"
           onClick={onOpenCreateModal}
-          className="w-full py-2.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+          className="w-full py-2.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition flex items-center justify-center gap-2  cursor-pointer"
         >
           <Plus className="w-4 h-4" /> Create New List
         </button>

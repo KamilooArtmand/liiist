@@ -105,12 +105,12 @@ export const AutonomousSupportModal: React.FC<AutonomousSupportModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 flex flex-col h-[85vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl bg-white dark:bg-stone-950  rounded-3xl  border border-stone-200 dark:border-stone-800 flex flex-col h-[85vh] overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-stone-200/80 dark:border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-2xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center shadow-sm">
+            <div className="w-9 h-9 rounded-2xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center ">
               <Bot className="w-5 h-5" />
             </div>
             <div>
@@ -151,8 +151,8 @@ export const AutonomousSupportModal: React.FC<AutonomousSupportModalProps> = ({
               <div
                 className={`max-w-[80%] rounded-3xl px-4 py-3 text-xs leading-relaxed ${
                   msg.sender === 'user'
-                    ? 'bg-black text-white dark:bg-white dark:text-black rounded-br-xs shadow-xs'
-                    : 'bg-stone-100/90 dark:bg-stone-900/90 text-stone-900 dark:text-stone-100 rounded-bl-xs border border-stone-200/70 dark:border-stone-800'
+                    ? 'bg-black text-white dark:bg-white dark:text-black rounded-br-xs '
+                    : 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 rounded-bl-xs border border-stone-200/70 dark:border-stone-800'
                 }`}
               >
                 <p className="whitespace-pre-wrap">{msg.text}</p>
@@ -191,7 +191,7 @@ export const AutonomousSupportModal: React.FC<AutonomousSupportModalProps> = ({
         {/* Input Bar */}
         <form
           onSubmit={handleSend}
-          className="p-4 border-t border-stone-200/80 dark:border-stone-800 bg-stone-50/80 dark:bg-stone-900/80 flex items-center gap-2.5"
+          className="p-4 border-t border-stone-200/80 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex items-center gap-2.5"
         >
           <input
             type="text"
@@ -203,7 +203,7 @@ export const AutonomousSupportModal: React.FC<AutonomousSupportModalProps> = ({
           <button
             type="submit"
             disabled={!input.trim() || loading}
-            className="px-5 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black disabled:opacity-40 text-xs font-bold transition flex items-center gap-1.5 shadow-xs cursor-pointer hover:opacity-90"
+            className="px-5 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black disabled:opacity-40 text-xs font-bold transition flex items-center gap-1.5  cursor-pointer hover:opacity-90"
           >
             <span>{t.send}</span>
             <Send className="w-3.5 h-3.5" />

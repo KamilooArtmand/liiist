@@ -71,8 +71,8 @@ export const RecursiveNodeModal: React.FC<RecursiveNodeModalProps> = ({
   if (!isOpen || !item) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-white/95 dark:bg-stone-950/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 flex flex-col max-h-[85vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black  animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl bg-white dark:bg-stone-950  rounded-3xl  border border-stone-200 dark:border-stone-800 flex flex-col max-h-[85vh] overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-stone-200/80 dark:border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -127,7 +127,7 @@ export const RecursiveNodeModal: React.FC<RecursiveNodeModalProps> = ({
                 {subList.items.map((sub, idx) => (
                   <div
                     key={sub.id || idx}
-                    className="p-3.5 rounded-2xl bg-stone-50/80 dark:bg-stone-900/60 border border-stone-200/60 dark:border-stone-800 hover:border-black dark:hover:border-white transition flex items-start justify-between gap-3 group"
+                    className="p-3.5 rounded-2xl bg-stone-50 dark:bg-stone-900 border border-stone-200/60 dark:border-stone-800 hover:border-black dark:hover:border-white transition flex items-start justify-between gap-3 group"
                   >
                     <div className="flex items-start gap-3 min-w-0">
                       <span className="w-6 h-6 rounded-xl bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 font-mono">
@@ -152,7 +152,7 @@ export const RecursiveNodeModal: React.FC<RecursiveNodeModalProps> = ({
                             {sub.tags.map((tg, i) => (
                               <span
                                 key={i}
-                                className="text-[9px] px-2 py-0.5 rounded-full bg-stone-200/60 dark:bg-stone-800 text-stone-600 dark:text-stone-400 font-mono"
+                                className="text-[9px] px-2 py-0.5 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-400 font-mono"
                               >
                                 #{tg}
                               </span>
@@ -173,7 +173,7 @@ export const RecursiveNodeModal: React.FC<RecursiveNodeModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-between bg-stone-50/80 dark:bg-stone-900/80">
+        <div className="px-6 py-4 border-t border-stone-200/80 dark:border-stone-800 flex items-center justify-between bg-stone-50 dark:bg-stone-900">
           <span className="text-xs text-stone-400 font-mono">
             {subList ? `${subList.items.length} sub-branches` : ''}
           </span>
@@ -187,7 +187,7 @@ export const RecursiveNodeModal: React.FC<RecursiveNodeModalProps> = ({
                   setSaved(true);
                 }}
                 disabled={saved}
-                className="px-4 py-2 text-xs font-bold rounded-full bg-black text-white dark:bg-white dark:text-black transition flex items-center gap-1.5 shadow-xs disabled:opacity-40 cursor-pointer hover:opacity-90"
+                className="px-4 py-2 text-xs font-bold rounded-full bg-black text-white dark:bg-white dark:text-black transition flex items-center gap-1.5  disabled:opacity-40 cursor-pointer hover:opacity-90"
               >
                 {saved ? (
                   <>

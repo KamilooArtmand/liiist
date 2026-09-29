@@ -70,7 +70,7 @@ export const WorldCountryPage: React.FC<WorldCountryPageProps> = ({
         {/* Bento Grid Visual Cards & Widgets (7 Cols on Desktop) */}
         <div className="lg:col-span-7 xl:col-span-7 space-y-5">
           {/* Bento Card 1: Macro Sovereign Nations Overview */}
-          <div className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+          <div className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
@@ -92,28 +92,28 @@ export const WorldCountryPage: React.FC<WorldCountryPageProps> = ({
 
             {/* Micro Metrics Strip inside the Card */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-              <div className="p-3 rounded-2xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/50 dark:border-neutral-800/50">
+              <div className="p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/50 dark:border-neutral-800/50">
                 <span className="text-[10px] font-mono text-neutral-400 block">NATIONS</span>
                 <span className="text-lg font-mono font-bold tabular-nums text-neutral-950 dark:text-white">
                   {COUNTRIES_DATA.length}
                 </span>
               </div>
 
-              <div className="p-3 rounded-2xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/50 dark:border-neutral-800/50">
+              <div className="p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/50 dark:border-neutral-800/50">
                 <span className="text-[10px] font-mono text-neutral-400 block">POPULATION</span>
                 <span className="text-lg font-mono font-bold tabular-nums text-neutral-950 dark:text-white">
                   {(totalPopulation / 1_000_000_000).toFixed(2)}B
                 </span>
               </div>
 
-              <div className="p-3 rounded-2xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/50 dark:border-neutral-800/50">
+              <div className="p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/50 dark:border-neutral-800/50">
                 <span className="text-[10px] font-mono text-neutral-400 block">LANDMASS</span>
                 <span className="text-lg font-mono font-bold tabular-nums text-neutral-950 dark:text-white">
                   {(totalArea / 1_000_000).toFixed(1)}M km²
                 </span>
               </div>
 
-              <div className="p-3 rounded-2xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/50 dark:border-neutral-800/50">
+              <div className="p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/50 dark:border-neutral-800/50">
                 <span className="text-[10px] font-mono text-neutral-400 block">CONTINENTS</span>
                 <span className="text-lg font-mono font-bold tabular-nums text-neutral-950 dark:text-white">
                   7
@@ -132,8 +132,8 @@ export const WorldCountryPage: React.FC<WorldCountryPageProps> = ({
                 }
                 className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                   activeContinentFilter === cont
-                    ? 'bg-neutral-900 text-white dark:bg-white dark:text-black border-transparent shadow-md'
-                    : 'bg-white/80 dark:bg-neutral-900/80 border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600'
+                    ? 'bg-neutral-900 text-white dark:bg-white dark:text-black border-transparent '
+                    : 'bg-white dark:bg-neutral-900 border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600'
                 }`}
               >
                 <span className="text-[10px] font-mono uppercase tracking-wider block opacity-70">
@@ -148,7 +148,7 @@ export const WorldCountryPage: React.FC<WorldCountryPageProps> = ({
               </div>
             ))}
 
-            <div className="p-4 rounded-2xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 flex flex-col justify-between">
+            <div className="p-4 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 flex flex-col justify-between">
               <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">
                 G20 Nations
               </span>
@@ -165,7 +165,7 @@ export const WorldCountryPage: React.FC<WorldCountryPageProps> = ({
 
           {/* Bento Card 3: Spotlight Sovereign State Card */}
           {spotlightCountry && (
-            <div className="liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+            <div className="liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">
                   Featured Sovereign Profile
@@ -183,7 +183,7 @@ export const WorldCountryPage: React.FC<WorldCountryPageProps> = ({
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <CountryFlag
                   code={spotlightCountry.code}
-                  className="w-16 h-11 rounded-md shadow-md shrink-0"
+                  className="w-16 h-11 rounded-md  shrink-0"
                   title={spotlightCountry.name}
                 />
                 <div className="min-w-0">
@@ -223,31 +223,31 @@ export const WorldCountryPage: React.FC<WorldCountryPageProps> = ({
           )}
 
           {/* Bento Card 4: Global Extremes & Curiosities */}
-          <div className="liquid-glass-card p-5 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-3">
+          <div className="liquid-glass-card p-5 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block">
               Sovereign Records & Extremes
             </span>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-xl bg-neutral-100/50 dark:bg-neutral-950/40 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <span className="text-neutral-400 text-[10px] font-mono block">LARGEST LANDMASS</span>
                 <span className="font-bold text-neutral-900 dark:text-white">Russia</span>
                 <span className="text-[11px] font-mono text-neutral-500 block">17,098,242 km²</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-neutral-100/50 dark:bg-neutral-950/40 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <span className="text-neutral-400 text-[10px] font-mono block">SMALLEST SOVEREIGN</span>
                 <span className="font-bold text-neutral-900 dark:text-white">Vatican City</span>
                 <span className="text-[11px] font-mono text-neutral-500 block">0.49 km² • 825 people</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-neutral-100/50 dark:bg-neutral-950/40 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <span className="text-neutral-400 text-[10px] font-mono block">MOST POPULOUS</span>
                 <span className="font-bold text-neutral-900 dark:text-white">India</span>
                 <span className="text-[11px] font-mono text-neutral-500 block">1.428 Billion inhabitants</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-neutral-100/50 dark:bg-neutral-950/40 border border-neutral-200/40 dark:border-neutral-800/40">
+              <div className="p-3 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
                 <span className="text-neutral-400 text-[10px] font-mono block">OLDEST CONTINUOUS SOVEREIGN</span>
                 <span className="font-bold text-neutral-900 dark:text-white">San Marino</span>
                 <span className="text-[11px] font-mono text-neutral-500 block">Founded 301 CE</span>

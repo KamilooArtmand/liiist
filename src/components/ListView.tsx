@@ -192,7 +192,7 @@ export const ListView: React.FC<ListViewProps> = ({
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3.5">
-              <span className="text-3xl sm:text-4xl p-2.5 rounded-2xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 shadow-xs">
+              <span className="text-3xl sm:text-4xl p-2.5 rounded-2xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 ">
                 {list.icon}
               </span>
               <div>
@@ -216,7 +216,7 @@ export const ListView: React.FC<ListViewProps> = ({
                   onClick={() => onChangeViewMode('list')}
                   className={`p-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     viewMode === 'list'
-                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      ? 'bg-black text-white dark:bg-white dark:text-black '
                       : 'hover:text-black dark:hover:text-white'
                   }`}
                   title="List View"
@@ -228,7 +228,7 @@ export const ListView: React.FC<ListViewProps> = ({
                   onClick={() => onChangeViewMode('board')}
                   className={`p-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     viewMode === 'board'
-                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      ? 'bg-black text-white dark:bg-white dark:text-black '
                       : 'hover:text-black dark:hover:text-white'
                   }`}
                   title="Board View"
@@ -240,7 +240,7 @@ export const ListView: React.FC<ListViewProps> = ({
                   onClick={() => onChangeViewMode('focus')}
                   className={`p-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     viewMode === 'focus'
-                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      ? 'bg-black text-white dark:bg-white dark:text-black '
                       : 'hover:text-black dark:hover:text-white'
                   }`}
                   title="Focus Mode"
@@ -358,7 +358,7 @@ export const ListView: React.FC<ListViewProps> = ({
             {/* Quick Add Bar */}
             <form
               onSubmit={handleQuickAdd}
-              className="bg-white dark:bg-stone-900 rounded-full px-4 py-2 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5"
+              className="bg-white dark:bg-stone-900 rounded-full px-4 py-2 border border-stone-200 dark:border-stone-800  flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5"
             >
               <div className="flex items-center gap-2 flex-1 pl-1">
                 <Plus className="w-4 h-4 text-stone-400 shrink-0" />
@@ -412,7 +412,7 @@ export const ListView: React.FC<ListViewProps> = ({
                 <button
                   type="submit"
                   disabled={!quickTitle.trim()}
-                  className="px-4 py-1.5 rounded-full bg-black text-white dark:bg-white dark:text-black disabled:opacity-40 text-xs font-bold transition shrink-0 shadow-xs cursor-pointer"
+                  className="px-4 py-1.5 rounded-full bg-black text-white dark:bg-white dark:text-black disabled:opacity-40 text-xs font-bold transition shrink-0  cursor-pointer"
                 >
                   Add
                 </button>
@@ -421,7 +421,7 @@ export const ListView: React.FC<ListViewProps> = ({
 
             {/* Filter and Sort bar */}
             <div className="flex items-center justify-between gap-3 text-xs text-stone-500">
-              <div className="flex items-center gap-1 bg-stone-100 dark:bg-stone-800/80 p-1 rounded-full">
+              <div className="flex items-center gap-1 bg-stone-100 dark:bg-stone-800 p-1 rounded-full">
                 {(['all', 'active', 'completed'] as FilterStatus[]).map(status => (
                   <button
                     key={status}
@@ -429,7 +429,7 @@ export const ListView: React.FC<ListViewProps> = ({
                     onClick={() => setFilterStatus(status)}
                     className={`px-3 py-1 rounded-full font-bold capitalize transition cursor-pointer ${
                       filterStatus === status
-                        ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                        ? 'bg-black text-white dark:bg-white dark:text-black '
                         : 'hover:text-stone-900 dark:hover:text-stone-200'
                     }`}
                   >
@@ -504,10 +504,10 @@ export const ListView: React.FC<ListViewProps> = ({
         onClick={() => onSelectItem(item)}
         className={`group px-4 py-3.5 rounded-2xl border transition flex items-center justify-between gap-3.5 cursor-pointer ${
           item.completed
-            ? 'bg-stone-50/60 dark:bg-stone-900/40 border-stone-200/50 dark:border-stone-800/50 opacity-60'
+            ? 'bg-stone-50 dark:bg-stone-900 border-stone-200/50 dark:border-stone-800/50 opacity-60'
             : isPodium1
-            ? 'bg-stone-100/90 dark:bg-stone-900/90 border-stone-400 dark:border-stone-600 shadow-xs'
-            : 'bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 hover:border-black dark:hover:border-white shadow-xs'
+            ? 'bg-stone-100 dark:bg-stone-900 border-stone-400 dark:border-stone-600 '
+            : 'bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 hover:border-black dark:hover:border-white '
         }`}
       >
         <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -537,7 +537,7 @@ export const ListView: React.FC<ListViewProps> = ({
             <div
               className={`w-7 h-7 rounded-xl font-bold flex items-center justify-center text-xs shrink-0 font-mono ${
                 isPodium1
-                  ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                  ? 'bg-black text-white dark:bg-white dark:text-black '
                   : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300'
               }`}
             >

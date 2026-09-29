@@ -129,7 +129,7 @@ export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
         {/* Animated Popover Search Bar */}
         {isSearchOpen && (
           <div className="absolute right-12 top-1/2 -translate-y-1/2 flex items-center z-50 animate-in fade-in zoom-in-95 duration-200">
-            <div className="w-72 sm:w-96 flex items-center bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-full shadow-2xl backdrop-blur-2xl ring-4 ring-black/5 dark:ring-white/5 pr-2">
+            <div className="w-72 sm:w-96 flex items-center bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-full   ring-4 ring-black/5 dark:ring-white/5 pr-2">
               <div className="pl-3.5 pr-2 text-neutral-400">
                 <Search className="w-3.5 h-3.5" />
               </div>
@@ -164,7 +164,7 @@ export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
             </div>
 
             {/* Quick Live Suggestion Dropdown */}
-            <div className="absolute top-full mt-2 right-0 w-72 sm:w-96 bg-white/95 dark:bg-neutral-900/95 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-2xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 backdrop-blur-2xl">
+            <div className="absolute top-full mt-2 right-0 w-72 sm:w-96 bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
               <div className="px-2.5 py-1.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-neutral-400 border-b border-neutral-100 dark:border-neutral-800">
                 <span className="flex items-center gap-1">
                   <Sparkles className="w-3 h-3" />
@@ -273,8 +273,8 @@ export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
           onClick={() => setIsSearchOpen(!isSearchOpen)}
           className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 shrink-0 ${
             isSearchOpen
-              ? 'bg-neutral-950 text-white dark:bg-white dark:text-black shadow-md'
-              : 'text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 hover:backdrop-blur-sm'
+              ? 'bg-neutral-950 text-white dark:bg-white dark:text-neutral-950'
+              : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900'
           }`}
           title="Search directories and places"
           aria-label="Toggle search"
@@ -286,7 +286,7 @@ export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
         <button
           type="button"
           onClick={onOpenUserMenu}
-          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 hover:backdrop-blur-sm transition-all duration-200 cursor-pointer active:scale-95 shrink-0"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-200 cursor-pointer active:scale-95 shrink-0"
           title="Account & Management"
           aria-label="User account menu"
         >

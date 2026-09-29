@@ -60,7 +60,7 @@ export const CosmicExplorer: React.FC<CosmicExplorerProps> = ({
   return (
     <div className="flex-1 flex flex-col h-full overflow-y-auto">
       {/* Top Bar with Category Switcher & Back to Landing */}
-      <section className="px-6 py-4 bg-white/70 dark:bg-stone-950/70 border-b border-stone-200/80 dark:border-stone-800/80 sticky top-0 z-20 backdrop-blur-xl">
+      <section className="px-6 py-4 bg-white dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 sticky top-0 z-20">
         <div className="max-w-5xl mx-auto flex items-center justify-between gap-3 overflow-x-auto">
           {onBackToLanding && (
             <button
@@ -84,7 +84,7 @@ export const CosmicExplorer: React.FC<CosmicExplorerProps> = ({
                   onClick={() => onSelectCosmicList(list.id)}
                   className={`px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 transition shrink-0 cursor-pointer ${
                     isSelected
-                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      ? 'bg-black text-white dark:bg-white dark:text-black '
                       : 'text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900 border border-stone-200 dark:border-stone-800'
                   }`}
                 >
@@ -104,7 +104,7 @@ export const CosmicExplorer: React.FC<CosmicExplorerProps> = ({
       <section className="p-6 md:p-8 max-w-5xl mx-auto w-full space-y-6 flex-1">
         {/* List Header Glass Card */}
         {currentList && (
-          <div className="p-6 sm:p-7 rounded-3xl bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl border border-stone-200 dark:border-stone-800 shadow-sm space-y-4">
+          <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-stone-900  border border-stone-200 dark:border-stone-800  space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3.5">
                 <span className="text-4xl p-3 rounded-2xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
@@ -155,7 +155,7 @@ export const CosmicExplorer: React.FC<CosmicExplorerProps> = ({
           {filteredItems.map((item, idx) => (
             <div
               key={item.id || idx}
-              className="p-5 rounded-3xl bg-white/90 dark:bg-stone-900/90 backdrop-blur-xl border border-stone-200 dark:border-stone-800 shadow-xs hover:border-black dark:hover:border-white transition flex flex-col gap-3 group"
+              className="p-5 rounded-3xl bg-white dark:bg-stone-900  border border-stone-200 dark:border-stone-800  hover:border-black dark:hover:border-white transition flex flex-col gap-3 group"
             >
               {/* Row: Index, Title, Subtitle, Expand Button */}
               <div className="flex items-start justify-between gap-3">
@@ -180,7 +180,7 @@ export const CosmicExplorer: React.FC<CosmicExplorerProps> = ({
                   <button
                     type="button"
                     onClick={() => onExpandNode(item, currentList.title)}
-                    className="px-3.5 py-1.5 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition flex items-center gap-1.5 shrink-0 shadow-xs cursor-pointer hover:opacity-90"
+                    className="px-3.5 py-1.5 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition flex items-center gap-1.5 shrink-0  cursor-pointer hover:opacity-90"
                     title={t.expandBranch}
                   >
                     <GitBranch className="w-3.5 h-3.5" />
@@ -199,7 +199,7 @@ export const CosmicExplorer: React.FC<CosmicExplorerProps> = ({
 
               {/* Attributes Grid (Monochromatic) */}
               {item.attributes && Object.keys(item.attributes).length > 0 && (
-                <div className="ml-10 grid grid-cols-2 sm:grid-cols-3 gap-2 p-3 rounded-2xl bg-stone-50 dark:bg-stone-800/50 border border-stone-200/50 dark:border-stone-800 text-[11px]">
+                <div className="ml-10 grid grid-cols-2 sm:grid-cols-3 gap-2 p-3 rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-200/50 dark:border-stone-800 text-[11px]">
                   {Object.entries(item.attributes).map(([k, v]) => (
                     <div key={k} className="flex flex-col">
                       <span className="text-[10px] uppercase font-bold text-stone-400">{k}</span>

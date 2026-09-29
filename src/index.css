@@ -5,16 +5,14 @@
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'Inter', monospace;
 
-    /* Monochromatic Tokens: strictly White, Grays, Black */
     --color-bg: #fafafa;
     --color-surface: #ffffff;
-    --color-surface-translucent: rgba(255, 255, 255, 0.85);
     --color-surface-hover: #f0f0f0;
     --color-text-primary: #0a0a0a;
     --color-text-secondary: #525252;
     --color-text-muted: #8c8c8c;
     --color-border: rgba(0, 0, 0, 0.08);
-    --color-border-hover: rgba(0, 0, 0, 0.2);
+    --color-border-hover: rgba(0, 0, 0, 0.18);
     --color-accent: #000000;
     --color-accent-contrast: #ffffff;
   }
@@ -22,13 +20,12 @@
   .dark {
     --color-bg: #000000;
     --color-surface: #0a0a0a;
-    --color-surface-translucent: rgba(12, 12, 12, 0.85);
     --color-surface-hover: #171717;
     --color-text-primary: #f5f5f5;
     --color-text-secondary: #a3a3a3;
     --color-text-muted: #737373;
-    --color-border: rgba(255, 255, 255, 0.1);
-    --color-border-hover: rgba(255, 255, 255, 0.25);
+    --color-border: rgba(255, 255, 255, 0.09);
+    --color-border-hover: rgba(255, 255, 255, 0.22);
     --color-accent: #ffffff;
     --color-accent-contrast: #000000;
   }
@@ -43,35 +40,28 @@
   }
 }
 
-/* Minimalist Liquid Glass Capsule Bar */
+/* Flat capsule bar — no blur, no shadow */
 .capsule-bar {
   border-radius: 9999px;
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  box-shadow: 0 10px 35px -10px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--color-border);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: border-color 0.2s ease;
 }
 
-.dark .capsule-bar {
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--color-border);
+.capsule-bar:hover {
+  border-color: var(--color-border-hover);
 }
 
 .capsule-bar:focus-within {
-  box-shadow: 0 16px 50px -10px rgba(0, 0, 0, 0.16), 0 0 0 1.5px var(--color-accent);
+  border-color: var(--color-accent);
 }
 
-.dark .capsule-bar:focus-within {
-  box-shadow: 0 16px 50px -10px rgba(0, 0, 0, 0.9), 0 0 0 1.5px rgba(255, 255, 255, 0.35);
-}
-
-/* Liquid Glass Bento Cards */
+/* Flat bento cards — no blur, no shadow */
 .liquid-glass-card {
-  border-radius: 1.75rem; /* Curved rounded borders */
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  border-radius: 1.75rem;
   border: 1px solid var(--color-border);
-  background: var(--color-surface-translucent);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--color-surface);
+  transition: border-color 0.18s ease;
 }
 
 .liquid-glass-card:hover {
@@ -79,10 +69,5 @@
 }
 
 /* Hide scrollbar utility */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

@@ -24,14 +24,14 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
   const t = TRANSLATIONS[currentLang];
 
   return (
-    <header className="sticky top-0 z-30 w-full px-4 sm:px-8 py-3.5 backdrop-blur-2xl bg-white/70 dark:bg-stone-950/70 border-b border-stone-200/60 dark:border-stone-800/80 transition-colors">
+    <header className="sticky top-0 z-30 w-full px-4 sm:px-8 py-3.5  bg-white dark:bg-stone-950 border-b border-stone-200/60 dark:border-stone-800/80 transition-colors">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Brand Monogram (Home trigger) */}
         <div
           onClick={onGoHome}
           className="flex items-center gap-3 cursor-pointer group select-none"
         >
-          <div className="w-9 h-9 rounded-2xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-black text-xl shadow-sm transition group-hover:scale-105">
+          <div className="w-9 h-9 rounded-2xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-black text-xl  transition group-hover:scale-105">
             L
           </div>
           <div>
@@ -72,7 +72,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
           <button
             type="button"
             onClick={onOpenUserMenu}
-            className="w-10 h-10 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-sm shadow-md hover:scale-105 transition cursor-pointer ring-2 ring-stone-200 dark:ring-stone-800"
+            className="w-10 h-10 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-sm  hover:scale-105 transition cursor-pointer ring-2 ring-stone-200 dark:ring-stone-800"
             title="User Account, Profile, Settings & Content Manager"
             aria-label="User Account Menu"
           >

@@ -65,7 +65,7 @@ export const FocusView: React.FC<FocusViewProps> = ({
 
   if (!activeItem) {
     return (
-      <div className="py-20 flex flex-col items-center justify-center text-center p-6 bg-white dark:bg-stone-900 rounded-3xl border border-stone-200 dark:border-stone-800 shadow-sm">
+      <div className="py-20 flex flex-col items-center justify-center text-center p-6 bg-white dark:bg-stone-900 rounded-3xl border border-stone-200 dark:border-stone-800 ">
         <div className="w-16 h-16 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 flex items-center justify-center mb-4">
           <CheckCircle2 className="w-8 h-8" />
         </div>
@@ -82,7 +82,7 @@ export const FocusView: React.FC<FocusViewProps> = ({
   return (
     <div className="max-w-2xl mx-auto flex flex-col items-center">
       {/* Focus Timer Card */}
-      <div className="w-full bg-stone-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl mb-6 flex flex-col items-center justify-center border border-stone-800">
+      <div className="w-full bg-stone-950 text-white rounded-3xl p-6 sm:p-8  mb-6 flex flex-col items-center justify-center border border-stone-800">
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-stone-400 font-semibold mb-3">
           <Flame className="w-4 h-4 text-white" /> Deep Focus Mode
         </div>
@@ -94,7 +94,7 @@ export const FocusView: React.FC<FocusViewProps> = ({
         <div className="flex items-center gap-3">
           <button
             onClick={() => setTimerRunning(!timerRunning)}
-            className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold rounded-full transition shadow-md cursor-pointer hover:bg-stone-200"
+            className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-bold rounded-full transition  cursor-pointer hover:bg-stone-200"
           >
             {timerRunning ? (
               <>
@@ -120,7 +120,7 @@ export const FocusView: React.FC<FocusViewProps> = ({
       </div>
 
       {/* Primary Active Task Card */}
-      <div className="w-full bg-white dark:bg-stone-900 rounded-3xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col gap-6">
+      <div className="w-full bg-white dark:bg-stone-900 rounded-3xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800  flex flex-col gap-6">
         <div className="flex items-center justify-between text-xs text-stone-400 font-medium">
           <span>
             Task {currentIndex + 1} of {pendingItems.length}
@@ -149,7 +149,7 @@ export const FocusView: React.FC<FocusViewProps> = ({
             {activeItem.title}
           </h2>
           {activeItem.notes && (
-            <p className="mt-3 text-sm text-stone-600 dark:text-stone-300 leading-relaxed bg-stone-50 dark:bg-stone-800/60 p-4 rounded-2xl border border-stone-100 dark:border-stone-800">
+            <p className="mt-3 text-sm text-stone-600 dark:text-stone-300 leading-relaxed bg-stone-50 dark:bg-stone-800 p-4 rounded-2xl border border-stone-100 dark:border-stone-800">
               {activeItem.notes}
             </p>
           )}
@@ -197,7 +197,7 @@ export const FocusView: React.FC<FocusViewProps> = ({
           <button
             type="button"
             onClick={handleCompleteCurrent}
-            className="px-6 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition flex items-center gap-2 shadow-xs cursor-pointer hover:opacity-90"
+            className="px-6 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black text-xs font-bold transition flex items-center gap-2  cursor-pointer hover:opacity-90"
           >
             <CheckCircle2 className="w-4 h-4" /> Mark as Done
           </button>
