@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f4f4f5" />
     <title>Liiist</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23111'/%3E%3Cpath d='M9 11h14M9 16h14M9 21h8' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E" />
-    <script>
-      try {
-        var t = localStorage.getItem("liiist:theme");
-        if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
-      } catch (e) {}
-    </script>
+    <meta name="description" content="A versatile, elegant list and task manager for organizing to-dos, ranked favorites, shopping runs, and bucket list goals." />
+    <meta property="og:title" content="Liiist" />
+    <meta property="og:description" content="A versatile, elegant list and task manager for organizing to-dos, ranked favorites, shopping runs, and bucket list goals." />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body class="bg-stone-50 text-stone-900 antialiased selection:bg-amber-200 selection:text-stone-900">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
