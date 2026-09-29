@@ -1,69 +1,98 @@
 import { ListGroup, ListItem, Priority } from '../types';
 
-export const COLOR_MAP = {
+// Monochromatic Theme Mapping — Exclusively White, Grays, and Black
+export const COLOR_MAP: Record<string, {
+  bg: string;
+  light: string;
+  border: string;
+  text: string;
+  ring: string;
+  badge: string;
+}> = {
   amber: {
-    bg: 'bg-amber-500',
-    light: 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/50',
-    border: 'border-amber-400',
-    text: 'text-amber-600 dark:text-amber-400',
-    ring: 'focus:ring-amber-400',
-    badge: 'bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-200'
+    bg: 'bg-black dark:bg-white',
+    light: 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 border-stone-300 dark:border-stone-800',
+    border: 'border-stone-400 dark:border-stone-600',
+    text: 'text-stone-900 dark:text-stone-100',
+    ring: 'focus:ring-stone-400',
+    badge: 'bg-stone-200 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
   },
   emerald: {
-    bg: 'bg-emerald-500',
-    light: 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/50',
-    border: 'border-emerald-400',
-    text: 'text-emerald-600 dark:text-emerald-400',
-    ring: 'focus:ring-emerald-400',
-    badge: 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200'
+    bg: 'bg-stone-900 dark:bg-stone-100',
+    light: 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 border-stone-300 dark:border-stone-800',
+    border: 'border-stone-400 dark:border-stone-600',
+    text: 'text-stone-900 dark:text-stone-100',
+    ring: 'focus:ring-stone-400',
+    badge: 'bg-stone-200 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
   },
   indigo: {
-    bg: 'bg-indigo-500',
-    light: 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800/50',
-    border: 'border-indigo-400',
-    text: 'text-indigo-600 dark:text-indigo-400',
-    ring: 'focus:ring-indigo-400',
-    badge: 'bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200'
+    bg: 'bg-stone-800 dark:bg-stone-200',
+    light: 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 border-stone-300 dark:border-stone-800',
+    border: 'border-stone-400 dark:border-stone-600',
+    text: 'text-stone-900 dark:text-stone-100',
+    ring: 'focus:ring-stone-400',
+    badge: 'bg-stone-200 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
   },
   rose: {
-    bg: 'bg-rose-500',
-    light: 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800/50',
-    border: 'border-rose-400',
-    text: 'text-rose-600 dark:text-rose-400',
-    ring: 'focus:ring-rose-400',
-    badge: 'bg-rose-100 dark:bg-rose-900/50 text-rose-800 dark:text-rose-200'
+    bg: 'bg-stone-800 dark:bg-stone-200',
+    light: 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 border-stone-300 dark:border-stone-800',
+    border: 'border-stone-400 dark:border-stone-600',
+    text: 'text-stone-900 dark:text-stone-100',
+    ring: 'focus:ring-stone-400',
+    badge: 'bg-stone-200 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
   },
   violet: {
-    bg: 'bg-violet-500',
-    light: 'bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-800/50',
-    border: 'border-violet-400',
-    text: 'text-violet-600 dark:text-violet-400',
-    ring: 'focus:ring-violet-400',
-    badge: 'bg-violet-100 dark:bg-violet-900/50 text-violet-800 dark:text-violet-200'
+    bg: 'bg-stone-800 dark:bg-stone-200',
+    light: 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 border-stone-300 dark:border-stone-800',
+    border: 'border-stone-400 dark:border-stone-600',
+    text: 'text-stone-900 dark:text-stone-100',
+    ring: 'focus:ring-stone-400',
+    badge: 'bg-stone-200 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
   },
   cyan: {
-    bg: 'bg-cyan-500',
-    light: 'bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border-cyan-200 dark:border-cyan-800/50',
-    border: 'border-cyan-400',
-    text: 'text-cyan-600 dark:text-cyan-400',
-    ring: 'focus:ring-cyan-400',
-    badge: 'bg-cyan-100 dark:bg-cyan-900/50 text-cyan-800 dark:text-cyan-200'
+    bg: 'bg-stone-800 dark:bg-stone-200',
+    light: 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 border-stone-300 dark:border-stone-800',
+    border: 'border-stone-400 dark:border-stone-600',
+    text: 'text-stone-900 dark:text-stone-100',
+    ring: 'focus:ring-stone-400',
+    badge: 'bg-stone-200 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
   },
   orange: {
-    bg: 'bg-orange-500',
-    light: 'bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800/50',
-    border: 'border-orange-400',
-    text: 'text-orange-600 dark:text-orange-400',
-    ring: 'focus:ring-orange-400',
-    badge: 'bg-orange-100 dark:bg-orange-900/50 text-orange-800 dark:text-orange-200'
+    bg: 'bg-stone-800 dark:bg-stone-200',
+    light: 'bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100 border-stone-300 dark:border-stone-800',
+    border: 'border-stone-400 dark:border-stone-600',
+    text: 'text-stone-900 dark:text-stone-100',
+    ring: 'focus:ring-stone-400',
+    badge: 'bg-stone-200 dark:bg-stone-800 text-stone-900 dark:text-stone-100'
   }
 };
 
+// Monochromatic Priority Config
 export const PRIORITY_CONFIG: Record<Priority, { label: string; badge: string; color: string; dot: string }> = {
-  p1: { label: 'Urgent', badge: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400 border-red-200 dark:border-red-900', color: 'text-red-500', dot: 'bg-red-500' },
-  p2: { label: 'High', badge: 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400 border-amber-200 dark:border-amber-900', color: 'text-amber-500', dot: 'bg-amber-500' },
-  p3: { label: 'Medium', badge: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400 border-blue-200 dark:border-blue-900', color: 'text-blue-500', dot: 'bg-blue-500' },
-  p4: { label: 'Low', badge: 'bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-400 border-stone-200 dark:border-stone-700', color: 'text-stone-400', dot: 'bg-stone-400' }
+  p1: {
+    label: 'P1 Urgent',
+    badge: 'bg-black text-white dark:bg-white dark:text-black border-transparent font-bold',
+    color: 'text-stone-950 dark:text-white',
+    dot: 'bg-stone-950 dark:bg-white'
+  },
+  p2: {
+    label: 'P2 High',
+    badge: 'bg-stone-800 text-white dark:bg-stone-200 dark:text-black border-transparent',
+    color: 'text-stone-800 dark:text-stone-200',
+    dot: 'bg-stone-800 dark:bg-stone-200'
+  },
+  p3: {
+    label: 'P3 Medium',
+    badge: 'bg-stone-200 text-stone-800 dark:bg-stone-800 dark:text-stone-200 border-stone-300 dark:border-stone-700',
+    color: 'text-stone-600 dark:text-stone-400',
+    dot: 'bg-stone-500 dark:bg-stone-500'
+  },
+  p4: {
+    label: 'P4 Low',
+    badge: 'bg-stone-100 text-stone-500 dark:bg-stone-900 dark:text-stone-400 border-stone-200 dark:border-stone-800',
+    color: 'text-stone-400',
+    dot: 'bg-stone-400'
+  }
 };
 
 export function formatDueDate(dateStr?: string): { text: string; isOverdue: boolean; isToday: boolean } | null {

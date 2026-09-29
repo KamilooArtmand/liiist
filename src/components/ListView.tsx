@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ListGroup, ListItem, Priority, FilterStatus, ViewMode } from '../types';
-import { COLOR_MAP, PRIORITY_CONFIG, formatDueDate } from '../utils/helpers';
+import { PRIORITY_CONFIG, formatDueDate } from '../utils/helpers';
 import {
   CheckCircle2,
   Circle,
@@ -17,8 +17,7 @@ import {
   Check,
   LayoutList,
   Kanban,
-  Eye,
-  SlidersHorizontal
+  Eye
 } from 'lucide-react';
 import { BoardView } from './BoardView';
 import { FocusView } from './FocusView';
@@ -49,7 +48,6 @@ export const ListView: React.FC<ListViewProps> = ({
   const [quickPriority, setQuickPriority] = useState<Priority>('p3');
   const [quickCategory, setQuickCategory] = useState('');
   const [quickScore, setQuickScore] = useState<number | undefined>(undefined);
-  const [showFilters, setShowFilters] = useState(false);
   const [sortOrder, setSortOrder] = useState<ListGroup['sortOrder']>(list.sortOrder || 'manual');
 
   // Computed stats
@@ -78,7 +76,7 @@ export const ListView: React.FC<ListViewProps> = ({
     });
   };
 
-  // Add Item through Quick Add Bar
+  // Quick Add Item
   const handleQuickAdd = (e: React.FormEvent) => {
     e.preventDefault();
     if (!quickTitle.trim()) return;
@@ -89,7 +87,7 @@ export const ListView: React.FC<ListViewProps> = ({
       completed: false,
       priority: quickPriority,
       tags: [],
-      category: list.type === 'shopping' ? quickCategory.trim() || 'Produce' : undefined,
+      category: list.type === 'shopping' ? quickCategory.trim() || 'General' : undefined,
       rank: list.type === 'ranked' ? list.items.length + 1 : undefined,
       score: list.type === 'ranked' ? (quickScore ?? 9.0) : undefined,
       createdAt: new Date().toISOString()
@@ -105,7 +103,7 @@ export const ListView: React.FC<ListViewProps> = ({
     setQuickScore(undefined);
   };
 
-  // Move item up/down (ranking or manual sort)
+  // Reorder up/down
   const handleMove = (index: number, direction: 'up' | 'down') => {
     const targetIndex = direction === 'up' ? index - 1 : index + 1;
     if (targetIndex < 0 || targetIndex >= list.items.length) return;
@@ -115,7 +113,6 @@ export const ListView: React.FC<ListViewProps> = ({
     newItems[index] = newItems[targetIndex];
     newItems[targetIndex] = temp;
 
-    // If ranked list, re-number ranks
     if (list.type === 'ranked') {
       newItems.forEach((item, idx) => {
         item.rank = idx + 1;
@@ -157,14 +154,12 @@ export const ListView: React.FC<ListViewProps> = ({
   const processedItems = useMemo(() => {
     let result = [...list.items];
 
-    // Filter
     if (filterStatus === 'active') {
       result = result.filter(i => !i.completed);
     } else if (filterStatus === 'completed') {
       result = result.filter(i => i.completed);
     }
 
-    // Sort
     if (sortOrder === 'rank') {
       result.sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999));
     } else if (sortOrder === 'priority') {
@@ -179,7 +174,6 @@ export const ListView: React.FC<ListViewProps> = ({
     return result;
   }, [list.items, filterStatus, sortOrder]);
 
-  // Grouping for shopping lists
   const shoppingGroups = useMemo(() => {
     if (list.type !== 'shopping') return null;
     const groups: Record<string, ListItem[]> = {};
@@ -191,26 +185,22 @@ export const ListView: React.FC<ListViewProps> = ({
     return groups;
   }, [processedItems, list.type]);
 
-  const colorStyle = COLOR_MAP[list.color] || COLOR_MAP.amber;
-
   return (
     <div className="flex-1 flex flex-col h-full overflow-y-auto">
-      {/* Top Banner / Header Card */}
+      {/* Top Banner Glass Card */}
       <div className="p-6 md:p-8 bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800">
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3.5">
-              <span className="text-3xl sm:text-4xl p-2.5 rounded-2xl bg-stone-100 dark:bg-stone-800 shadow-xs">
+              <span className="text-3xl sm:text-4xl p-2.5 rounded-2xl bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 shadow-xs">
                 {list.icon}
               </span>
               <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">
-                    {list.title}
-                  </h1>
-                </div>
+                <h1 className="text-2xl sm:text-3xl font-black text-stone-950 dark:text-white tracking-tight">
+                  {list.title}
+                </h1>
                 {list.description && (
-                  <p className="text-sm text-stone-500 dark:text-stone-400 mt-1 max-w-xl">
+                  <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 max-w-xl">
                     {list.description}
                   </p>
                 )}
@@ -220,14 +210,14 @@ export const ListView: React.FC<ListViewProps> = ({
             {/* Actions Toolbar */}
             <div className="flex items-center gap-2 self-start sm:self-auto flex-wrap">
               {/* View Switcher */}
-              <div className="flex items-center p-1 bg-stone-100 dark:bg-stone-800 rounded-xl border border-stone-200/60 dark:border-stone-700/60 text-stone-600 dark:text-stone-300">
+              <div className="flex items-center p-1 bg-stone-100 dark:bg-stone-800 rounded-full border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300">
                 <button
                   type="button"
                   onClick={() => onChangeViewMode('list')}
-                  className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition ${
+                  className={`p-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     viewMode === 'list'
-                      ? 'bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-xs'
-                      : 'hover:text-stone-900 dark:hover:text-white'
+                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      : 'hover:text-black dark:hover:text-white'
                   }`}
                   title="List View"
                 >
@@ -236,10 +226,10 @@ export const ListView: React.FC<ListViewProps> = ({
                 <button
                   type="button"
                   onClick={() => onChangeViewMode('board')}
-                  className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition ${
+                  className={`p-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     viewMode === 'board'
-                      ? 'bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-xs'
-                      : 'hover:text-stone-900 dark:hover:text-white'
+                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      : 'hover:text-black dark:hover:text-white'
                   }`}
                   title="Board View"
                 >
@@ -248,10 +238,10 @@ export const ListView: React.FC<ListViewProps> = ({
                 <button
                   type="button"
                   onClick={() => onChangeViewMode('focus')}
-                  className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition ${
+                  className={`p-1.5 rounded-full text-xs font-bold transition cursor-pointer ${
                     viewMode === 'focus'
-                      ? 'bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-xs'
-                      : 'hover:text-stone-900 dark:hover:text-white'
+                      ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                      : 'hover:text-black dark:hover:text-white'
                   }`}
                   title="Focus Mode"
                 >
@@ -259,11 +249,11 @@ export const ListView: React.FC<ListViewProps> = ({
                 </button>
               </div>
 
-              {/* Export Button */}
+              {/* Export */}
               <button
                 type="button"
                 onClick={() => onExportList(list)}
-                className="p-2 rounded-xl border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition"
+                className="p-2 rounded-full border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition"
                 title="Export or Share"
               >
                 <Share2 className="w-4 h-4" />
@@ -273,8 +263,8 @@ export const ListView: React.FC<ListViewProps> = ({
               <button
                 type="button"
                 onClick={() => onEditListMeta(list)}
-                className="p-2 rounded-xl border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800 transition"
-                title="Edit List Settings"
+                className="p-2 rounded-full border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition"
+                title="Edit List Details"
               >
                 <Edit3 className="w-4 h-4" />
               </button>
@@ -283,11 +273,11 @@ export const ListView: React.FC<ListViewProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  if (confirm(`Are you sure you want to delete the list "${list.title}"?`)) {
+                  if (confirm(`Delete list "${list.title}"?`)) {
                     onDeleteList(list.id);
                   }
                 }}
-                className="p-2 rounded-xl border border-stone-200 dark:border-stone-700 text-stone-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition"
+                className="p-2 rounded-full border border-stone-200 dark:border-stone-700 text-stone-400 hover:text-red-500 hover:bg-stone-100 dark:hover:bg-stone-800 transition"
                 title="Delete List"
               >
                 <Trash2 className="w-4 h-4" />
@@ -295,17 +285,17 @@ export const ListView: React.FC<ListViewProps> = ({
             </div>
           </div>
 
-          {/* Progress bar & counts */}
+          {/* Progress bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
             <div className="flex items-center gap-3 flex-1 max-w-md">
-              <div className="flex-1 h-2 bg-stone-100 dark:bg-stone-800 rounded-full overflow-hidden">
+              <div className="flex-1 h-2 bg-stone-100 dark:bg-stone-800 rounded-full overflow-hidden border border-stone-200 dark:border-stone-700">
                 <div
-                  className={`h-full transition-all duration-300 ${colorStyle.bg}`}
+                  className="h-full bg-black dark:bg-white transition-all duration-300"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
-              <span className="text-xs font-semibold text-stone-500 whitespace-nowrap">
-                {completedItems} of {totalItems} completed ({progressPercent}%)
+              <span className="text-xs font-mono font-bold text-stone-500 whitespace-nowrap">
+                {completedItems}/{totalItems} ({progressPercent}%)
               </span>
             </div>
 
@@ -315,7 +305,7 @@ export const ListView: React.FC<ListViewProps> = ({
                 <button
                   type="button"
                   onClick={() => handleToggleAll(true)}
-                  className="text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 underline underline-offset-2"
+                  className="text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 underline"
                 >
                   Mark all done
                 </button>
@@ -326,7 +316,7 @@ export const ListView: React.FC<ListViewProps> = ({
                   <button
                     type="button"
                     onClick={handleClearCompleted}
-                    className="text-stone-500 hover:text-red-600 dark:hover:text-red-400 underline underline-offset-2"
+                    className="text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 underline"
                   >
                     Clear completed
                   </button>
@@ -339,7 +329,6 @@ export const ListView: React.FC<ListViewProps> = ({
 
       {/* Main Content Area */}
       <div className="flex-1 p-6 md:p-8 max-w-4xl mx-auto w-full space-y-6">
-        {/* Render depending on viewMode */}
         {viewMode === 'board' ? (
           <BoardView
             list={list}
@@ -369,41 +358,33 @@ export const ListView: React.FC<ListViewProps> = ({
             {/* Quick Add Bar */}
             <form
               onSubmit={handleQuickAdd}
-              className="bg-white dark:bg-stone-900 rounded-2xl p-2.5 sm:p-3 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5"
+              className="bg-white dark:bg-stone-900 rounded-full px-4 py-2 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5"
             >
-              <div className="flex items-center gap-2 flex-1 pl-2">
-                <Plus className="w-5 h-5 text-amber-500 shrink-0" />
+              <div className="flex items-center gap-2 flex-1 pl-1">
+                <Plus className="w-4 h-4 text-stone-400 shrink-0" />
                 <input
                   type="text"
                   value={quickTitle}
                   onChange={e => setQuickTitle(e.target.value)}
-                  placeholder={
-                    list.type === 'ranked'
-                      ? 'Add title for next ranked position...'
-                      : list.type === 'shopping'
-                      ? 'Add grocery item (e.g. Sourdough loaf, Avocados)...'
-                      : 'Add a new task or item... (press Enter)'
-                  }
-                  className="w-full text-sm font-medium bg-transparent text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none"
+                  placeholder="Add a new item... (Press Enter)"
+                  className="w-full text-xs sm:text-sm font-medium bg-transparent text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none"
                 />
               </div>
 
               <div className="flex items-center gap-2 justify-end">
-                {/* Shopping category */}
                 {list.type === 'shopping' && (
                   <input
                     type="text"
                     value={quickCategory}
                     onChange={e => setQuickCategory(e.target.value)}
                     placeholder="Category"
-                    className="w-24 px-2 py-1 text-xs rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-800 dark:text-stone-200 focus:outline-none"
+                    className="w-20 px-2 py-1 text-xs rounded-full border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-800 dark:text-stone-200 focus:outline-none"
                   />
                 )}
 
-                {/* Ranked Score */}
                 {list.type === 'ranked' && (
-                  <div className="flex items-center gap-1 bg-stone-50 dark:bg-stone-800 px-2 py-1 rounded-lg border border-stone-200 dark:border-stone-700">
-                    <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                  <div className="flex items-center gap-1 bg-stone-50 dark:bg-stone-800 px-2.5 py-1 rounded-full border border-stone-200 dark:border-stone-700">
+                    <Star className="w-3.5 h-3.5 text-stone-500 fill-current" />
                     <input
                       type="number"
                       step="0.1"
@@ -412,16 +393,15 @@ export const ListView: React.FC<ListViewProps> = ({
                       value={quickScore ?? ''}
                       onChange={e => setQuickScore(e.target.value ? parseFloat(e.target.value) : undefined)}
                       placeholder="Score"
-                      className="w-12 text-xs bg-transparent text-stone-800 dark:text-stone-200 focus:outline-none"
+                      className="w-10 text-xs bg-transparent text-stone-800 dark:text-stone-200 focus:outline-none font-mono"
                     />
                   </div>
                 )}
 
-                {/* Priority quick selector */}
                 <select
                   value={quickPriority}
                   onChange={e => setQuickPriority(e.target.value as Priority)}
-                  className="text-xs px-2.5 py-1.5 rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-medium focus:outline-none"
+                  className="text-xs px-2 py-1 rounded-full border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-medium focus:outline-none"
                 >
                   <option value="p1">P1 Urgent</option>
                   <option value="p2">P2 High</option>
@@ -432,7 +412,7 @@ export const ListView: React.FC<ListViewProps> = ({
                 <button
                   type="submit"
                   disabled={!quickTitle.trim()}
-                  className="px-4 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 disabled:opacity-40 text-white text-xs font-semibold transition shrink-0 shadow-xs"
+                  className="px-4 py-1.5 rounded-full bg-black text-white dark:bg-white dark:text-black disabled:opacity-40 text-xs font-bold transition shrink-0 shadow-xs cursor-pointer"
                 >
                   Add
                 </button>
@@ -441,16 +421,15 @@ export const ListView: React.FC<ListViewProps> = ({
 
             {/* Filter and Sort bar */}
             <div className="flex items-center justify-between gap-3 text-xs text-stone-500">
-              {/* Filter tabs */}
-              <div className="flex items-center gap-1 bg-stone-100 dark:bg-stone-800/80 p-1 rounded-xl">
+              <div className="flex items-center gap-1 bg-stone-100 dark:bg-stone-800/80 p-1 rounded-full">
                 {(['all', 'active', 'completed'] as FilterStatus[]).map(status => (
                   <button
                     key={status}
                     type="button"
                     onClick={() => setFilterStatus(status)}
-                    className={`px-3 py-1 rounded-lg font-medium capitalize transition ${
+                    className={`px-3 py-1 rounded-full font-bold capitalize transition cursor-pointer ${
                       filterStatus === status
-                        ? 'bg-white dark:bg-stone-700 text-stone-900 dark:text-stone-100 shadow-xs'
+                        ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
                         : 'hover:text-stone-900 dark:hover:text-stone-200'
                     }`}
                   >
@@ -459,13 +438,12 @@ export const ListView: React.FC<ListViewProps> = ({
                 ))}
               </div>
 
-              {/* Sort Selector */}
               <div className="flex items-center gap-2">
                 <ArrowUpDown className="w-3.5 h-3.5 text-stone-400" />
                 <select
                   value={sortOrder}
                   onChange={e => setSortOrder(e.target.value as any)}
-                  className="bg-transparent border border-stone-200 dark:border-stone-700 rounded-lg px-2 py-1 text-stone-700 dark:text-stone-300 focus:outline-none"
+                  className="bg-transparent border border-stone-200 dark:border-stone-700 rounded-full px-3 py-1 text-stone-700 dark:text-stone-300 focus:outline-none"
                 >
                   <option value="manual">Manual Order</option>
                   <option value="priority">Priority First</option>
@@ -478,24 +456,19 @@ export const ListView: React.FC<ListViewProps> = ({
 
             {/* Items List */}
             {processedItems.length === 0 ? (
-              <div className="py-16 text-center bg-white dark:bg-stone-900 rounded-2xl border border-dashed border-stone-200 dark:border-stone-800 p-8">
-                <p className="text-sm font-semibold text-stone-600 dark:text-stone-400">
+              <div className="py-16 text-center bg-white dark:bg-stone-900 rounded-3xl border border-dashed border-stone-200 dark:border-stone-800 p-8">
+                <p className="text-sm font-semibold text-stone-500">
                   {filterStatus === 'all'
                     ? 'No items in this list yet.'
                     : `No ${filterStatus} items found.`}
                 </p>
-                <p className="text-xs text-stone-400 mt-1">
-                  Use the input bar above to add your first item!
-                </p>
               </div>
             ) : list.type === 'shopping' && shoppingGroups ? (
-              /* Shopping view grouped by Aisle */
               <div className="space-y-6">
                 {Object.entries(shoppingGroups).map(([groupTitle, items]) => (
                   <div key={groupTitle} className="space-y-2">
                     <div className="flex items-center justify-between px-1">
-                      <span className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-stone-400">
                         {groupTitle} ({items.filter(i => i.completed).length}/{items.length})
                       </span>
                     </div>
@@ -506,7 +479,6 @@ export const ListView: React.FC<ListViewProps> = ({
                 ))}
               </div>
             ) : (
-              /* Standard or Ranked items */
               <div className="space-y-2.5">
                 {processedItems.map((item, index) => renderItemRow(item, index))}
               </div>
@@ -524,10 +496,7 @@ export const ListView: React.FC<ListViewProps> = ({
     const subtasks = item.subtasks || [];
     const doneSubtasks = subtasks.filter(s => s.completed).length;
 
-    // Podium highlight for top 3 in ranked mode
     const isPodium1 = isRanked && rankNum === 1;
-    const isPodium2 = isRanked && rankNum === 2;
-    const isPodium3 = isRanked && rankNum === 3;
 
     return (
       <div
@@ -535,19 +504,13 @@ export const ListView: React.FC<ListViewProps> = ({
         onClick={() => onSelectItem(item)}
         className={`group px-4 py-3.5 rounded-2xl border transition flex items-center justify-between gap-3.5 cursor-pointer ${
           item.completed
-            ? 'bg-stone-50/70 dark:bg-stone-900/40 border-stone-200/60 dark:border-stone-800/60 opacity-75'
+            ? 'bg-stone-50/60 dark:bg-stone-900/40 border-stone-200/50 dark:border-stone-800/50 opacity-60'
             : isPodium1
-            ? 'bg-amber-50/60 dark:bg-amber-950/20 border-amber-300 dark:border-amber-700/50 shadow-xs'
-            : isPodium2
-            ? 'bg-stone-50 dark:bg-stone-900/70 border-stone-300 dark:border-stone-700 shadow-xs'
-            : isPodium3
-            ? 'bg-orange-50/40 dark:bg-orange-950/20 border-orange-200 dark:border-orange-800/40 shadow-xs'
-            : 'bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 hover:border-amber-400 dark:hover:border-amber-500/50 shadow-xs'
+            ? 'bg-stone-100/90 dark:bg-stone-900/90 border-stone-400 dark:border-stone-600 shadow-xs'
+            : 'bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 hover:border-black dark:hover:border-white shadow-xs'
         }`}
       >
-        {/* Left: Reorder, Rank badge, checkbox, title */}
         <div className="flex items-center gap-3 min-w-0 flex-1">
-          {/* Move up / down controls */}
           <div
             className="flex flex-col opacity-0 group-hover:opacity-100 transition shrink-0"
             onClick={e => e.stopPropagation()}
@@ -556,7 +519,7 @@ export const ListView: React.FC<ListViewProps> = ({
               type="button"
               onClick={() => handleMove(index, 'up')}
               disabled={index === 0}
-              className="text-stone-400 hover:text-stone-700 disabled:opacity-20 p-0.5"
+              className="text-stone-400 hover:text-black dark:hover:text-white disabled:opacity-20 p-0.5"
             >
               <ChevronUp className="w-3.5 h-3.5" />
             </button>
@@ -564,59 +527,52 @@ export const ListView: React.FC<ListViewProps> = ({
               type="button"
               onClick={() => handleMove(index, 'down')}
               disabled={index === list.items.length - 1}
-              className="text-stone-400 hover:text-stone-700 disabled:opacity-20 p-0.5"
+              className="text-stone-400 hover:text-black dark:hover:text-white disabled:opacity-20 p-0.5"
             >
               <ChevronDown className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          {/* Ranked badge */}
           {isRanked && (
             <div
-              className={`w-7 h-7 rounded-xl font-bold flex items-center justify-center text-xs shrink-0 ${
+              className={`w-7 h-7 rounded-xl font-bold flex items-center justify-center text-xs shrink-0 font-mono ${
                 isPodium1
-                  ? 'bg-amber-400 text-stone-900 shadow-xs ring-2 ring-amber-300'
-                  : isPodium2
-                  ? 'bg-stone-300 dark:bg-stone-700 text-stone-900 dark:text-stone-100 ring-1 ring-stone-400'
-                  : isPodium3
-                  ? 'bg-amber-700 text-amber-100 ring-1 ring-amber-600'
-                  : 'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400'
+                  ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                  : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300'
               }`}
             >
               #{rankNum}
             </div>
           )}
 
-          {/* Completion Checkbox */}
           <button
             type="button"
             onClick={e => {
               e.stopPropagation();
               handleToggleComplete(item.id);
             }}
-            className="text-stone-400 hover:text-amber-500 shrink-0 transition"
+            className="text-stone-400 hover:text-black dark:hover:text-white shrink-0 transition"
           >
             {item.completed ? (
-              <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+              <CheckCircle2 className="w-5 h-5 text-stone-950 dark:text-white" />
             ) : (
-              <Circle className="w-5 h-5 hover:text-amber-500" />
+              <Circle className="w-5 h-5" />
             )}
           </button>
 
-          {/* Title & Notes snippet */}
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <span
                 className={`text-sm font-medium tracking-tight truncate ${
                   item.completed
                     ? 'line-through text-stone-400 dark:text-stone-500'
-                    : 'text-stone-900 dark:text-stone-100'
+                    : 'text-stone-950 dark:text-white'
                 }`}
               >
                 {item.title}
               </span>
               {item.quantity && (
-                <span className="text-xs px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 font-mono">
+                <span className="text-[11px] px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 font-mono">
                   {item.quantity}
                 </span>
               )}
@@ -630,17 +586,14 @@ export const ListView: React.FC<ListViewProps> = ({
           </div>
         </div>
 
-        {/* Right side badges & details */}
         <div className="flex items-center gap-2 shrink-0">
-          {/* Score rating for ranked items */}
           {item.score !== undefined && (
-            <span className="text-xs font-bold px-2 py-0.5 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 flex items-center gap-1">
-              <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+            <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-md bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 flex items-center gap-1">
+              <Star className="w-3.5 h-3.5 fill-current" />
               {item.score}
             </span>
           )}
 
-          {/* Priority pill */}
           {item.priority && (
             <span
               className={`text-[10px] px-2 py-0.5 rounded-full font-semibold border ${
@@ -651,26 +604,14 @@ export const ListView: React.FC<ListViewProps> = ({
             </span>
           )}
 
-          {/* Due date badge */}
           {dateBadge && (
-            <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-medium flex items-center gap-1 ${
-                dateBadge.isOverdue
-                  ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300'
-                  : dateBadge.isToday
-                  ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
-                  : 'bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300'
-              }`}
-            >
-              <Clock className="w-3 h-3" />
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 font-mono">
               {dateBadge.text}
             </span>
           )}
 
-          {/* Subtasks summary */}
           {subtasks.length > 0 && (
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 flex items-center gap-1">
-              <CheckSquare className="w-3 h-3" />
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 font-mono">
               {doneSubtasks}/{subtasks.length}
             </span>
           )}

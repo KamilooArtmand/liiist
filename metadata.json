@@ -1,4 +1,7 @@
 {
-  "name": "Liiist",
-  "description": "A versatile, elegant list and task manager for organizing to-dos, ranked favorites, shopping runs, and bucket list goals."
+  "name": "liiist",
+  "description": "liiist — The Universal Directory of Everything. Minimalist, token-based, monochrome architecture.",
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
