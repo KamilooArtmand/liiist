@@ -1,11 +1,13 @@
 import React from 'react';
-import { Globe2, Layers, Building2, ChevronRight, ExternalLink } from 'lucide-react';
+import { Globe2, Layers, Building2, ChevronRight, ExternalLink, Library } from 'lucide-react';
 import { Country } from '../types/country';
 import { StateInfo, CityInfo } from '../types/hierarchy';
 import { COUNTRIES_DATA } from '../data/countriesData';
 import { ALL_50_US_STATES } from '../data/usStatesData';
 import { ALL_NEW_YORK_CITIES } from '../data/newYorkCitiesData';
 import { CountryFlag } from './CountryFlag';
+import { WORLD_LANGUAGES } from '../data/worldLanguagesData';
+import { WorldLanguage } from '../types/worldLanguage';
 import { USStateFlag } from './USStateFlag';
 
 interface LandingListColumnProps<T> {
@@ -34,29 +36,29 @@ function LandingListColumn<T>({
   viewAllLabel = 'View All'
 }: LandingListColumnProps<T>) {
   return (
-    <div className="flex-1 w-full min-w-[300px] max-w-md rounded-3xl p-5 sm:p-6 bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 backdrop-blur-2xl shadow-sm flex flex-col justify-between space-y-4 group hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300">
+    <div className="flex-1 w-full min-w-[240px] max-w-md rounded-[20px] p-3.5 sm:p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex flex-col justify-between space-y-2.5 group hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300">
       {/* Top Header Card */}
-      <div className="space-y-3 pb-3 border-b border-neutral-200/60 dark:border-neutral-800/60">
+      <div className="space-y-2 pb-2.5 border-b border-neutral-200/60 dark:border-neutral-800/60">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200/60 dark:border-neutral-700/60 flex items-center justify-center text-neutral-950 dark:text-white shrink-0 group-hover:scale-105 transition-transform">
+            <div className="w-7 h-7 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200/60 dark:border-neutral-700/60 flex items-center justify-center text-neutral-950 dark:text-white shrink-0 group-hover:scale-105 transition-transform">
               {icon}
             </div>
             <div>
-              <h2 className="text-sm sm:text-base font-bold text-neutral-950 dark:text-white tracking-tight">
+              <h2 className="text-[13px] font-bold text-neutral-950 dark:text-white tracking-tight leading-tight">
                 {title}
               </h2>
-              <span className="font-mono text-[10px] text-neutral-400 block">
+              <span className="font-mono text-[9px] text-neutral-400 block mt-0.5">
                 {handle}
               </span>
             </div>
           </div>
 
           <div className="text-right">
-            <span className="text-xl sm:text-2xl font-bold font-mono text-neutral-950 dark:text-white tabular-nums block">
+            <span className="text-lg font-bold font-mono text-neutral-950 dark:text-white tabular-nums block leading-none">
               {count}
             </span>
-            <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 block">
+            <span className="text-[8px] font-mono uppercase tracking-wider text-neutral-400 block mt-1">
               Cataloged
             </span>
           </div>
@@ -85,7 +87,7 @@ function LandingListColumn<T>({
         <button
           type="button"
           onClick={onViewAll}
-          className="text-xs font-mono font-medium text-neutral-900 dark:text-white hover:underline flex items-center gap-1 cursor-pointer group-hover:translate-x-0.5 transition-transform"
+          className="text-[11px] font-mono font-medium text-neutral-900 dark:text-white hover:underline flex items-center gap-1 cursor-pointer group-hover:translate-x-0.5 transition-transform"
         >
           <span>{viewAllLabel}</span>
           <ChevronRight className="w-3.5 h-3.5" />
@@ -96,6 +98,8 @@ function LandingListColumn<T>({
 }
 
 interface MinimalCapsuleLandingProps {
+  onSelectLanguage: (lang: WorldLanguage) => void;
+  onOpenCultureLanguages: () => void;
   onOpenWorldCountries: () => void;
   onOpenWorldOverview: () => void;
   onSelectCountry: (country: Country) => void;
@@ -106,6 +110,8 @@ interface MinimalCapsuleLandingProps {
 }
 
 export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
+  onSelectLanguage,
+  onOpenCultureLanguages,
   onOpenWorldCountries,
   onOpenWorldOverview,
   onSelectCountry,
@@ -117,18 +123,19 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
   const top10Countries = COUNTRIES_DATA.slice(0, 10);
   const top10States = ALL_50_US_STATES.slice(0, 10);
   const top10NYCities = ALL_NEW_YORK_CITIES.slice(0, 10);
+  const top10Languages = WORLD_LANGUAGES.slice(0, 10);
 
   const newYorkState = ALL_50_US_STATES.find(s => s.code === 'NY') || ALL_50_US_STATES[0];
 
   return (
     <div className="w-full flex-1 flex flex-col items-center justify-start px-4 sm:px-6 py-4 sm:py-6 relative min-h-[82vh] space-y-6">
-      {/* 3 Prominent 10-Item Directory Columns */}
-      <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch justify-center gap-6">
+                  {/* 4 Prominent 10-Item Directory Columns */}
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         {/* Column 1: Countries of the World */}
         <LandingListColumn<Country>
           title="Countries of the World"
           subtitle="Sovereign Planet Directory"
-          icon={<Globe2 className="w-4.5 h-4.5" />}
+          icon={<Globe2 className="w-3.5 h-3.5" />}
           count={COUNTRIES_DATA.length}
           lastUpdated="Sep 29, 2026"
           handle="@countries"
@@ -141,18 +148,18 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
                 onSelectCountry(c);
                 onOpenCountryDetail(c);
               }}
-              className="flex items-center justify-between p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row"
+              className="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="font-mono text-[10px] text-neutral-400 w-4 text-right">
                   {String(idx + 1).padStart(2, '0')}
                 </span>
                 <CountryFlag code={c.code} className="w-5 h-3.5 rounded-xs shrink-0" />
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white truncate">
+                <span className="text-[11px] font-semibold text-neutral-900 dark:text-white truncate leading-snug">
                   {c.name}
                 </span>
               </div>
-              <span className="font-mono text-[10px] text-neutral-400 shrink-0">
+              <span className="font-mono text-[9px] text-neutral-400 shrink-0">
                 {c.capital}
               </span>
             </div>
@@ -163,7 +170,7 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
         <LandingListColumn<StateInfo>
           title="States of the United States"
           subtitle="50 Sovereign Federated States"
-          icon={<Layers className="w-4.5 h-4.5" />}
+          icon={<Layers className="w-3.5 h-3.5" />}
           count={ALL_50_US_STATES.length}
           lastUpdated="Sep 29, 2026"
           handle="@us-states"
@@ -173,18 +180,18 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
           renderItem={(s, idx) => (
             <div
               onClick={() => onSelectState(s)}
-              className="flex items-center justify-between p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row"
+              className="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="font-mono text-[10px] text-neutral-400 w-4 text-right">
                   {String(idx + 1).padStart(2, '0')}
                 </span>
                 <USStateFlag code={s.code} name={s.name} className="w-5 h-3.5 rounded-xs shrink-0" />
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white truncate">
+                <span className="text-[11px] font-semibold text-neutral-900 dark:text-white truncate leading-snug">
                   {s.name}
                 </span>
               </div>
-              <span className="font-mono text-[10px] text-neutral-400 shrink-0">
+              <span className="font-mono text-[9px] text-neutral-400 shrink-0">
                 {s.code} • {s.capital}
               </span>
             </div>
@@ -195,7 +202,7 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
         <LandingListColumn<CityInfo>
           title="Cities of New York State"
           subtitle="Incorporated Municipalities"
-          icon={<Building2 className="w-4.5 h-4.5" />}
+          icon={<Building2 className="w-3.5 h-3.5" />}
           count={ALL_NEW_YORK_CITIES.length}
           lastUpdated="Sep 29, 2026"
           handle="@ny-cities"
@@ -208,13 +215,13 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
                 onSelectState(newYorkState);
                 onSelectCity?.(city.name);
               }}
-              className="flex items-center justify-between p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row"
+              className="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="font-mono text-[10px] text-neutral-400 w-4 text-right">
                   {String(idx + 1).padStart(2, '0')}
                 </span>
-                <span className="text-xs font-semibold text-neutral-900 dark:text-white truncate">
+                <span className="text-[11px] font-semibold text-neutral-900 dark:text-white truncate leading-snug">
                   {city.name}
                 </span>
                 {city.isCapital && (
@@ -223,9 +230,43 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
                   </span>
                 )}
               </div>
-              <span className="font-mono text-[10px] text-neutral-400 tabular-nums shrink-0">
+              <span className="font-mono text-[9px] text-neutral-400 tabular-nums shrink-0">
                 {city.population.toLocaleString()}
               </span>
+            </div>
+          )}
+        />
+
+        {/* Column 4: World Languages */}
+        <LandingListColumn<WorldLanguage>
+          title="World Languages"
+          subtitle="Top Spoken Tongues"
+          icon={<Library className="w-3.5 h-3.5" />}
+          count={WORLD_LANGUAGES.length}
+          lastUpdated="Today"
+          handle="@languages"
+          items={top10Languages}
+          viewAllLabel="All Languages"
+          onViewAll={onOpenCultureLanguages}
+          renderItem={(l, idx) => (
+            <div
+              onClick={() => onSelectLanguage(l)}
+              className="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="font-mono text-[10px] text-neutral-400 w-4 text-right shrink-0">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <span className="text-sm font-black font-serif text-neutral-300 dark:text-neutral-700 select-none shrink-0 w-4 text-center">
+                  {l.nativeName.charAt(0)}
+                </span>
+                <span className="text-[11px] font-semibold text-neutral-900 dark:text-white truncate leading-snug">
+                  {l.name}
+                </span>
+              </div>
+              <div className="text-right shrink-0 opacity-0 group-hover/row:opacity-100 transition-opacity">
+                <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
+              </div>
             </div>
           )}
         />
