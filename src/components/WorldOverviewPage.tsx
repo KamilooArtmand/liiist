@@ -14,7 +14,10 @@ import {
   Home
 } from 'lucide-react';
 
+import { Library } from 'lucide-react';
+
 interface WorldOverviewPageProps {
+  onOpenCultureLanguages?: () => void;
   onGoHome: () => void;
   onOpenCountryList: () => void;
 }
@@ -48,7 +51,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
   return (
     <div className="flex-1 flex flex-col w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       {/* Hero Bento Header for Planet Earth */}
-      <div className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+      <div className="liquid-glass-card p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
@@ -66,7 +69,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
           <button
             type="button"
             onClick={onOpenCountryList}
-            className="px-4 py-2.5 rounded-full bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-semibold hover:opacity-90 transition flex items-center gap-2 cursor-pointer shadow-md"
+            className="px-4 py-2.5 rounded-full bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-semibold hover:opacity-90 transition flex items-center gap-2 cursor-pointer "
           >
             <span>Enter Sovereign Countries</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -79,7 +82,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
         {/* Bento Card 1: Sovereign Countries Gateway (6 Cols) */}
         <div
           onClick={onOpenCountryList}
-          className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all cursor-pointer group space-y-4"
+          className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-all cursor-pointer group space-y-4"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
@@ -108,7 +111,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
         </div>
 
         {/* Bento Card 2: Recursive Administrative Hierarchy (6 Cols) */}
-        <div className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+        <div className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-900 dark:text-white">
@@ -126,27 +129,27 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
           </div>
 
           <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div className="p-2.5 rounded-xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/40 dark:border-neutral-800/40">
+            <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
               <span className="text-[10px] text-neutral-400 block">LEVEL 1</span>
               <span className="font-bold text-neutral-900 dark:text-white">Continents (7)</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/40 dark:border-neutral-800/40">
+            <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
               <span className="text-[10px] text-neutral-400 block">LEVEL 2</span>
               <span className="font-bold text-neutral-900 dark:text-white">Countries (195)</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/40 dark:border-neutral-800/40">
+            <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
               <span className="text-[10px] text-neutral-400 block">LEVEL 3 (Roadmap)</span>
               <span className="font-bold text-neutral-900 dark:text-white">States & Provinces</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/40 dark:border-neutral-800/40">
+            <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
               <span className="text-[10px] text-neutral-400 block">LEVEL 4 (Roadmap)</span>
               <span className="font-bold text-neutral-900 dark:text-white">Cities & Towns</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/40 dark:border-neutral-800/40">
+            <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
               <span className="text-[10px] text-neutral-400 block">LEVEL 5 (Roadmap)</span>
               <span className="font-bold text-neutral-900 dark:text-white">Counties & Boroughs</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-neutral-100/60 dark:bg-neutral-950/60 border border-neutral-200/40 dark:border-neutral-800/40">
+            <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40">
               <span className="text-[10px] text-neutral-400 block">LEVEL 6 (Roadmap)</span>
               <span className="font-bold text-neutral-900 dark:text-white">Districts & Villages</span>
             </div>
@@ -154,7 +157,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
         </div>
 
         {/* Bento Card 3: The 7 Continents (6 Cols) */}
-        <div className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+        <div className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
               <Compass className="w-3.5 h-3.5" />
@@ -167,7 +170,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
             {continents.map((cont) => (
               <div
                 key={cont.name}
-                className="p-3 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 flex items-center justify-between text-xs font-mono"
+                className="p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 flex items-center justify-between text-xs font-mono"
               >
                 <div>
                   <span className="font-bold text-neutral-900 dark:text-white">{cont.name}</span>
@@ -187,7 +190,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
         </div>
 
         {/* Bento Card 4: The 5 Major World Oceans (6 Cols) */}
-        <div className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white/80 dark:bg-neutral-900/80 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
+        <div className="md:col-span-6 liquid-glass-card p-6 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
               <Waves className="w-3.5 h-3.5" />
@@ -200,7 +203,7 @@ export const WorldOverviewPage: React.FC<WorldOverviewPageProps> = ({
             {oceans.map((ocean) => (
               <div
                 key={ocean.name}
-                className="p-3 rounded-2xl bg-neutral-100/50 dark:bg-neutral-950/50 border border-neutral-200/40 dark:border-neutral-800/40 flex items-center justify-between text-xs font-mono"
+                className="p-3 rounded-2xl bg-neutral-100 dark:bg-neutral-950 border border-neutral-200/40 dark:border-neutral-800/40 flex items-center justify-between text-xs font-mono"
               >
                 <div>
                   <span className="font-bold text-neutral-900 dark:text-white">{ocean.name}</span>

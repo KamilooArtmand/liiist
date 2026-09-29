@@ -13,6 +13,9 @@ import { WorldCountryPage } from './components/WorldCountryPage';
 import { CountryDetailPage } from './components/CountryDetailPage';
 import { StatesDirectoryPage } from './components/StatesDirectoryPage';
 import { StateDetailPage } from './components/StateDetailPage';
+import { LanguagesDirectoryPage } from './components/LanguagesDirectoryPage';
+import { LanguageDetailPage } from './components/LanguageDetailPage';
+import { WorldLanguage } from './types/worldLanguage';
 import { UserMenuPanel, UserMenuSection } from './components/UserMenuPanel';
 import { ProfileModal } from './components/ProfileModal';
 import { ContentManagerModal } from './components/ContentManagerModal';
@@ -37,14 +40,23 @@ export const App: React.FC = () => {
 
   // App Navigation View
   const [activeView, setActiveView] = useState<
-    'landing' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail'
+    'landing' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
   >('landing');
 
   // Currently selected country
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
-  // Currently selected state (e.g. California, Texas, New York)
+    // Currently selected state (e.g. California, Texas, New York)
   const [selectedState, setSelectedState] = useState<StateInfo | null>(null);
+
+  // Currently selected language
+  const [selectedLanguage, setSelectedLanguage] = useState<WorldLanguage | null>(null);
+
+  const handleSelectLanguage = (lang: WorldLanguage) => {
+    setSelectedLanguage(lang);
+    setActiveView('language-detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Modal dialog states
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -206,6 +218,17 @@ export const App: React.FC = () => {
     headerBreadcrumbSegments.push({ label: 'City', hierarchyTone: 'subdivision' });
     headerBreadcrumbSegments.push({ label: 'Village', hierarchyTone: 'subdivision' });
     headerBreadcrumbPath = 'liii.st/World/Country/States/County/City/Village';
+    } else if (activeView === 'languages-directory') {
+    headerBreadcrumbSegments.push({ label: 'World', onClick: () => setActiveView('world-overview'), hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Culture', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Language', isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbPath = 'liii.st/World/Culture/Language';
+  } else if (activeView === 'language-detail' && selectedLanguage) {
+    headerBreadcrumbSegments.push({ label: 'World', onClick: () => setActiveView('world-overview'), hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Culture', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Language', onClick: () => setActiveView('languages-directory'), hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: selectedLanguage.name, isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbPath = 'liii.st/World/Culture/Language/' + selectedLanguage.name;
   } else if (activeView === 'world-overview') {
     headerBreadcrumbSegments.push({ label: 'World', isCurrent: true, hierarchyTone: 'current' });
     headerBreadcrumbSegments.push({ label: 'Country', onClick: () => setActiveView('country-list'), hierarchyTone: 'subdivision' });
@@ -359,6 +382,8 @@ export const App: React.FC = () => {
         {activeView === 'landing' ? (
           /* THE 3-COLUMN DIRECTORY LANDING: 10 Nations + 10 US States + 10 NY Cities with rich headers */
           <MinimalCapsuleLanding
+            onOpenCultureLanguages={() => setActiveView('languages-directory')}
+            onSelectLanguage={handleSelectLanguage}
             onOpenWorldCountries={() => setActiveView('country-list')}
             onOpenWorldOverview={() => setActiveView('world-overview')}
             onSelectCountry={handleSelectCountry}
@@ -377,11 +402,20 @@ export const App: React.FC = () => {
               }
             }}
           />
+                ) : activeView === 'languages-directory' ? (
+          <LanguagesDirectoryPage 
+            onBackToLanding={() => setActiveView('landing')}
+            onSelectLanguage={handleSelectLanguage}
+          />
+        ) : activeView === 'language-detail' && selectedLanguage ? (
+          <LanguageDetailPage language={selectedLanguage} />
         ) : activeView === 'world-overview' ? (
           /* WORLD HIERARCHY OVERVIEW: liii.st/World */
           <WorldOverviewPage
             onGoHome={() => setActiveView('landing')}
             onOpenCountryList={() => setActiveView('country-list')}
+            onOpenCultureLanguages={() => setActiveView('languages-directory')}
+            onSelectLanguage={handleSelectLanguage}
           />
         ) : activeView === 'country-list' ? (
           /* DEDICATED SOVEREIGN COUNTRIES PAGE: liii.st/World/Country */
