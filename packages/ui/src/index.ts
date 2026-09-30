@@ -15,3 +15,5 @@ export * from './EngagementAction';
 export * from './ActivityFeed';
 
 export * from './SettingsComponents';
+
+export * from './Icon';
