@@ -17,3 +17,5 @@ export * from './ActivityFeed';
 export * from './SettingsComponents';
 
 export * from './Icon';
+
+export * from './InstallWidget';
