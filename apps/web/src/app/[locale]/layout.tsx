@@ -1,7 +1,7 @@
 import React from 'react';
 import { Inter, Vazirmatn } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { InstallWidget } from '@liiist/ui';
+import { InstallWidget, ThemeProvider } from '@liiist/ui';
 import { getMessages } from 'next-intl/server';
 import '../../../../src/index.css';
 
@@ -34,11 +34,14 @@ export default async function RootLayout({
     <html lang={locale} dir={dir} className={`${fontClass} antialiased subpixel-antialiased`}>
       <body className="w-full min-h-screen font-sans">
         <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>
           {children}
           <InstallWidget />
+        </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
   );
 }
+
 

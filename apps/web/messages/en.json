@@ -8,5 +8,11 @@
   "Settings": {
     "title": "Account & Security",
     "description": "Manage your Liiist identity, active sessions, and account lifecycle."
+  },
+  "Auth": {
+    "facebook": "Continue with Facebook",
+    "google": "Continue with Google",
+    "title": "Authenticate",
+    "devLogin": "DEV: Login as Admin"
   }
 }

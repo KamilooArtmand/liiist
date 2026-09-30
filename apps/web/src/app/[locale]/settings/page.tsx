@@ -1,6 +1,6 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-import { DangerZone, SettingsGroup, SettingsRow } from '@liiist/ui';
+import { DangerZone, SettingsGroup, SettingsRow, ThemeToggleRow } from '@liiist/ui';
 import { Shield, Moon, Smartphone, UserX } from 'lucide-react';
 
 export default async function SettingsIndexPage({ params: { locale } }: { params: { locale: string } }) {
@@ -59,3 +59,4 @@ export default async function SettingsIndexPage({ params: { locale } }: { params
     </div>
   );
 }
+
