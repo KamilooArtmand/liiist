@@ -17,6 +17,9 @@ import { StatesDirectoryPage } from './components/StatesDirectoryPage';
 import { StateDetailPage } from './components/StateDetailPage';
 import { LanguagesDirectoryPage } from './components/LanguagesDirectoryPage';
 import { LanguageDetailPage } from './components/LanguageDetailPage';
+import { MoviesDirectoryPage } from './components/MoviesDirectoryPage';
+import { MovieDetailPage } from './components/MovieDetailPage';
+import { ListItem } from './types';
 import { WorldLanguage } from './types/worldLanguage';
 import { UserMenuPanel, UserMenuSection } from './components/UserMenuPanel';
 import { ProfileModal } from './components/ProfileModal';
@@ -43,7 +46,7 @@ export const App: React.FC = () => {
 
   // App Navigation View
   const [activeView, setActiveView] = useState<
-    'landing' | 'explore-feed' | 'list-detail' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
+    'landing' | 'explore-feed' | 'list-detail' | 'world-overview' | 'country-list' | 'movies-directory' | 'movie-detail' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
   >('landing');
 
   // Currently selected country
@@ -54,6 +57,7 @@ export const App: React.FC = () => {
 
   // Currently selected language
   const [selectedLanguage, setSelectedLanguage] = useState<WorldLanguage | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<ListItem | null>(null);
 
   const handleSelectLanguage = (lang: WorldLanguage) => {
     setSelectedLanguage(lang);
@@ -238,7 +242,18 @@ export const App: React.FC = () => {
     headerBreadcrumbSegments.push({ label: 'City', hierarchyTone: 'subdivision' });
     headerBreadcrumbSegments.push({ label: 'Village', hierarchyTone: 'subdivision' });
     headerBreadcrumbPath = 'liii.st/World/Country/States/County/City/Village';
-    } else if (activeView === 'languages-directory') {
+    } else if (activeView === 'movies-directory') {
+    headerBreadcrumbSegments.push({ label: 'World', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Culture', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Art', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Cinema', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Movies', isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbPath = 'liii.st/World/Culture/Art/Cinema/Movie';
+  } else if (activeView === 'movie-detail' && selectedMovie) {
+    headerBreadcrumbSegments.push({ label: 'Cinema', hierarchyTone: 'ancestor', onClick: () => setActiveView('movies-directory') });
+    headerBreadcrumbSegments.push({ label: selectedMovie.title, isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbPath = 'liii.st/World/Culture/Art/Cinema/Movie/' + selectedMovie.title.replace(/\s+/g, '');
+  } else if (activeView === 'languages-directory') {
     headerBreadcrumbSegments.push({ label: 'World', onClick: () => setActiveView('world-overview'), hierarchyTone: 'ancestor' });
     headerBreadcrumbSegments.push({ label: 'Culture', hierarchyTone: 'ancestor' });
     headerBreadcrumbSegments.push({ label: 'Language', isCurrent: true, hierarchyTone: 'current' });
@@ -425,19 +440,25 @@ export const App: React.FC = () => {
               setActiveView('landing');
             }}
           />
+                ) : activeView === 'movies-directory' ? (
+          <MoviesDirectoryPage 
+            onBack={() => setActiveView('landing')}
+            onSelectMovie={(movie) => {
+              setSelectedMovie(movie);
+              setActiveView('movie-detail');
+            }}
+          />
+        ) : activeView === 'movie-detail' && selectedMovie ? (
+          <MovieDetailPage 
+            movie={selectedMovie}
+            onBack={() => setActiveView('movies-directory')}
+          />
         ) : activeView === 'landing' ? (
           /* THE 3-COLUMN DIRECTORY LANDING: 10 Nations + 10 US States + 10 NY Cities with rich headers */
           <MinimalCapsuleLanding
             onOpenCultureLanguages={() => setActiveView('languages-directory')}
             onSelectLanguage={handleSelectLanguage}
-            onOpenMoviesTimeline={() => {
-              const movieL = activeLists.find(l => l.id === MOVIES_LIST_ID);
-              if (movieL) {
-                setSelectedListId(movieL.id);
-                setListViewMode('timeline');
-                setActiveView('list-detail');
-              }
-            }}
+            onOpenMoviesDirectory={() => setActiveView('movies-directory')}
             onOpenWorldCountries={() => setActiveView('country-list')}
             onOpenWorldOverview={() => setActiveView('world-overview')}
             onSelectCountry={handleSelectCountry}

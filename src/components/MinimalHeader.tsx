@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, Search, X, Sparkles, Globe2, ChevronRight, Layers } from 'lucide-react';
+import { User, Search, X, Sparkles, Globe2, ChevronRight, Layers, List, LayoutGrid, Eye } from 'lucide-react';
 import { Country } from '../types/country';
 import { ALL_COUNTRIES } from '../data/countriesData';
 import { ALL_50_US_STATES } from '../data/usStatesData';

@@ -108,7 +108,7 @@ interface MinimalCapsuleLandingProps {
   onOpenStatesDirectory: () => void;
   onSelectState: (state: StateInfo) => void;
   onSelectCity?: (cityName: string) => void;
-  onOpenMoviesTimeline?: () => void;
+  onOpenMoviesDirectory?: () => void;
 }
 
 export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
@@ -121,7 +121,7 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
   onOpenStatesDirectory,
   onSelectState,
   onSelectCity,
-  onOpenMoviesTimeline
+  onOpenMoviesDirectory
 }) => {
   const top10Countries = COUNTRIES_DATA.slice(0, 10);
   const top10States = ALL_50_US_STATES.slice(0, 10);
@@ -272,6 +272,38 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
                 <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
               </div>
             </div>
+          )}
+                />
+
+        {/* COLUMN 5: TOP 100 MOVIES */}
+        <LandingListColumn
+          title="Top 100 Movies"
+          subtitle="Cinematic Masterpieces"
+          icon={<Film className="w-3.5 h-3.5" />}
+          handle="@cinema"
+          lastUpdated="2026-09"
+          count={100}
+          items={top10Movies}
+          onViewAll={() => onOpenMoviesDirectory?.()}
+          viewAllLabel="All Movies"
+          renderItem={(movie, i) => (
+            <button
+              key={movie.id}
+              onClick={() => onOpenMoviesDirectory?.()}
+              className="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer group/row w-full text-left"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="font-mono text-[10px] text-neutral-400 w-4 text-right shrink-0">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="text-[11px] font-semibold text-neutral-900 dark:text-white truncate leading-snug">
+                  {movie.title}
+                </span>
+              </div>
+              <span className="font-mono text-[9px] text-neutral-400 shrink-0">
+                {movie.year}
+              </span>
+            </button>
           )}
         />
       </div>
