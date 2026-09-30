@@ -18,9 +18,10 @@ export default async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   
   // Get hostname of request (e.g. kid.liii.st, germany.liii.st, liii.st)
+  // Handle localhost port 3000 mapping for local development
   let hostname = req.headers
     .get('host')!
-    .replace('.localhost:3000', `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`)
+    .replace('.localhost:3000', `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'liii.st'}`)
     .replace('localhost:3000', process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'liii.st');
 
   const searchParams = req.nextUrl.searchParams.toString();
@@ -28,20 +29,31 @@ export default async function middleware(req: NextRequest) {
     searchParams.length > 0 ? `?${searchParams}` : ''
   }`;
 
-  // If we are on the main domain (liii.st or liiist.app), we don't rewrite.
-  // The root domain might be handled by apps/web instead, but if it hits here:
-  if (
+  // Base domain check
+  const isMainDomain = 
     hostname === 'liii.st' ||
     hostname === 'liiist.app' ||
-    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
-  ) {
+    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN;
+
+  if (isMainDomain) {
     return NextResponse.next();
   }
 
   // Extract the subdomain (e.g. 'kid' from 'kid.liii.st')
   const subdomain = hostname.split('.')[0];
 
-  // Rewrite to the dynamic route `/[subdomain]/[path]`
-  // This allows the App Router to handle `app/[subdomain]/page.tsx`
-  return NextResponse.rewrite(new URL(`/${subdomain}${path}`, req.url));
+  // Pass the extracted subdomain as a header so Server Components can easily access it
+  // without parsing the URL multiple times.
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('x-subdomain', subdomain);
+
+  // Rewrite to the dynamic route `/[subdomain]/[path]` for App Router structural mapping
+  return NextResponse.rewrite(
+    new URL(`/${subdomain}${path}`, req.url),
+    {
+      request: {
+        headers: requestHeaders,
+      },
+    }
+  );
 }
