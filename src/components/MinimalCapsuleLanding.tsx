@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe2, Layers, Building2, ChevronRight, ExternalLink, Library } from 'lucide-react';
+import { Globe2, Layers, Building2, ChevronRight, ExternalLink, Library, Film } from 'lucide-react';
 import { Country } from '../types/country';
 import { StateInfo, CityInfo } from '../types/hierarchy';
 import { COUNTRIES_DATA } from '../data/countriesData';
@@ -7,6 +7,7 @@ import { ALL_50_US_STATES } from '../data/usStatesData';
 import { ALL_NEW_YORK_CITIES } from '../data/newYorkCitiesData';
 import { CountryFlag } from './CountryFlag';
 import { WORLD_LANGUAGES } from '../data/worldLanguagesData';
+import { MOVIES_100 } from '../data/moviesData';
 import { WorldLanguage } from '../types/worldLanguage';
 import { USStateFlag } from './USStateFlag';
 
@@ -107,6 +108,7 @@ interface MinimalCapsuleLandingProps {
   onOpenStatesDirectory: () => void;
   onSelectState: (state: StateInfo) => void;
   onSelectCity?: (cityName: string) => void;
+  onOpenMoviesTimeline?: () => void;
 }
 
 export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
@@ -118,19 +120,21 @@ export const MinimalCapsuleLanding: React.FC<MinimalCapsuleLandingProps> = ({
   onOpenCountryDetail,
   onOpenStatesDirectory,
   onSelectState,
-  onSelectCity
+  onSelectCity,
+  onOpenMoviesTimeline
 }) => {
   const top10Countries = COUNTRIES_DATA.slice(0, 10);
   const top10States = ALL_50_US_STATES.slice(0, 10);
   const top10NYCities = ALL_NEW_YORK_CITIES.slice(0, 10);
   const top10Languages = WORLD_LANGUAGES.slice(0, 10);
+  const top10Movies = MOVIES_100.slice(0, 10);
 
   const newYorkState = ALL_50_US_STATES.find(s => s.code === 'NY') || ALL_50_US_STATES[0];
 
   return (
     <div className="w-full flex-1 flex flex-col items-center justify-start px-4 sm:px-6 py-4 sm:py-6 relative min-h-[82vh] space-y-6">
                   {/* 4 Prominent 10-Item Directory Columns */}
-      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3 sm:gap-4">
         {/* Column 1: Countries of the World */}
         <LandingListColumn<Country>
           title="Countries of the World"

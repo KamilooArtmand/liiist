@@ -430,6 +430,14 @@ export const App: React.FC = () => {
           <MinimalCapsuleLanding
             onOpenCultureLanguages={() => setActiveView('languages-directory')}
             onSelectLanguage={handleSelectLanguage}
+            onOpenMoviesTimeline={() => {
+              const movieL = activeLists.find(l => l.id === MOVIES_LIST_ID);
+              if (movieL) {
+                setSelectedListId(movieL.id);
+                setListViewMode('timeline');
+                setActiveView('list-detail');
+              }
+            }}
             onOpenWorldCountries={() => setActiveView('country-list')}
             onOpenWorldOverview={() => setActiveView('world-overview')}
             onSelectCountry={handleSelectCountry}
@@ -461,7 +469,6 @@ export const App: React.FC = () => {
             onGoHome={() => setActiveView('landing')}
             onOpenCountryList={() => setActiveView('country-list')}
             onOpenCultureLanguages={() => setActiveView('languages-directory')}
-            onSelectLanguage={handleSelectLanguage}
           />
         ) : activeView === 'country-list' ? (
           /* DEDICATED SOVEREIGN COUNTRIES PAGE: liii.st/World/Country */
