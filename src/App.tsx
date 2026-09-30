@@ -8,6 +8,7 @@ import { COUNTRIES_DATA } from './data/countriesData';
 import { ALL_50_US_STATES } from './data/usStatesData';
 import { MinimalHeader } from './components/MinimalHeader';
 import { MinimalCapsuleLanding } from './components/MinimalCapsuleLanding';
+import { ExploreFeedPage } from './components/ExploreFeedPage';
 import { WorldOverviewPage } from './components/WorldOverviewPage';
 import { WorldCountryPage } from './components/WorldCountryPage';
 import { CountryDetailPage } from './components/CountryDetailPage';
@@ -40,7 +41,7 @@ export const App: React.FC = () => {
 
   // App Navigation View
   const [activeView, setActiveView] = useState<
-    'landing' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
+    'landing' | 'explore-feed' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
   >('landing');
 
   // Currently selected country
@@ -210,7 +211,10 @@ export const App: React.FC = () => {
   ];
   let headerBreadcrumbPath = 'liii.st';
 
-  if (activeView === 'landing') {
+    if (activeView === 'explore-feed') {
+    headerBreadcrumbSegments.push({ label: 'Explore', isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbPath = 'liii.st/Explore';
+  } else if (activeView === 'landing') {
     headerBreadcrumbSegments.push({ label: 'World', onClick: () => setActiveView('world-overview'), hierarchyTone: 'current' });
     headerBreadcrumbSegments.push({ label: 'Country', onClick: () => setActiveView('country-list'), hierarchyTone: 'subdivision' });
     headerBreadcrumbSegments.push({ label: 'States', hierarchyTone: 'subdivision' });
@@ -354,7 +358,8 @@ export const App: React.FC = () => {
       <MinimalHeader
         onOpenUserMenu={() => setIsUserMenuOpen(true)}
         onGoHome={() => {
-          setActiveView('landing');
+          if (activeView === 'landing') setActiveView('explore-feed');
+          else setActiveView('landing');
           setSelectedCountry(null);
           setSelectedState(null);
         }}
@@ -378,8 +383,10 @@ export const App: React.FC = () => {
       />
 
       {/* Main Viewport Area */}
-      <main className="flex-1 flex flex-col items-center justify-start w-full">
-        {activeView === 'landing' ? (
+            <main className="flex-1 flex flex-col items-center justify-start w-full">
+        {activeView === 'explore-feed' ? (
+          <ExploreFeedPage />
+        ) : activeView === 'landing' ? (
           /* THE 3-COLUMN DIRECTORY LANDING: 10 Nations + 10 US States + 10 NY Cities with rich headers */
           <MinimalCapsuleLanding
             onOpenCultureLanguages={() => setActiveView('languages-directory')}
