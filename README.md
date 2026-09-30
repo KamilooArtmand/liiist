@@ -33,3 +33,10 @@ pnpm dev
 - **My.liii.st**: User-generated hyper-specific lists that dynamically influence global data.
 - **Time-Machine View**: Rewind any list to see its historical state (e.g., "Top Tech Companies in 1999").
 - **Unbiased Monetization**: Absolutely zero paid rankings. Revenue is driven by B2B Data APIs, Premium Analytics Tools, and Verified "Claim Your Page" features for brands.
+
+## Rollout Strategy (Phased Execution)
+- **Phase 0 (MVP)**: Laser focus on a single niche (e.g., Tech Tools & Software).
+- **Phase 1**: Prove and perfect the UI and the Comparison/Filtering Engine.
+- **Phase 2**: Open APIs for crowdsourcing and vertical expansion.
+
+> **Our Core Challenge**: Maintaining profound visual simplicity on the surface while managing infinite data complexity in the background. Liiist is a new infrastructural layer for the internet.
