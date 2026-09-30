@@ -1,0 +1,12 @@
+{
+  "Common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "searchCosmos": "Search Cosmos (⌘K)",
+    "noEntities": "No entities found in this dimension."
+  },
+  "Settings": {
+    "title": "Account & Security",
+    "description": "Manage your Liiist identity, active sessions, and account lifecycle."
+  }
+}
