@@ -1,11 +1,12 @@
+'use client';
 import React from 'react';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import { DangerZone, SettingsGroup, SettingsRow, ThemeToggleRow } from '@liiist/ui';
 import { Shield, Moon, Smartphone, UserX } from 'lucide-react';
 
-export default async function SettingsIndexPage({ params: { locale } }: { params: { locale: string } }) {
+export default function SettingsIndexPage({ params: { locale } }: { params: { locale: string } }) {
   // Using next-intl server-side translations
-  const t = await getTranslations('Settings');
+  const t = useTranslations('Settings');
 
   return (
     <div className="flex flex-col gap-12 max-w-3xl">
@@ -59,4 +60,5 @@ export default async function SettingsIndexPage({ params: { locale } }: { params
     </div>
   );
 }
+
 

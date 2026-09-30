@@ -3,7 +3,7 @@ import { Inter, Vazirmatn } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { InstallWidget, ThemeProvider } from '@liiist/ui';
 import { getMessages } from 'next-intl/server';
-import '../../../../src/index.css';
+import '../../index.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-primary', display: 'swap' });
 const vazirmatn = Vazirmatn({ subsets: ['arabic', 'latin'], variable: '--font-primary', display: 'swap' });
@@ -43,5 +43,7 @@ export default async function RootLayout({
     </html>
   );
 }
+
+
 
 
