@@ -9,8 +9,11 @@ interface TimelineViewProps {
 }
 
 export const TimelineView: React.FC<TimelineViewProps> = ({ list }) => {
+  if (!list.items || list.items.length === 0) return <div className="flex items-center justify-center h-full">No items in this list to display on timeline.</div>;
   const items = list.items.sort((a, b) => (a.year || 0) - (b.year || 0));
-  const [selectedItem, setSelectedItem] = useState<ListItem>(items[0]);
+  const [selectedItem, setSelectedItem] = useState<ListItem | undefined>(items[0]);
+
+  if (!selectedItem) return null;
   const [animationKey, setAnimationKey] = useState<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
