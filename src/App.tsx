@@ -3,7 +3,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import { SupportedLanguage, TRANSLATIONS } from './types/language';
 import { Country } from './types/country';
 import { StateInfo } from './types/hierarchy';
-import { BookmarkedPage } from './types';
+import { BookmarkedPage } from './types/bookmark';
 import { COUNTRIES_DATA } from './data/countriesData';
 import { ALL_50_US_STATES } from './data/usStatesData';
 import { MinimalHeader } from './components/MinimalHeader';
@@ -614,11 +614,11 @@ export const App: React.FC = () => {
       />
 
       {/* Bookmark Manager Modal */}
-      <BookmarkManagerModal
+            <BookmarkManagerModal
         isOpen={isBookmarkManagerOpen}
         onClose={() => setIsBookmarkManagerOpen(false)}
         lang={currentLang}
-        personalLists={lists}
+        personalLists={activeLists}
         cosmicLists={COSMIC_SEEDS}
         bookmarkedPages={bookmarkedPages}
         onSelectPersonalList={(id) => {
@@ -634,6 +634,7 @@ export const App: React.FC = () => {
           setIsBookmarkManagerOpen(false);
         }}
         onRemoveBookmark={(id) => setBookmarkedPages((prev) => prev.filter((p) => p.id !== id))}
+
       />
 
       {/* Settings Modal */}
