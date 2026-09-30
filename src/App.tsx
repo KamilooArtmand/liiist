@@ -108,23 +108,18 @@ export const App: React.FC = () => {
 
     // Dynamic Lists for Content Manager
   const [lists, setLists] = useLocalStorage<ListGroup[]>('liiist_user_lists', INITIAL_LISTS);
+  // Force injection of the 100 Movies list into the active session
+  const activeLists = lists.some(l => l.id === MOVIES_LIST_ID) 
+    ? lists 
+    : [MOVIES_100_LIST, ...lists];
+
 
   // Selected List for ListView
   const [selectedListId, setSelectedListId] = useState<string | null>(null);
   const [listViewMode, setListViewMode] = useState<'list' | 'board' | 'focus' | 'timeline'>('list');
 
 
-    // Ensure the 100 Movies list is injected even if localStorage already exists
-  useEffect(() => {
-    setLists(prev => {
-      if (!prev.some(l => l.id === MOVIES_LIST_ID)) {
-        return [MOVIES_100_LIST, ...prev];
-      }
-      return prev;
-    });
-  }, [setLists]);
-
-  // Toggle bookmark handler
+      // Toggle bookmark handler
   const handleToggleBookmark = (item: Omit<BookmarkedPage, 'createdAt'>) => {
     setBookmarkedPages((prev) => {
       const exists = prev.some((p) => p.id === item.id);
@@ -230,7 +225,7 @@ export const App: React.FC = () => {
 
         if (activeView === 'list-detail') {
     headerBreadcrumbSegments.push({ label: 'Lists', hierarchyTone: 'ancestor' });
-    headerBreadcrumbSegments.push({ label: lists.find(l => l.id === selectedListId)?.title || 'List', isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbSegments.push({ label: activeLists.find(l => l.id === selectedListId)?.title || 'List', isCurrent: true, hierarchyTone: 'current' });
     headerBreadcrumbPath = 'liii.st/Lists/Detail';
   } else if (activeView === 'explore-feed') {
     headerBreadcrumbSegments.push({ label: 'Explore', isCurrent: true, hierarchyTone: 'current' });
@@ -407,7 +402,7 @@ export const App: React.FC = () => {
                   <main className="flex-1 flex flex-col items-center justify-start w-full">
         {activeView === 'explore-feed' ? (
           <ExploreFeedPage onOpenMoviesTimeline={() => {
-            const movieL = lists.find(l => l.id === 'list-movies-100');
+            const movieL = activeLists.find(l => l.id === 'list-movies-100');
             if (movieL) {
               setSelectedListId(movieL.id);
               setListViewMode('timeline');
@@ -416,7 +411,7 @@ export const App: React.FC = () => {
           }} />
                 ) : activeView === 'list-detail' && selectedListId ? (
           <ListView
-            list={lists.find(l => l.id === selectedListId) || lists[0]}
+            list={activeLists.find(l => l.id === selectedListId) || activeLists[0]}
             viewMode={listViewMode}
             onChangeViewMode={setListViewMode}
             onUpdateList={(updatedList) => {
@@ -581,7 +576,7 @@ export const App: React.FC = () => {
       <ContentManagerModal
         isOpen={isContentManagerOpen}
         onClose={() => setIsContentManagerOpen(false)}
-        lists={lists}
+        lists={activeLists}
         onSelectList={(id) => { setSelectedListId(id); setListViewMode('list'); setActiveView('list-detail'); setIsContentManagerOpen(false); }}
         onDeleteList={(id) => setLists(prev => prev.filter(l => l.id !== id))}
         onCreateNewList={() => { /* stub */ setIsContentManagerOpen(false); }}
