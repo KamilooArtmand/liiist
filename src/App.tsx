@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { SupportedLanguage, TRANSLATIONS } from './types/language';
 import { Country } from './types/country';
@@ -28,6 +28,7 @@ import { AutonomousSupportModal } from './components/AutonomousSupportModal';
 import { RecursiveNodeModal } from './components/RecursiveNodeModal';
 import { CosmicItem } from './types/cosmos';
 import { INITIAL_LISTS } from './data/initialLists';
+import { MOVIES_100_LIST, MOVIES_LIST_ID } from './data/moviesListData';
 import { COSMIC_SEEDS } from './data/cosmicSeeds';
 import { ListGroup } from './types';
 import { BreadcrumbSegment } from './components/CapsuleBreadcrumb';
@@ -112,6 +113,16 @@ export const App: React.FC = () => {
   const [selectedListId, setSelectedListId] = useState<string | null>(null);
   const [listViewMode, setListViewMode] = useState<'list' | 'board' | 'focus' | 'timeline'>('list');
 
+
+    // Ensure the 100 Movies list is injected even if localStorage already exists
+  useEffect(() => {
+    setLists(prev => {
+      if (!prev.some(l => l.id === MOVIES_LIST_ID)) {
+        return [MOVIES_100_LIST, ...prev];
+      }
+      return prev;
+    });
+  }, [setLists]);
 
   // Toggle bookmark handler
   const handleToggleBookmark = (item: Omit<BookmarkedPage, 'createdAt'>) => {
