@@ -49,3 +49,19 @@ All of these paths are clickable, scalable, and expansive.
 - Read this document whenever making architectural, routing, or UI decisions.
 - Do not sacrifice the user's creative vision for standard web-dev habits.
 - Protect this Bible. This document dictates the protocol, secrets, and fundamental principles that cannot be compromised by generic AI creativity.
+
+## Strategic Innovations & Features
+To execute the vision without compromising integrity, the platform will implement the following core features:
+
+### 1. Dynamic Personalized Lists (My.liii.st)
+Beyond global objective catalogs, users can create highly specific, User-Generated Content (UGC) lists (e.g., "Best laptop-friendly cafes in Berlin"). 
+If these personal lists gain significant traction and popularity, their metadata and rankings will dynamically influence the global master lists (The Cosmos).
+
+### 2. Time-Machine View
+History and fluctuation are core data points. Liiist offers a literal Time Machine feature for lists. Users can rewind time to see exactly what the "Top Smartphones" list looked like in 2016, or observe the ranking trajectory of a specific brand over the past decade.
+
+### 3. Unbiased Monetization Model
+Because rankings are sacred and must remain purely data-driven, **Liiist explicitly forbids "Promoted Results" or paid ranking manipulation.** Instead, revenue is generated through:
+- **B2B Data API**: Selling structured data access and market trend analysis to research firms and enterprises.
+- **Premium Tools**: Offering advanced analytics, professional exports (Enterprise PDF/Excel), and deep comparison tools via user subscriptions.
+- **Claim Your Page**: Brands and entities can pay an annual verification fee to receive a "Blue Tick" and unlock custom action widgets (e.g., direct booking buttons, shop links) on their dedicated Liiist page—strictly without affecting their objective rank in any list.

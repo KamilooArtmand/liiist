@@ -28,3 +28,8 @@ pnpm install
 # Start development server
 pnpm dev
 ```
+
+## Strategic Pillars
+- **My.liii.st**: User-generated hyper-specific lists that dynamically influence global data.
+- **Time-Machine View**: Rewind any list to see its historical state (e.g., "Top Tech Companies in 1999").
+- **Unbiased Monetization**: Absolutely zero paid rankings. Revenue is driven by B2B Data APIs, Premium Analytics Tools, and Verified "Claim Your Page" features for brands.
