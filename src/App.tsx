@@ -9,6 +9,7 @@ import { ALL_50_US_STATES } from './data/usStatesData';
 import { MinimalHeader } from './components/MinimalHeader';
 import { MinimalCapsuleLanding } from './components/MinimalCapsuleLanding';
 import { ExploreFeedPage } from './components/ExploreFeedPage';
+import { MoviesTimelinePage } from './components/MoviesTimelinePage';
 import { WorldOverviewPage } from './components/WorldOverviewPage';
 import { WorldCountryPage } from './components/WorldCountryPage';
 import { CountryDetailPage } from './components/CountryDetailPage';
@@ -41,7 +42,7 @@ export const App: React.FC = () => {
 
   // App Navigation View
   const [activeView, setActiveView] = useState<
-    'landing' | 'explore-feed' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
+    'landing' | 'explore-feed' | 'movies-timeline' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
   >('landing');
 
   // Currently selected country
@@ -211,7 +212,11 @@ export const App: React.FC = () => {
   ];
   let headerBreadcrumbPath = 'liii.st';
 
-    if (activeView === 'explore-feed') {
+      if (activeView === 'movies-timeline') {
+    headerBreadcrumbSegments.push({ label: 'Explore', onClick: () => setActiveView('explore-feed'), hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'Movies 100', isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbPath = 'liii.st/Explore/Movies100';
+  } else if (activeView === 'explore-feed') {
     headerBreadcrumbSegments.push({ label: 'Explore', isCurrent: true, hierarchyTone: 'current' });
     headerBreadcrumbPath = 'liii.st/Explore';
   } else if (activeView === 'landing') {
@@ -383,9 +388,11 @@ export const App: React.FC = () => {
       />
 
       {/* Main Viewport Area */}
-            <main className="flex-1 flex flex-col items-center justify-start w-full">
+                  <main className="flex-1 flex flex-col items-center justify-start w-full">
         {activeView === 'explore-feed' ? (
-          <ExploreFeedPage />
+          <ExploreFeedPage onOpenMoviesTimeline={() => setActiveView('movies-timeline')} />
+        ) : activeView === 'movies-timeline' ? (
+          <MoviesTimelinePage onGoBack={() => setActiveView('explore-feed')} />
         ) : activeView === 'landing' ? (
           /* THE 3-COLUMN DIRECTORY LANDING: 10 Nations + 10 US States + 10 NY Cities with rich headers */
           <MinimalCapsuleLanding
@@ -410,8 +417,9 @@ export const App: React.FC = () => {
             }}
           />
                 ) : activeView === 'languages-directory' ? (
-          <LanguagesDirectoryPage 
+          <LanguagesDirectoryPage
             onBackToLanding={() => setActiveView('landing')}
+            onSelectLanguage={handleSelectLanguage}
           />
         ) : activeView === 'language-detail' && selectedLanguage ? (
           <LanguageDetailPage language={selectedLanguage} />

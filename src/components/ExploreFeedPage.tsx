@@ -120,7 +120,11 @@ const FEED_ITEMS: FeedItem[] = [
   }
 ];
 
-export const ExploreFeedPage: React.FC = () => {
+interface ExploreFeedPageProps {
+  onOpenMoviesTimeline: () => void;
+}
+
+export const ExploreFeedPage: React.FC<ExploreFeedPageProps> = ({ onOpenMoviesTimeline }) => {
   const [sortBy, setSortBy] = useState<SortOption>('editor');
   const [isSortOpen, setIsSortOpen] = useState(false);
 
