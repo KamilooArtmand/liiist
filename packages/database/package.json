@@ -9,9 +9,11 @@
     "lint": "eslint \"src/**/*.ts*\""
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.0"
+    "@supabase/supabase-js": "^2.39.0",
+    "pg": "^8.23.0"
   },
   "devDependencies": {
+    "@types/pg": "^8.23.1",
     "typescript": "^5.0.0"
   }
 }
