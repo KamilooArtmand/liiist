@@ -13,3 +13,5 @@ export * from './PrivacyToggle';
 export * from './EngagementAction';
 
 export * from './ActivityFeed';
+
+export * from './SettingsComponents';
