@@ -9,3 +9,7 @@ export * from './ProfileTabs';
 export * from './Layout';
 
 export * from './PrivacyToggle';
+
+export * from './EngagementAction';
+
+export * from './ActivityFeed';
