@@ -19,7 +19,9 @@ interface MinimalHeaderProps {
   breadcrumbPath?: string;
   isBookmarked?: boolean;
   onToggleBookmark?: () => void;
-  onGoBack?: () => void;
+    onGoBack?: () => void;
+  viewMode?: 'list' | 'board' | 'focus' | 'timeline';
+  onChangeViewMode?: (mode: 'list' | 'board' | 'focus' | 'timeline') => void;
 }
 
 export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
@@ -33,9 +35,11 @@ export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
   onOpenStatesDirectory,
   breadcrumbSegments,
   breadcrumbPath,
-  isBookmarked,
+    isBookmarked,
   onToggleBookmark,
-  onGoBack
+  onGoBack,
+  viewMode,
+  onChangeViewMode
 }) => {
   const [query, setQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -124,8 +128,33 @@ export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
         <div className="flex-1" />
       )}
 
-      {/* Right Side: Search Icon + User Icon */}
-      <div ref={searchContainerRef} className="flex items-center gap-2 relative shrink-0">
+              {/* Right Side: Search Icon + User Icon */}
+        <div ref={searchContainerRef} className="flex items-center gap-1 sm:gap-2 relative shrink-0">
+          
+          {/* View Mode Mini Capsule */}
+          {viewMode && onChangeViewMode && (
+            <div className="hidden sm:flex items-center gap-1 bg-neutral-100/60 dark:bg-neutral-800/60 rounded-full p-1 mr-2">
+              <button 
+                onClick={() => onChangeViewMode('list')}
+                className={`w-7 h-7 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${viewMode === 'list' ? 'bg-black/5 dark:bg-white/10 text-black dark:text-white' : 'text-neutral-500 hover:bg-black/5 dark:hover:bg-white/10 hover:text-neutral-800 dark:hover:text-neutral-200'}`}
+              >
+                <List className="w-3.5 h-3.5" />
+              </button>
+              <button 
+                onClick={() => onChangeViewMode('board')}
+                className={`w-7 h-7 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${viewMode === 'board' ? 'bg-black/5 dark:bg-white/10 text-black dark:text-white' : 'text-neutral-500 hover:bg-black/5 dark:hover:bg-white/10 hover:text-neutral-800 dark:hover:text-neutral-200'}`}
+              >
+                <LayoutGrid className="w-3.5 h-3.5" />
+              </button>
+              <button 
+                onClick={() => onChangeViewMode('timeline')}
+                className={`w-7 h-7 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${viewMode === 'timeline' ? 'bg-black/5 dark:bg-white/10 text-black dark:text-white' : 'text-neutral-500 hover:bg-black/5 dark:hover:bg-white/10 hover:text-neutral-800 dark:hover:text-neutral-200'}`}
+              >
+                <Eye className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
+
         {/* Animated Popover Search Bar */}
         {isSearchOpen && (
           <div className="absolute right-12 top-1/2 -translate-y-1/2 flex items-center z-50 animate-in fade-in zoom-in-95 duration-200">

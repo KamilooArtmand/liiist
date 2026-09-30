@@ -66,140 +66,119 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ list }) => {
   if (!selectedItem) return null;
 
   return (
-    <div className="flex flex-col w-full h-[calc(100vh-64px)] sm:h-[calc(100vh-140px)] bg-white dark:bg-[#000000] selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black overflow-hidden font-sans border-t border-neutral-200 dark:border-neutral-900">
+    <div className="flex flex-col w-full h-full min-h-[calc(100vh-64px)] bg-white dark:bg-[#050505] overflow-hidden font-sans">
       
-      {/* ── TOP EDITORIAL CANVAS ── */}
-      <div className="flex-1 w-full relative flex flex-col md:flex-row overflow-hidden">
+      {/* ── TOP HERO (Simple, Expansive, Readable) ── */}
+      <div className="flex-1 w-full flex flex-col justify-center relative overflow-hidden p-6 md:p-12 lg:p-20">
         
-        {/* Animated Layer */}
         <div 
           key={animationKey}
-          className="absolute inset-0 flex flex-col md:flex-row w-full h-full animate-in fade-in slide-in-from-right-8 duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="w-full h-full flex flex-col md:flex-row gap-12 lg:gap-24 animate-in fade-in slide-in-from-bottom-8 duration-[800ms] ease-out fill-mode-both items-center md:items-start max-w-none"
         >
-          {/* LEFT/CENTER: Typography & Image */}
-          <div className="flex-1 p-8 md:p-16 flex flex-col justify-between relative border-b md:border-b-0 md:border-r border-neutral-200 dark:border-neutral-900">
-            
-            <div className="flex flex-col gap-2 relative z-10">
-              <span className="text-[10rem] md:text-[14rem] lg:text-[20rem] font-black leading-none tracking-tighter text-neutral-100 dark:text-neutral-900/50 absolute -top-12 -left-4 md:-top-24 md:-left-8 pointer-events-none select-none">
+          {/* Left Column: Poster Placeholder */}
+          <div className="shrink-0 w-48 md:w-64 lg:w-80 aspect-[2/3] bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex flex-col items-center justify-center p-6 text-center rounded-2xl">
+             <span className="text-6xl lg:text-8xl font-black text-neutral-300 dark:text-neutral-700 tracking-tighter">
                 {selectedItem.year}
-              </span>
-              
-              <div className="mt-16 md:mt-32 max-w-4xl relative z-10">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-black dark:text-white uppercase tracking-tighter leading-[0.85] break-words">
-                  {selectedItem.title}
-                </h1>
-                <p className="mt-8 text-xl md:text-3xl font-serif text-neutral-600 dark:text-neutral-400">
-                  <span className="text-xs uppercase tracking-widest font-sans font-bold text-neutral-400 dark:text-neutral-600 mr-4">Directed By</span>
-                  <span className="text-black dark:text-white">{selectedItem.director}</span>
-                </p>
-              </div>
-            </div>
-
-            {/* Poster / Actions Block */}
-            <div className="mt-12 flex items-end justify-between relative z-10">
-              <div className="flex items-center gap-4">
-                <button title="Play" className="flex items-center justify-center w-14 h-14 bg-black dark:bg-white text-white dark:text-black rounded-full hover:scale-95 transition-transform duration-300 cursor-pointer">
-                  <Play className="w-5 h-5 fill-current ml-1" />
-                </button>
-                <button title="Gallery" className="flex items-center justify-center w-14 h-14 bg-white dark:bg-black border border-neutral-300 dark:border-neutral-800 text-black dark:text-white rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-300 cursor-pointer">
-                  <ImageIcon className="w-5 h-5" />
-                </button>
-              </div>
-              
-              <div className="hidden md:block w-32 h-48 bg-neutral-200 dark:bg-neutral-800 grayscale contrast-125 relative overflow-hidden shrink-0 border border-neutral-300 dark:border-neutral-700">
-                {/* Monochromatic Placeholder for Poster */}
-                <div className="absolute inset-0 flex flex-col justify-between p-3">
-                  <div className="text-[8px] font-mono font-bold uppercase text-neutral-500">{selectedItem.countryCode || 'US'} / {selectedItem.runtime}</div>
-                  <div className="text-2xl font-black text-neutral-400 tracking-tighter opacity-50">{selectedItem.year}</div>
-                </div>
-              </div>
-            </div>
-
+             </span>
+             <span className="mt-4 text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">
+                {selectedItem.countryCode || 'INT'} / {selectedItem.runtime || 'N/A'}
+             </span>
           </div>
 
-          {/* RIGHT: Strict Grid Data (The Encyclopedia) */}
-          <div className="w-full md:w-[400px] lg:w-[480px] shrink-0 flex flex-col bg-[#fafafa] dark:bg-[#0a0a0a]">
-            
-            {/* Meta Row */}
-            <div className="flex border-b border-neutral-200 dark:border-neutral-900">
-              <div className="flex-1 p-6 border-r border-neutral-200 dark:border-neutral-900 flex flex-col justify-center">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-600 mb-1">IMDb</span>
-                <span className="text-2xl font-mono font-black text-black dark:text-white flex items-center gap-2">
-                  {selectedItem.score || '-'} <Star className="w-4 h-4 text-black dark:text-white fill-current" />
-                </span>
+          {/* Right Column: Information & Details */}
+          <div className="flex-1 flex flex-col max-w-6xl">
+            {/* Meta tags */}
+            <div className="flex items-center gap-4 mb-6 text-xs font-mono font-bold uppercase tracking-widest text-neutral-500">
+              <span>{selectedItem.year}</span>
+              <div className="w-1 h-1 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
+              <div className="flex items-center gap-1">
+                 <Star className="w-3.5 h-3.5 fill-current" />
+                 {selectedItem.score || '-'}
               </div>
-              <div className="flex-1 p-6 border-r border-neutral-200 dark:border-neutral-900 flex flex-col justify-center">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-600 mb-1">Runtime</span>
-                <span className="text-xl font-mono font-bold text-black dark:text-white">
-                  {selectedItem.runtime || 'N/A'}
-                </span>
-              </div>
-              <div className="flex-1 p-6 flex flex-col justify-center">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-600 mb-1">Country</span>
-                <span className="text-xl font-mono font-bold text-black dark:text-white uppercase">
-                  {selectedItem.countryCode || '--'}
-                </span>
-              </div>
+              <div className="w-1 h-1 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
+              <span>{selectedItem.runtime}</span>
             </div>
 
-            {/* Synopsis Row */}
-            <div className="p-6 border-b border-neutral-200 dark:border-neutral-900 flex-1 overflow-y-auto no-scrollbar">
-              <span className="block text-[9px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-600 mb-4">Synopsis</span>
-              <p className="text-base leading-relaxed text-neutral-800 dark:text-neutral-300 font-serif">
-                {selectedItem.notes || 'No description available.'}
-              </p>
-            </div>
+            {/* Title */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-black dark:text-white tracking-tighter leading-[0.9] uppercase mb-8 break-words">
+              {selectedItem.title}
+            </h1>
 
-            {/* Cast & Tags Row */}
-            <div className="p-6 flex flex-col gap-6">
-              <div>
-                <span className="block text-[9px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-600 mb-3">Cast</span>
-                <div className="flex flex-col gap-1.5">
-                  {(selectedItem.cast || []).map(actor => (
-                    <span key={actor} className="text-sm font-semibold text-black dark:text-white uppercase tracking-tight">
-                      {actor}
-                    </span>
-                  ))}
+            {/* Director & Synopsis */}
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-12">
+              <div className="flex-1">
+                <span className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">Synopsis</span>
+                <p className="text-lg lg:text-xl leading-relaxed text-neutral-600 dark:text-neutral-400 font-medium">
+                  {selectedItem.notes || 'No description available.'}
+                </p>
+              </div>
+              
+              <div className="w-full lg:w-64 shrink-0 flex flex-col gap-8">
+                <div>
+                  <span className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">Director</span>
+                  <p className="text-lg font-bold text-black dark:text-white uppercase tracking-tight">
+                    {selectedItem.director || 'Unknown'}
+                  </p>
+                </div>
+                <div>
+                  <span className="block text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-2">Cast</span>
+                                    <div className="flex flex-col gap-1">
+                    {(selectedItem.cast || []).map(actor => {
+                      const initials = actor.split(' ').map(n => n[0]).join('').substring(0, 2);
+                      return (
+                        <button key={actor} className="flex items-center gap-3 py-1.5 pr-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-full transition-colors cursor-pointer group text-left">
+                          <div className="w-7 h-7 rounded-full bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center shrink-0 border border-neutral-300 dark:border-neutral-700 group-hover:border-neutral-400 dark:group-hover:border-neutral-500 transition-colors">
+                            <span className="text-[9px] font-bold text-neutral-500 dark:text-neutral-400">{initials}</span>
+                          </div>
+                          <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-black dark:group-hover:text-white uppercase tracking-wide">
+                            {actor}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-              <div>
-                <span className="block text-[9px] font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-600 mb-3">Genres</span>
-                <div className="flex flex-wrap gap-2">
-                  {(selectedItem.genre || []).map(g => (
-                    <span key={g} className="px-2 py-1 bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 text-[10px] font-mono font-bold uppercase tracking-widest text-black dark:text-white">
-                      {g}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
 
+            {/* Action Buttons (Icon Only) */}
+            <div className="flex items-center gap-4 mt-auto">
+              <button title="Play" className="flex items-center justify-center w-14 h-14 bg-black dark:bg-white text-white dark:text-black rounded-full hover:scale-105 transition-transform duration-300 cursor-pointer shadow-none">
+                <Play className="w-5 h-5 fill-current ml-1" />
+              </button>
+              <button title="Gallery" className="flex items-center justify-center w-14 h-14 bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 text-black dark:text-white rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-300 cursor-pointer shadow-none">
+                <ImageIcon className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Global Navigation Overlays */}
+        {/* Floating Global Navigation (Icon Only) */}
         <button 
           onClick={handlePrev}
           disabled={selectedItem.id === items[0].id}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 hidden md:flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 text-black dark:text-white disabled:opacity-0 transition-all duration-300 cursor-pointer z-20 hover:scale-110 rounded-full"
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-16 h-16 hidden md:flex items-center justify-center bg-transparent text-neutral-400 hover:text-black dark:hover:text-white disabled:opacity-0 transition-colors duration-300 cursor-pointer z-20"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-8 h-8" />
         </button>
         <button 
           onClick={handleNext}
           disabled={selectedItem.id === items[items.length - 1].id}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 hidden md:flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 text-black dark:text-white disabled:opacity-0 transition-all duration-300 cursor-pointer z-20 hover:scale-110 rounded-full"
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-16 h-16 hidden md:flex items-center justify-center bg-transparent text-neutral-400 hover:text-black dark:hover:text-white disabled:opacity-0 transition-colors duration-300 cursor-pointer z-20"
         >
-          <ArrowRight className="w-5 h-5" />
+          <ArrowRight className="w-8 h-8" />
         </button>
 
       </div>
 
-      {/* ── BOTTOM TIMELINE (The Precision Ruler) ── */}
-      <div className="h-[140px] md:h-[180px] shrink-0 w-full border-t border-neutral-200 dark:border-neutral-900 bg-white dark:bg-[#000000] relative overflow-hidden">
+      {/* ── BOTTOM TIMELINE (Clean, Spaced Ruler) ── */}
+      <div className="h-[200px] shrink-0 w-full border-t border-neutral-200 dark:border-neutral-900 bg-[#fafafa] dark:bg-[#0a0a0a] relative overflow-hidden group">
         
         {/* Playhead Center Marker */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-black dark:bg-white z-30 pointer-events-none -translate-x-1/2" />
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-neutral-300 dark:bg-neutral-700 z-30 pointer-events-none -translate-x-1/2 transition-colors duration-500 group-hover:bg-black dark:group-hover:bg-white" />
+        
+        {/* The Continuous Horizontal Line */}
+        <div className="absolute left-0 right-0 h-px top-[60%] -translate-y-1/2 bg-neutral-200 dark:border-neutral-800" />
         
         {/* Scroll Container */}
         <div 
@@ -214,38 +193,38 @@ export const TimelineView: React.FC<TimelineViewProps> = ({ list }) => {
                 key={item.id}
                 ref={(el) => { itemRefs.current[index] = el; }}
                 onClick={() => handleSelect(item)}
-                className={`relative w-[100px] h-full shrink-0 flex flex-col justify-end items-center cursor-pointer transition-opacity duration-500 pb-8 border-b-2 group ${
-                  isSelected ? 'border-black dark:border-white z-20' : 'border-neutral-200 dark:border-neutral-900 hover:border-neutral-400 dark:hover:border-neutral-600 opacity-40 hover:opacity-100 z-10'
+                className={`relative w-[140px] h-full shrink-0 flex flex-col justify-center items-center cursor-pointer transition-all duration-[800ms] ease-out group ${
+                  isSelected ? 'z-20 opacity-100 scale-100 mx-4' : 'z-10 opacity-30 hover:opacity-100 scale-95'
                 }`}
               >
-                {/* Vertical Ruler Tick */}
-                <div className={`absolute bottom-0 w-[1px] transition-all duration-500 ${
-                  isSelected ? 'h-8 bg-black dark:bg-white' : 'h-4 bg-neutral-300 dark:bg-neutral-800 group-hover:bg-neutral-500'
-                }`} />
-
-                {/* Info block (Animated Y offset) */}
-                <div className={`flex flex-col items-center justify-end text-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                  isSelected ? '-translate-y-6 scale-110' : '-translate-y-2'
+                {/* Info block Above the line */}
+                <div className={`absolute top-[15%] w-full px-2 flex flex-col items-center justify-end text-center transition-all duration-500 ${
+                  isSelected ? 'translate-y-0' : 'translate-y-2'
                 }`}>
-                  <span className={`text-[10px] font-bold uppercase tracking-widest mb-1 w-[90px] truncate transition-colors duration-500 ${
-                    isSelected ? 'text-black dark:text-white' : 'text-neutral-500 dark:text-neutral-600'
+                  <span className={`text-[10px] font-bold uppercase tracking-widest mb-2 w-full truncate transition-colors duration-500 ${
+                    isSelected ? 'text-black dark:text-white' : 'text-neutral-500'
                   }`}>
                     {item.title}
                   </span>
                   <span className={`text-sm font-mono font-black tracking-tighter transition-colors duration-500 ${
-                    isSelected ? 'text-black dark:text-white' : 'text-neutral-400 dark:text-neutral-700'
+                    isSelected ? 'text-black dark:text-white scale-110' : 'text-neutral-400'
                   }`}>
                     {item.year}
                   </span>
                 </div>
+
+                {/* Vertical Ruler Tick on the line */}
+                <div className={`absolute top-[60%] -translate-y-1/2 w-[2px] transition-all duration-500 ${
+                  isSelected ? 'h-8 bg-black dark:bg-white' : 'h-4 bg-neutral-300 dark:bg-neutral-700 group-hover:bg-neutral-500'
+                }`} />
               </button>
             );
           })}
         </div>
         
-        {/* Edge Gradients for scrolling context (Strictly matching background) */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-[#000000] to-transparent pointer-events-none z-20" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-[#000000] to-transparent pointer-events-none z-20" />
+        {/* Edge Gradients */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#fafafa] dark:from-[#0a0a0a] to-transparent pointer-events-none z-20" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#fafafa] dark:from-[#0a0a0a] to-transparent pointer-events-none z-20" />
       </div>
 
     </div>
