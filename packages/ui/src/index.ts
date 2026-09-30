@@ -7,3 +7,5 @@ export * from './InfiniteVirtualizedList';
 export * from './ProfileTabs';
 
 export * from './Layout';
+
+export * from './PrivacyToggle';
