@@ -544,6 +544,7 @@ export const App: React.FC = () => {
             country={selectedCountry}
             onBackToCountryList={() => setActiveView('country-list')}
             onBackToWorldOverview={() => setActiveView('world-overview')}
+            onSelectNeighborCountry={handleSelectCountry}
             onOpenStatesDirectory={() => {
               if (selectedCountry.code !== 'US') {
                 const usa = COUNTRIES_DATA.find((c) => c.code === 'US');
@@ -616,16 +617,30 @@ export const App: React.FC = () => {
       <BookmarkManagerModal
         isOpen={isBookmarkManagerOpen}
         onClose={() => setIsBookmarkManagerOpen(false)}
+        lang={currentLang}
+        personalLists={lists}
+        cosmicLists={COSMIC_SEEDS}
         bookmarkedPages={bookmarkedPages}
+        onSelectPersonalList={(id) => {
+          setSelectedListId(id);
+          setActiveView('list-detail');
+          setIsBookmarkManagerOpen(false);
+        }}
+        onSelectCosmicList={(_id) => {
+          setIsBookmarkManagerOpen(false);
+        }}
+        onSelectBookmarkedPage={(page) => {
+          handleSelectBookmarkedPage(page);
+          setIsBookmarkManagerOpen(false);
+        }}
         onRemoveBookmark={(id) => setBookmarkedPages((prev) => prev.filter((p) => p.id !== id))}
-        onSelectPage={handleSelectBookmarkedPage}
       />
 
       {/* Settings Modal */}
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
-        currentLang={currentLang}
+        lang={currentLang}
         onSelectLang={setCurrentLang}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
@@ -635,14 +650,14 @@ export const App: React.FC = () => {
       <AutonomousKernelModal
         isOpen={isKernelModalOpen}
         onClose={() => setIsKernelModalOpen(false)}
-        isDarkMode={isDarkMode}
+        lang={currentLang}
       />
 
       {/* Autonomous Support & Ticketing Modal */}
       <AutonomousSupportModal
         isOpen={isSupportModalOpen}
         onClose={() => setIsSupportModalOpen(false)}
-        isDarkMode={isDarkMode}
+        lang={currentLang}
       />
 
       {/* Infinite Recursive Sub-Directory Modal */}
@@ -650,9 +665,9 @@ export const App: React.FC = () => {
         <RecursiveNodeModal
           isOpen={isRecursiveOpen}
           onClose={() => setIsRecursiveOpen(false)}
-          parentItem={recursiveItem}
-          parentTitle={recursiveParentTitle}
-          onSelectChild={(child) => handleOpenSublist(child.title)}
+          item={recursiveItem}
+          parentListTitle={recursiveParentTitle}
+          lang={currentLang}
         />
       )}
     </div>

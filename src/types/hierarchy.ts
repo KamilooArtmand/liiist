@@ -41,7 +41,7 @@ export interface StateInfo {
   coverUrl?: string; // Representative landmark cover photo
 }
 
-export type EntityType = 'country' | 'state' | 'city' | 'brand' | 'person' | 'product';
+export type EntityType = 'country' | 'state' | 'city' | 'brand' | 'person' | 'product' | 'language';
 
 export interface IndexSection {
   id: string;

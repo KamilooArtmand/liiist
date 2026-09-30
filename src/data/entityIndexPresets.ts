@@ -54,4 +54,12 @@ export const ENTITY_INDEX_PRESETS: Record<EntityType, IndexSection[]> = {
     { id: 'ecosystem', title: 'Compatibility', iconName: 'Compass' },
     { id: 'origin', title: 'Manufacturing Origin', iconName: 'Factory' },
   ],
+  language: [
+    { id: 'overview', title: 'Overview', iconName: 'BookOpen' },
+    { id: 'classification', title: 'Classification', iconName: 'Layers' },
+    { id: 'geography', title: 'Geographic Distribution', iconName: 'Map' },
+    { id: 'phonology', title: 'Phonology & Accents', iconName: 'Mic2' },
+    { id: 'writing', title: 'Writing System', iconName: 'Palette' },
+    { id: 'history', title: 'History & Evolution', iconName: 'Compass' },
+  ],
 };

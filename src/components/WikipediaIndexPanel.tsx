@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   BookOpen, Landmark, Languages, Users, Coins, Award,
   Scale, Trophy, Palette, Flag, Factory, Compass,
-  Trees, Layers, ListFilter, Building2,
+  Trees, Layers, ListFilter, Building2, Map, Mic2,
 } from 'lucide-react';
 import { EntityType, IndexSection } from '../types/hierarchy';
 import { ENTITY_INDEX_PRESETS } from '../data/entityIndexPresets';
@@ -36,6 +36,8 @@ function Icon({ name }: { name?: string }) {
     case 'Compass':    return <Compass    className={cls} />;
     case 'Trees':      return <Trees      className={cls} />;
     case 'Building2':  return <Building2  className={cls} />;
+    case 'Map':        return <Map        className={cls} />;
+    case 'Mic2':       return <Mic2       className={cls} />;
     default:           return <ListFilter className={cls} />;
   }
 }
