@@ -1,100 +1,30 @@
-# 🌌 liiist — The Universal Directory of Everything
-### *Domain: liii.st • WORLD DATA DNA Core • Token-Based Monochromatic OS (White / Gray / Black) • Inter Variable • Bento Grid*
+# liiist
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](https://opensource.org/licenses/MIT)
-[![Domain: liii.st](https://img.shields.io/badge/Domain-liii.st-black.svg)](#)
-[![Search: Clean Top--Right Icon Trigger](https://img.shields.io/badge/Search-Header%20Icon%20Popover-black.svg)](#)
-[![Footer: Universal Sticky Route Capsule](https://img.shields.io/badge/Footer-Universal%20Route%20Capsule-black.svg)](#)
-[![INDEX: Strict LTR Left Alignment](https://img.shields.io/badge/INDEX-Left%20Aligned%20LTR-black.svg)](#)
-[![State: New York Deep Coverage](https://img.shields.io/badge/New%20York-24%20Cities%20%2B%20Full%20Articles-black.svg)](#)
-[![Stack: React 19 + Express + Gemini](https://img.shields.io/badge/Stack-React%2019%20%7C%20Express%20%7C%20Gemini-black.svg)](#)
-[![Design: Pure Monochrome Token System](https://img.shields.io/badge/Palette-White%20%7C%20Gray%20%7C%20Black-gray.svg)](#)
+> 1 world 1 list.
 
----
+**liiist** is the most comprehensive, intelligent, and expansive list in human history. Anything in the universe that can be counted, collected, categorized, and tagged belongs in liiist. We bring order to the world's data, making access fast, easy, affordable, delightful, and error-free.
 
-## 🌐 Language Navigation / ڕێبەری زمانەکان / راهنمای زبان‌ها / دليل اللغات
-- [English](#-english-overview)
-- [فارسی (Persian)](#-معرفی-به-زبان-فارسی)
-- [کوردی سۆرانی (Kurdish Sorani)](#-ناساندن-بە-زمانی-کوردی-سۆرانی)
-- [العربية (Arabic)](#-نظرة-عامة-باللغة-العربية)
+## The Vision
+The conceptual foundation of listing everything stems from human nature: humanity is forever seeking the best, the freshest, the cheapest, the closest, and the most popular. By listing everything and sorting/comparing based on features and Metadata, the "best choice" is no longer random, dictated, fake, or strictly promotional.
 
----
+From all the books in the world, to every cafe, restaurant, hotel, celebrity, city, village, software, application, website, disease, medicine, brand, flag, logo, word, and language—**everything will be listed.**
 
-## 🇬🇧 English Overview
+## Naming Philosophy
+The project is named **liiist** because the icon and symbol of a list is essentially **iii**. If you rotate it 90 degrees to the left, it forms the shape of a list (≡). Visually, a column (line) and an avatar (circle) perfectly evoke the `i` in our identity.
 
-### 1. Unified Search Icon Beside User Profile
-- Floating circular search button at the top-right next to the user menu icon.
-- Clicking the search icon opens a flyout typing bar with keyboard autofocus, live search across 195 nations and 50 US states, and instant keyboard dismiss.
+## Architecture
+Every list has an infinite, endless column. Every list has a dedicated page. Every item inside the list has its own dedicated page. All paths are transparent and infinitely hierarchical:
+- `liii.st > World > Continent > Country > State > City > Village`
+- `liii.st > World > People > Culture > Cinema > Movie`
 
-### 2. Consolidated Route Capsule in the Footer
-- The hierarchical breadcrumb bar has been centralized into the bottom footer (`FooterCapsuleBreadcrumb`), clearing up the top header area.
-- 3-tone color hierarchy from backward ancestors (medium), active page (bold capsule), down to smallest subdivisions (faded).
+## Design System
+See our [Product Bible](./docs/LIIIST_BIBLE.md) for strict architectural and UX protocols. Liiist is built on extreme minimalism, stark contrast (Black/White/Gray), flat surfaces (no shadows, no blurs), and expansive cinematic typography.
 
-### 3. Left-Aligned INDEX Panel (LTR Standard)
-- Interactive collapsible index column is positioned on the **left side** of country and state layouts, respecting Left-To-Right reading flow.
-
-### 4. New York State Comprehensive Knowledge Base
-- Full deep profile of New York State with 24 incorporated cities, statehood history, Wall Street and UN cultural hubs, $2.15T economy, prominent enterprises, and verified Wikipedia sources.
-
----
-
-## 🇮🇷 معرفی به زبان فارسی
-
-### ۱. آیکون شیشه‌ای جستجو در کنار کاربر
-- تبدیل میله سرچ به یک آیکون مدرن و شناور در کنار آیکون پروفایل کاربر، با کلیک یک ورودی شیشه‌ای با قابلیت جستجوی زنده در ۱۹۵ کشور و ۵۰ ایالت باز می‌شود.
-
-### ۲. انتقال کامل میله مسیر صفحات به فوتر (Bottom Capsule)
-- حذف میله‌های تکراری از بالای صفحات و یکپارچه‌سازی کامل در فوتر سایت با سیستم ۳ رنگ (متوسط، برجسته، کمرنگ) تا کوچک‌ترین واحد تقسیمی (روستا).
-
-### ۳. چپ‌چین بودن ستون ایندکس (استاندارد LTR)
-- ستون INDEX برای سازگاری کامل با استانداردهای خوانش انگلیسی به سمت چپ صفحه منتقل شد.
-
-### ۴. تکمیل جامع ایالت نیویورک
-- ثبت ۲۴ شهر اصلی نیویورک، تاریخ الحاق ۱۷۸۸، تولید ناخالص ۲۱۵۰ میلیارد دلاری، برندهای جهانی و مقالات دانشنامه‌ای.
-
----
-
-## ☀️ ناساندن بە زمانی کوردی سۆرانی
-
-### ١. ئایکۆنی گەڕان لە تەنیشت بەکارهێنەر
-- گۆڕینی شریتی گەڕان بۆ ئایکۆنێکی بازنەیی جوان لە تەنیشت پڕۆفایل لەگەڵ گەڕانی دینامیکی و خێرا.
-
-### ٢. شریتی ڕێڕەو لە خوارەوە لە ناو فووتەر
-- کۆکردنەوەی شریتی ڕێڕەوی پەڕەکان لە خوارەوەی پەڕەدا بە ٣ ڕەنگ تا ئاستی گوند.
-
-### ٣. ستوونی ئیندێکس لە لای چەپ بە پێی LTR
-- گواستنەوەی پێڕست بۆ لای چەپ بەپێی زمانی ئینگلیزی.
-
-### ٤. زانیاری دەوڵەمەندی ویلایەتی نیویۆرک و ٢٤ شارەکەی
-- تۆمارکردنی سەرجەم شارە سەرەکییەکان و کلتوور و ئابووری نیویۆرک.
-
----
-
-## 🇸🇦 نظرة عامة باللغة العربية
-
-### ١. أيقونة البحث الأنيقة بجوار المستخدم
-- تحويل شريط البحث إلى زر أيقونة عائم يفتح نافذة بحث تفاعلية فورية بضغطة زر.
-
-### ٢. مسار التنقل الكبسولي في التذييل (Footer)
-- نقل شريط المسارات كاملاً إلى أسفل الشاشة بتدرج لوني ثلاثي حتى مستوى القرية.
-
-### ٣. محاذاة الفهرس إلى اليسار (LTR)
-- وضع لوحة الفهرس القابلة للطي على يسار المحتوى لتتوافق مع نظام القراءة الإنجليزي.
-
-### ٤. استكمال شامل لولاية نيويورك و24 مدينة
-- قاعدة بيانات شاملة لكافة المدن الكبرى والمؤشرات الاقتصادية والتاريخية.
-
----
-
-## 🛠️ Run & Verify
-
+## Development
 ```bash
-# Start development full-stack server (Port 3000)
-npm run dev
+# Install dependencies
+pnpm install
 
-# TypeScript type check & build
-npm run build
-
-# Run linter
-npm run lint
+# Start development server
+pnpm dev
 ```

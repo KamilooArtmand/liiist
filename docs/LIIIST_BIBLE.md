@@ -1,23 +1,51 @@
 # Liiist Product Bible & Design System
 
-## 1. Core Philosophy
-Liiist is an ultimate, expansive encyclopedia and cataloging platform. It is NOT a standard web app. It is a premium, cutting-edge cinematic experience built on editorial, Bauhaus, and Swiss design principles.
+## The Grand Vision: "1 World 1 List"
+The **liiist** project, hosted on the liii.st domain, is the largest, most comprehensive, and most intelligent list in human history. 
 
-## 2. Strict UI/UX Rules
-- **Color Palette**: STRICTLY Monochrome (White, Gray, Black). Do not use soft pastel colors, ambers, or blue primary buttons unless explicitly asked. Focus on stark contrast.
-- **Surface & Depth**: FLAT DESIGN ONLY. **Absolutely NO drop shadows (shadow-md, etc.) and NO backdrop-blurs (ackdrop-blur).** Elevations are handled by hairline borders (order-[0.5px], order-neutral-200/900) and stark background color contrast.
-- **Layout & Space**: Expansive layouts. Do NOT restrict main content to narrow central columns (max-w-4xl) unless it's a specific modal or reading block. Let grids stretch edge-to-edge.
-- **Typography**: Cinematic and Editorial. Use huge watermarked texts (	ext-[10rem]+, 	racking-tighter, absolute positioning with z-[-1]) behind main titles. Use uppercase monospaced fonts for metadata and tags.
-- **Icons**: Icon-only interfaces for actions. Do not write "Back" or "Play Trailer" next to icons. Use pure, minimal icons. On hover, use soft transparent glass/gray circles (g-black/5 or g-white/10).
-- **Posters/Images**: Movie posters and catalog covers should have curved edges (ounded-xl or ounded-2xl) and default to grayscale with high contrast, transitioning to color/sharpness on active states.
-- **Animations**: Fluid, spring-like, and cinematic. Use cubic-bezier easing, duration-700 or duration-1000.
+Anything in the universe that can be counted, collected, categorized, and tagged belongs in **liiist**. By adhering to the philosophy of **"1 world 1 list"**, we bring order to the world's data, making access fast, easy, affordable, delightful, and error-free.
 
-## 3. Information Architecture (The Cosmos)
-- **Hierarchy is everything**: Every entity belongs to a deep path. Example: liii.st/World/Culture/Art/Cinema/Movie.
-- **View Modes**: Features like "Timeline" or "Board" are **View Modes** for Lists, NOT separate standalone pages. A Timeline is just a way to view data that has dates (Inventions, Wars, Movies).
-- **Entities**: Every item (e.g., a Movie, an Actor, a Country, a State) has its own dedicated Detail Page. Clicking a movie from a list should open the Movie Detail Page, not default to a timeline. Clicking an Actor should open an Artist Profile Page.
+The conceptual foundation of listing everything stems from human nature: humanity is forever seeking the best, the freshest, the cheapest, the closest, and the most popular. By listing everything and sorting/comparing based on features and Metadata, the "best choice" is no longer random, dictated, fake, or strictly promotional.
 
-## 4. Development Protocol (The Machine's Directive)
-- Read this document whenever making architectural or UI decisions.
-- Never override the user's creative vision with default web-dev habits (like adding shadows or max-widths).
-- Always maintain the BreadcrumbSegment logic to reflect the deep path.
+From all the books in the world, to every cafe, restaurant, hotel, celebrity, city, village, software, application, website, disease, medicine, brand, flag, logo, word, and language—**everything will be listed.**
+
+## Infinite Information Architecture
+For every list, there is an infinite, endless column. 
+Every list has a dedicated page. Every page contains the most comprehensive and up-to-date information on its subject, and **every option inside the list also has its own dedicated page.**
+
+Even if it is a single word, a product, or a character... all information, knowledge, opinions, and history concerning it have a dedicated page. And on this page, information can be accessed in all living languages of the world. For example, the page for the word "Book" is accessible in all languages, showing its meanings, synonyms, usage, etymology, and scientific context.
+
+The list gathers the history, price fluctuations, events, news, documents, links, and opinions for *everything*.
+
+## Naming Philosophy
+The project is named **liiist** because the icon and symbol of a list is essentially **iii**. If you rotate it 90 degrees to the left, it forms the shape of a list (≡).
+
+Furthermore, when a column and a list of data are stacked, it visually represents a straight vertical line and a circle (or square)! The line is the title/text, and the circle is the logo/icon/cover of the item. Together, columns placed side-by-side perfectly form a | (the column) and a . (the cover)—which at any state evokes the exact form and identity of our logo iii.
+
+## Domain Strategy & Geographical Routing
+We operate on two primary domains: liiist.app and liii.st, separating different services.
+
+Every country will have its own dedicated subdomain, defining the **Geography of Data**. For instance:
+- germany.liii.st: The Explore and Landing pages will feature news, events, tricks, goods, personalities, movies, books, products, and brands specifically listed for Germany, displayed in the German language.
+
+We will also utilize niche subdomains, such as:
+- kid.liii.st: A dedicated realm where all services, goods, content, and lists are entirely related to children.
+
+Every list possesses a transparent and direct routing hierarchy. Examples:
+- **Geographical Division**: liii.st > World > Continent > Country > State > City > Village
+- **Cinema & Art**: liii.st > World > People > Culture > Cinema > Movie
+
+All of these paths are clickable, scalable, and expansive.
+
+## Strict UI/UX Rules
+- **Color Palette**: STRICTLY Monochrome (White, Gray, Black). Focus on stark contrast. No colorful accents unless requested.
+- **Surface & Depth**: FLAT DESIGN ONLY. **Absolutely NO drop shadows (shadow-md, etc.) and NO backdrop-blurs (ackdrop-blur).**
+- **Layout & Space**: Expansive layouts (Edge-to-Edge). Let grids stretch.
+- **Typography**: Cinematic and Editorial. Large, bold, tightly-tracked typography.
+- **Icons**: Icon-only interfaces for actions. Hover effects use pure transparent glass circles (g-black/5 or g-white/10).
+- **Posters/Images**: Movie posters and catalog covers should have curved edges (ounded-2xl).
+
+## Development Protocol (The Machine's Directive)
+- Read this document whenever making architectural, routing, or UI decisions.
+- Do not sacrifice the user's creative vision for standard web-dev habits.
+- Protect this Bible. This document dictates the protocol, secrets, and fundamental principles that cannot be compromised by generic AI creativity.

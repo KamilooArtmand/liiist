@@ -14,14 +14,19 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Google GenAI Server Client
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-  httpOptions: {
-    headers: {
-      'User-Agent': 'aistudio-build',
+let ai: GoogleGenAI | undefined;
+try {
+  ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY || 'MOCK_KEY_FOR_DEV',
+    httpOptions: {
+      headers: {
+        'User-Agent': 'aistudio-build',
+      },
     },
-  },
-});
+  });
+} catch (e: any) {
+  console.warn('GoogleGenAI init failed:', e.message);
+}
 
 // Autonomous Kernel State in Memory
 let autonomousLog = [

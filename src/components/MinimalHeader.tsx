@@ -102,14 +102,16 @@ export const MinimalHeader: React.FC<MinimalHeaderProps> = ({
 
   return (
     <header className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3 sm:gap-6 z-40 shrink-0 relative">
-      {/* Left: Brand logo strictly lowercase "liiist" */}
+            {/* Left: Brand logo strictly lowercase "liiist" */}
       <button
         type="button"
         onClick={onGoHome}
-        className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-950 dark:text-white lowercase select-none cursor-pointer hover:opacity-80 transition-opacity shrink-0"
+        className="text-xl sm:text-2xl font-black tracking-tight text-neutral-950 dark:text-white lowercase select-none cursor-pointer hover:opacity-80 transition-opacity shrink-0 flex items-center"
         aria-label="liiist home"
       >
-        liiist
+        <span>l</span>
+        <span className="tracking-[-0.05em]">iii</span>
+        <span>st</span>
       </button>
 
       {/* Center: Dynamic Rounded Hierarchy Route Capsule Breadcrumb placed directly between Logo and Search Icon */}

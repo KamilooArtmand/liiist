@@ -245,14 +245,14 @@ export const App: React.FC = () => {
     } else if (activeView === 'movies-directory') {
     headerBreadcrumbSegments.push({ label: 'World', hierarchyTone: 'ancestor' });
     headerBreadcrumbSegments.push({ label: 'Culture', hierarchyTone: 'ancestor' });
-    headerBreadcrumbSegments.push({ label: 'Art', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: 'People', hierarchyTone: 'ancestor' });
     headerBreadcrumbSegments.push({ label: 'Cinema', hierarchyTone: 'ancestor' });
     headerBreadcrumbSegments.push({ label: 'Movies', isCurrent: true, hierarchyTone: 'current' });
-    headerBreadcrumbPath = 'liii.st/World/Culture/Art/Cinema/Movie';
+    headerBreadcrumbPath = 'liii.st/World/People/Culture/Cinema/Movie';
   } else if (activeView === 'movie-detail' && selectedMovie) {
     headerBreadcrumbSegments.push({ label: 'Cinema', hierarchyTone: 'ancestor', onClick: () => setActiveView('movies-directory') });
     headerBreadcrumbSegments.push({ label: selectedMovie.title, isCurrent: true, hierarchyTone: 'current' });
-    headerBreadcrumbPath = 'liii.st/World/Culture/Art/Cinema/Movie/' + selectedMovie.title.replace(/\s+/g, '');
+    headerBreadcrumbPath = 'liii.st/World/People/Culture/Cinema/Movie/' + selectedMovie.title.replace(/\s+/g, '');
   } else if (activeView === 'languages-directory') {
     headerBreadcrumbSegments.push({ label: 'World', onClick: () => setActiveView('world-overview'), hierarchyTone: 'ancestor' });
     headerBreadcrumbSegments.push({ label: 'Culture', hierarchyTone: 'ancestor' });
