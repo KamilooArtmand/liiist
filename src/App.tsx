@@ -412,7 +412,6 @@ export const App: React.FC = () => {
                 ) : activeView === 'languages-directory' ? (
           <LanguagesDirectoryPage 
             onBackToLanding={() => setActiveView('landing')}
-            onSelectLanguage={handleSelectLanguage}
           />
         ) : activeView === 'language-detail' && selectedLanguage ? (
           <LanguageDetailPage language={selectedLanguage} />

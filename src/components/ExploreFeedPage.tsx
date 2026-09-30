@@ -12,7 +12,8 @@ import {
   Globe2,
   Trophy,
   History,
-  LineChart
+  LineChart,
+  ChevronRight
 } from 'lucide-react';
 
 type SortOption = 'newest' | 'views' | 'likes' | 'editor';
