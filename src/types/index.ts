@@ -24,6 +24,14 @@ export interface ListItem {
   subtasks?: Subtask[];
   createdAt: string;
   completedAt?: string;
+  // Timeline & Media Fields
+  year?: number;
+  director?: string;
+  countryCode?: string;
+  runtime?: string;
+  cast?: string[];
+  genre?: string[];
+  coverColor?: string;
 }
 
 export interface ListGroup {
@@ -41,5 +49,5 @@ export interface ListGroup {
   updatedAt: string;
 }
 
-export type ViewMode = 'list' | 'board' | 'focus';
+export type ViewMode = 'list' | 'board' | 'focus' | 'timeline';
 export type FilterStatus = 'all' | 'active' | 'completed';

@@ -8,8 +8,8 @@ import { COUNTRIES_DATA } from './data/countriesData';
 import { ALL_50_US_STATES } from './data/usStatesData';
 import { MinimalHeader } from './components/MinimalHeader';
 import { MinimalCapsuleLanding } from './components/MinimalCapsuleLanding';
+import { ListView } from './components/ListView';
 import { ExploreFeedPage } from './components/ExploreFeedPage';
-import { MoviesTimelinePage } from './components/MoviesTimelinePage';
 import { WorldOverviewPage } from './components/WorldOverviewPage';
 import { WorldCountryPage } from './components/WorldCountryPage';
 import { CountryDetailPage } from './components/CountryDetailPage';
@@ -42,7 +42,7 @@ export const App: React.FC = () => {
 
   // App Navigation View
   const [activeView, setActiveView] = useState<
-    'landing' | 'explore-feed' | 'movies-timeline' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
+    'landing' | 'explore-feed' | 'list-detail' | 'world-overview' | 'country-list' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail'
   >('landing');
 
   // Currently selected country
@@ -105,8 +105,13 @@ export const App: React.FC = () => {
     }
   ]);
 
-  // Dynamic Lists for Content Manager
+    // Dynamic Lists for Content Manager
   const [lists, setLists] = useLocalStorage<ListGroup[]>('liiist_user_lists', INITIAL_LISTS);
+
+  // Selected List for ListView
+  const [selectedListId, setSelectedListId] = useState<string | null>(null);
+  const [listViewMode, setListViewMode] = useState<'list' | 'board' | 'focus' | 'timeline'>('list');
+
 
   // Toggle bookmark handler
   const handleToggleBookmark = (item: Omit<BookmarkedPage, 'createdAt'>) => {
@@ -212,10 +217,10 @@ export const App: React.FC = () => {
   ];
   let headerBreadcrumbPath = 'liii.st';
 
-      if (activeView === 'movies-timeline') {
-    headerBreadcrumbSegments.push({ label: 'Explore', onClick: () => setActiveView('explore-feed'), hierarchyTone: 'ancestor' });
-    headerBreadcrumbSegments.push({ label: 'Movies 100', isCurrent: true, hierarchyTone: 'current' });
-    headerBreadcrumbPath = 'liii.st/Explore/Movies100';
+        if (activeView === 'list-detail') {
+    headerBreadcrumbSegments.push({ label: 'Lists', hierarchyTone: 'ancestor' });
+    headerBreadcrumbSegments.push({ label: lists.find(l => l.id === selectedListId)?.title || 'List', isCurrent: true, hierarchyTone: 'current' });
+    headerBreadcrumbPath = 'liii.st/Lists/Detail';
   } else if (activeView === 'explore-feed') {
     headerBreadcrumbSegments.push({ label: 'Explore', isCurrent: true, hierarchyTone: 'current' });
     headerBreadcrumbPath = 'liii.st/Explore';
@@ -390,9 +395,30 @@ export const App: React.FC = () => {
       {/* Main Viewport Area */}
                   <main className="flex-1 flex flex-col items-center justify-start w-full">
         {activeView === 'explore-feed' ? (
-          <ExploreFeedPage onOpenMoviesTimeline={() => setActiveView('movies-timeline')} />
-        ) : activeView === 'movies-timeline' ? (
-          <MoviesTimelinePage onGoBack={() => setActiveView('explore-feed')} />
+          <ExploreFeedPage onOpenMoviesTimeline={() => {
+            const movieL = lists.find(l => l.id === 'list-movies-100');
+            if (movieL) {
+              setSelectedListId(movieL.id);
+              setListViewMode('timeline');
+              setActiveView('list-detail');
+            }
+          }} />
+                ) : activeView === 'list-detail' && selectedListId ? (
+          <ListView
+            list={lists.find(l => l.id === selectedListId) || lists[0]}
+            viewMode={listViewMode}
+            onChangeViewMode={setListViewMode}
+            onUpdateList={(updatedList) => {
+              setLists(prev => prev.map(l => l.id === updatedList.id ? updatedList : l));
+            }}
+            onEditListMeta={() => {}}
+            onExportList={() => {}}
+            onSelectItem={() => {}}
+            onDeleteList={(id) => {
+              setLists(prev => prev.filter(l => l.id !== id));
+              setActiveView('landing');
+            }}
+          />
         ) : activeView === 'landing' ? (
           /* THE 3-COLUMN DIRECTORY LANDING: 10 Nations + 10 US States + 10 NY Cities with rich headers */
           <MinimalCapsuleLanding
@@ -545,7 +571,10 @@ export const App: React.FC = () => {
         isOpen={isContentManagerOpen}
         onClose={() => setIsContentManagerOpen(false)}
         lists={lists}
-        onUpdateLists={setLists}
+        onSelectList={(id) => { setSelectedListId(id); setListViewMode('list'); setActiveView('list-detail'); setIsContentManagerOpen(false); }}
+        onDeleteList={(id) => setLists(prev => prev.filter(l => l.id !== id))}
+        onCreateNewList={() => { /* stub */ setIsContentManagerOpen(false); }}
+        onExportList={() => {}}
         lang={currentLang}
       />
 

@@ -20,7 +20,9 @@ import {
   Eye
 } from 'lucide-react';
 import { BoardView } from './BoardView';
+import { TimelineView } from './TimelineView';
 import { FocusView } from './FocusView';
+import { Navigation } from 'lucide-react';
 
 interface ListViewProps {
   list: ListGroup;
@@ -328,7 +330,7 @@ export const ListView: React.FC<ListViewProps> = ({
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 p-6 md:p-8 max-w-4xl mx-auto w-full space-y-6">
+      <div className={viewMode === 'timeline' ? 'flex-1 w-full p-0' : 'flex-1 w-full p-6 md:p-8 max-w-4xl mx-auto space-y-6'}>
         {viewMode === 'board' ? (
           <BoardView
             list={list}
@@ -346,6 +348,8 @@ export const ListView: React.FC<ListViewProps> = ({
               onUpdateList({ ...list, items: [newItem, ...list.items] });
             }}
           />
+                ) : viewMode === 'timeline' ? (
+          <TimelineView list={list} />
         ) : viewMode === 'focus' ? (
           <FocusView
             list={list}
