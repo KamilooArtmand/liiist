@@ -211,6 +211,7 @@ export const ExploreFeedPage: React.FC<ExploreFeedPageProps> = ({ onOpenMoviesTi
           return (
             <button
               key={item.id}
+              onClick={() => { if (item.id === 'movies-100') onOpenMoviesTimeline(); }}
               className={`group relative text-left bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-[24px] overflow-hidden hover:border-neutral-400 dark:hover:border-neutral-600 transition-all duration-300 flex flex-col cursor-pointer ${spanClasses}`}
             >
               {/* Soft Watercolor Background Gradient */}
