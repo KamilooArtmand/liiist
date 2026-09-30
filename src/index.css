@@ -2,57 +2,49 @@
 
 @layer theme {
   :root {
-    /* ==============================================================
-       1. CORE GREYSCALE (12-STEP) - LIGHT MODE
-       Precision Titanium & Slate Greys ensuring AAA WCAG compliance
-    ============================================================== */
+    /* Core Grey (Light) */
     --gray-0: #FFFFFF;
-    --gray-1: #F9FAFB; /* Surface Subtle */
-    --gray-2: #F3F4F6; /* Surface Elevated */
-    --gray-3: #E5E7EB; /* Border Subtle */
-    --gray-4: #D1D5DB; /* Border Default */
-    --gray-5: #9CA3AF; /* Text Muted / Icons */
-    --gray-6: #6B7280; /* Text Tertiary */
-    --gray-7: #4B5563; /* Text Secondary (WCAG AA) */
-    --gray-8: #374151; /* Text Primary Alt (WCAG AAA) */
-    --gray-9: #1F2937; /* Text Primary (WCAG AAA) */
+    --gray-1: #F9FAFB;
+    --gray-2: #F3F4F6;
+    --gray-3: #E5E7EB;
+    --gray-4: #D1D5DB;
+    --gray-5: #9CA3AF;
+    --gray-6: #6B7280;
+    --gray-7: #4B5563;
+    --gray-8: #374151;
+    --gray-9: #1F2937;
     --gray-10: #111827;
     --gray-11: #030712;
     --gray-12: #000000;
 
-    /* ==============================================================
-       2. SEMANTIC COLOR TOKENS
-    ============================================================== */
+    /* Semantic Tokens */
     --color-bg-primary: var(--gray-0);
     --color-bg-secondary: var(--gray-1);
     --color-bg-tertiary: var(--gray-2);
-    
     --color-border-subtle: var(--gray-3);
     --color-border-strong: var(--gray-4);
-    
     --color-text-primary: var(--gray-11);
     --color-text-secondary: var(--gray-7);
     --color-text-tertiary: var(--gray-5);
     --color-text-inverse: var(--gray-0);
 
-    /* ==============================================================
-       3. TYPOGRAPHY SCALES (Tracking & Leading)
-    ============================================================== */
+    /* Typography Scales */
     --tracking-editorial-tighter: -0.06em;
     --tracking-editorial-tight: -0.03em;
     --tracking-editorial-base: -0.01em;
     --tracking-editorial-wide: 0.05em;
     --tracking-editorial-widest: 0.2em;
-
     --leading-editorial-tight: 0.9;
     --leading-editorial-snug: 1.1;
     --leading-editorial-relaxed: 1.6;
+
+    /* Fluid Typography */
+    --text-fluid-h1: clamp(2.5rem, 5vw + 1rem, 5rem);
+    --text-fluid-h2: clamp(1.5rem, 3vw + 0.5rem, 3rem);
+    --text-fluid-p: clamp(1rem, 1vw + 0.5rem, 1.125rem);
   }
 
   .dark {
-    /* ==============================================================
-       CORE GREYSCALE (12-STEP) - DARK MODE (INVERTED)
-    ============================================================== */
     --gray-0: #000000;
     --gray-1: #0A0A0B;
     --gray-2: #121214;
@@ -67,28 +59,13 @@
     --gray-11: #FAFAFA;
     --gray-12: #FFFFFF;
 
-    /* Re-map semantic tokens for dark mode */
-    --color-bg-primary: var(--gray-0);
-    --color-bg-secondary: var(--gray-1);
-    --color-bg-tertiary: var(--gray-2);
-    
-    --color-border-subtle: var(--gray-3);
-    --color-border-strong: var(--gray-4);
-    
-    --color-text-primary: var(--gray-11);
-    --color-text-secondary: var(--gray-8); /* Adjusted for AAA Dark contrast */
-    --color-text-tertiary: var(--gray-6);
-    --color-text-inverse: var(--gray-0);
+    --color-text-secondary: var(--gray-8);
   }
 }
 
-/* ==============================================================
-   TAILWIND v4 THEME MAPPINGS
-============================================================== */
 @theme {
   --color-background: var(--color-bg-primary);
   --color-foreground: var(--color-text-primary);
-  
   --color-primary: var(--color-text-primary);
   --color-secondary: var(--color-bg-secondary);
   --color-muted: var(--color-bg-tertiary);
@@ -99,22 +76,20 @@
   --letter-spacing-base: var(--tracking-editorial-base);
   --letter-spacing-wide: var(--tracking-editorial-wide);
   --letter-spacing-widest: var(--tracking-editorial-widest);
+
+  /* STRICT TYPOGRAPHY OVERRIDES */
+  /* We map the Tailwind default fonts strictly to our variables injected by Next.js */
+  --font-sans: var(--font-primary);
+  --font-serif: var(--font-primary); /* Liiist relies purely on the variable sans font */
+  --font-mono: var(--font-primary);
 }
 
 @layer utilities {
-  /* ==============================================================
-     4. DIMENSIONAL IDENTITY CLASSES (| and o)
-     Strict dimensional consistency across the codebase
-  ============================================================== */
-  
-  /* The '|' Column Bar */
   .liiist-bar {
     width: 2px;
     background-color: var(--color-text-primary);
     flex-shrink: 0;
   }
-
-  /* The 'o' Cover Primitive (Circle) */
   .liiist-cover-o {
     aspect-ratio: 1 / 1;
     border-radius: 9999px;
@@ -126,11 +101,9 @@
     overflow: hidden;
     flex-shrink: 0;
   }
-
-  /* The '[]' Cover Primitive (Square with curved edges per Bible) */
   .liiist-cover-square {
     aspect-ratio: 1 / 1;
-    border-radius: 1rem; /* rounded-2xl */
+    border-radius: 1rem;
     border: 1px solid var(--color-border-subtle);
     background-color: var(--color-bg-secondary);
     display: flex;
@@ -145,15 +118,6 @@
   body {
     background-color: var(--color-bg-primary);
     color: var(--color-text-primary);
-    font-family: 'Inter', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /* Font family is handled globally by Next.js variable injection + Tailwind config */
   }
-}
-
-@layer theme {
-  /* Fluid Typography using clamp() (320px to 1440px viewport) */
-  --text-fluid-h1: clamp(2.5rem, 5vw + 1rem, 5rem);
-  --text-fluid-h2: clamp(1.5rem, 3vw + 0.5rem, 3rem);
-  --text-fluid-p: clamp(1rem, 1vw + 0.5rem, 1.125rem);
 }
