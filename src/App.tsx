@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocalStorage } from './hooks/hooks-useLocalStorage';
+import { Info } from 'lucide-react';
 import { SupportedLanguage, TRANSLATIONS } from './types/types-language';
 import { Country } from './types/types-country';
 import { StateInfo } from './types/types-hierarchy';
@@ -40,7 +41,7 @@ import { InstallWidget } from './components/components-InstallWidget';
 import { BentoGrid } from './components/components-BentoGrid';
 import { AuthUI } from './components/components-AuthUI';
 import { CreateListModal } from './components/components-CreateListModal';
-
+import { ManifestoPage } from './components/components-ManifestoPage';
 export const App: React.FC = () => {
   // Multilingual state
   const [currentLang, setCurrentLang] = useLocalStorage<SupportedLanguage>('liiist_lang', 'en');
@@ -51,7 +52,7 @@ export const App: React.FC = () => {
 
   // App Navigation View
   const [activeView, setActiveView] = useState<
-    'landing' | 'explore-feed' | 'list-detail' | 'world-overview' | 'country-list' | 'movies-directory' | 'movie-detail' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail' | 'bento'
+    'landing' | 'explore-feed' | 'list-detail' | 'world-overview' | 'country-list' | 'movies-directory' | 'movie-detail' | 'country-detail' | 'states-directory' | 'state-detail' | 'languages-directory' | 'language-detail' | 'bento' | 'manifesto'
   >('landing');
 
   // Auth Modal State
@@ -493,6 +494,8 @@ export const App: React.FC = () => {
             movie={selectedMovie}
             onBack={() => setActiveView('movies-directory')}
           />
+        ) : activeView === 'manifesto' ? (
+          <ManifestoPage />
         ) : activeView === 'bento' ? (
           <div className="w-full max-w-7xl mx-auto py-8 px-4">
             <div className="flex items-center justify-between mb-8 pb-4 border-b border-neutral-200 dark:border-neutral-800">
@@ -779,6 +782,17 @@ export const App: React.FC = () => {
             />
           </div>
         </div>
+      )}
+
+      {/* Floating Info Button for Manifesto */}
+      {activeView !== 'manifesto' && (
+        <button
+          onClick={() => setActiveView('manifesto')}
+          className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:scale-105 transition-all"
+          aria-label="Manifesto"
+        >
+          <Info size={24} strokeWidth={1.5} />
+        </button>
       )}
     </div>
   );
