@@ -1,47 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { SupportedLanguage, TRANSLATIONS } from './types/language';
-import { Country } from './types/country';
-import { StateInfo } from './types/hierarchy';
-import { BookmarkedPage } from './types/bookmark';
-import { COUNTRIES_DATA } from './data/countriesData';
-import { ALL_50_US_STATES } from './data/usStatesData';
-import { MinimalHeader } from './components/MinimalHeader';
-import { MinimalCapsuleLanding } from './components/MinimalCapsuleLanding';
-import { ListView } from './components/ListView';
-import { ExploreFeedPage } from './components/ExploreFeedPage';
-import { WorldOverviewPage } from './components/WorldOverviewPage';
-import { WorldCountryPage } from './components/WorldCountryPage';
-import { CountryDetailPage } from './components/CountryDetailPage';
-import { StatesDirectoryPage } from './components/StatesDirectoryPage';
-import { StateDetailPage } from './components/StateDetailPage';
-import { LanguagesDirectoryPage } from './components/LanguagesDirectoryPage';
-import { LanguageDetailPage } from './components/LanguageDetailPage';
-import { MoviesDirectoryPage } from './components/MoviesDirectoryPage';
-import { MovieDetailPage } from './components/MovieDetailPage';
-import { ListItem } from './types';
-import { WorldLanguage } from './types/worldLanguage';
-import { UserMenuPanel, UserMenuSection } from './components/UserMenuPanel';
-import { ProfileModal } from './components/ProfileModal';
-import { ContentManagerModal } from './components/ContentManagerModal';
-import { BookmarkManagerModal } from './components/BookmarkManagerModal';
-import { SettingsModal } from './components/SettingsModal';
-import { AutonomousKernelModal } from './components/AutonomousKernelModal';
-import { AutonomousSupportModal } from './components/AutonomousSupportModal';
-import { RecursiveNodeModal } from './components/RecursiveNodeModal';
-import { CosmicItem } from './types/cosmos';
-import { INITIAL_LISTS } from './data/initialLists';
-import { MOVIES_100_LIST, MOVIES_LIST_ID } from './data/moviesListData';
-import { COSMIC_SEEDS } from './data/cosmicSeeds';
-import { ListGroup } from './types';
-import { BreadcrumbSegment } from './components/CapsuleBreadcrumb';
-import { CommandBar, InstallWidget, BentoGrid, AuthUI } from '@liiist/ui';
-import { ModernLiiistExperience } from './components/ModernLiiistExperience';
+import { useLocalStorage } from './hooks/hooks-useLocalStorage';
+import { SupportedLanguage, TRANSLATIONS } from './types/types-language';
+import { Country } from './types/types-country';
+import { StateInfo } from './types/types-hierarchy';
+import { BookmarkedPage } from './types/types-bookmark';
+import { COUNTRIES_DATA } from './data/data-countriesData';
+import { ALL_50_US_STATES } from './data/data-usStatesData';
+import { MinimalHeader } from './components/components-MinimalHeader';
+import { MinimalCapsuleLanding } from './components/components-MinimalCapsuleLanding';
+import { ListView } from './components/components-ListView';
+import { ExploreFeedPage } from './components/components-ExploreFeedPage';
+import { WorldOverviewPage } from './components/components-WorldOverviewPage';
+import { WorldCountryPage } from './components/components-WorldCountryPage';
+import { CountryDetailPage } from './components/components-CountryDetailPage';
+import { StatesDirectoryPage } from './components/components-StatesDirectoryPage';
+import { StateDetailPage } from './components/components-StateDetailPage';
+import { LanguagesDirectoryPage } from './components/components-LanguagesDirectoryPage';
+import { LanguageDetailPage } from './components/components-LanguageDetailPage';
+import { MoviesDirectoryPage } from './components/components-MoviesDirectoryPage';
+import { MovieDetailPage } from './components/components-MovieDetailPage';
+import { ListItem } from './types/types-index';
+import { WorldLanguage } from './types/types-worldLanguage';
+import { UserMenuPanel, UserMenuSection } from './components/components-UserMenuPanel';
+import { ProfileModal } from './components/components-ProfileModal';
+import { ContentManagerModal } from './components/components-ContentManagerModal';
+import { BookmarkManagerModal } from './components/components-BookmarkManagerModal';
+import { SettingsModal } from './components/components-SettingsModal';
+import { AutonomousKernelModal } from './components/components-AutonomousKernelModal';
+import { AutonomousSupportModal } from './components/components-AutonomousSupportModal';
+import { RecursiveNodeModal } from './components/components-RecursiveNodeModal';
+import { CosmicItem } from './types/types-cosmos';
+import { INITIAL_LISTS } from './data/data-initialLists';
+import { MOVIES_100_LIST, MOVIES_LIST_ID } from './data/data-moviesListData';
+import { COSMIC_SEEDS } from './data/data-cosmicSeeds';
+import { ListGroup } from './types/types-index';
+import { BreadcrumbSegment } from './components/components-CapsuleBreadcrumb';
+import { CommandBar } from './components/components-CommandBar';
+import { InstallWidget } from './components/components-InstallWidget';
+import { BentoGrid } from './components/components-BentoGrid';
+import { AuthUI } from './components/components-AuthUI';
+import { CreateListModal } from './components/components-CreateListModal';
 
 export const App: React.FC = () => {
-  // Experience Mode: Default to 'modern' (Linear/Framer monochromatic architecture)
-  const [experienceMode, setExperienceMode] = useState<'modern' | 'classic'>('modern');
-
   // Multilingual state
   const [currentLang, setCurrentLang] = useLocalStorage<SupportedLanguage>('liiist_lang', 'en');
   const t = TRANSLATIONS[currentLang];
@@ -56,6 +56,9 @@ export const App: React.FC = () => {
 
   // Auth Modal State
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+
+  // CommandBar Search Palette State
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Currently selected country
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -81,6 +84,7 @@ export const App: React.FC = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isKernelModalOpen, setIsKernelModalOpen] = useState(false);
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+  const [isCreateListOpen, setIsCreateListOpen] = useState(false);
 
   // Infinite recursive modal node
   const [isRecursiveOpen, setIsRecursiveOpen] = useState(false);
@@ -129,6 +133,30 @@ export const App: React.FC = () => {
   // Selected List for ListView
   const [selectedListId, setSelectedListId] = useState<string | null>(null);
   const [listViewMode, setListViewMode] = useState<'list' | 'board' | 'focus' | 'timeline'>('list');
+
+  const userCatalogLists = lists.filter(l => l.origin === 'user' && l.id !== MOVIES_LIST_ID);
+
+  const openUserList = (id: string) => {
+    setSelectedListId(id);
+    setListViewMode('list');
+    setActiveView('list-detail');
+  };
+
+  const handleCreateList = (draft: Omit<ListGroup, 'id' | 'createdAt' | 'updatedAt'>) => {
+    const now = new Date().toISOString();
+    const id = `list-user-${Date.now()}`;
+    const created: ListGroup = {
+      ...draft,
+      id,
+      origin: 'user',
+      createdAt: now,
+      updatedAt: now,
+      items: draft.items || []
+    };
+    setLists(prev => [created, ...prev]);
+    setSelectedListId(id);
+    setActiveView('landing');
+  };
 
 
       // Toggle bookmark handler
@@ -391,28 +419,9 @@ export const App: React.FC = () => {
     }
   };
 
-  if (experienceMode === 'modern') {
-    return (
-      <ModernLiiistExperience
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-        onOpenClassicApp={() => setExperienceMode('classic')}
-      />
-    );
-  }
-
   return (
     <div className="flex flex-col min-h-screen w-screen overflow-x-hidden bg-neutral-50 dark:bg-black font-sans text-neutral-900 dark:text-neutral-100 transition-colors">
-      {/* Banner to switch to Modern Monochromatic Architecture */}
-      <div className="w-full bg-black text-white dark:bg-white dark:text-black py-2 px-4 text-center text-xs font-bold uppercase tracking-wider flex items-center justify-between z-50">
-        <span>Viewing Classic Prototype</span>
-        <button 
-          onClick={() => setExperienceMode('modern')}
-          className="underline hover:opacity-80 transition cursor-pointer font-mono"
-        >
-          Switch to v2.0 Linear/Framer Experience →
-        </button>
-      </div>
+
 
       {/* Strict Minimal Top Header with Capsule Route Breadcrumb placed right between Logo and Search Icon */}
       <MinimalHeader
@@ -440,6 +449,8 @@ export const App: React.FC = () => {
         isBookmarked={isCurrentHeaderBookmarked}
         onToggleBookmark={handleHeaderToggleBookmark}
         onGoBack={activeView !== 'landing' ? handleHeaderGoBack : undefined}
+        onCreateList={() => setIsCreateListOpen(true)}
+        onOpenSearch={() => setIsSearchOpen(true)}
       />
 
       {/* Main Viewport Area */}
@@ -528,6 +539,9 @@ export const App: React.FC = () => {
                 handleSelectState(ny);
               }
             }}
+            userLists={userCatalogLists}
+            onCreateList={() => setIsCreateListOpen(true)}
+            onOpenUserList={openUserList}
           />
                 ) : activeView === 'languages-directory' ? (
           <LanguagesDirectoryPage
@@ -662,7 +676,10 @@ export const App: React.FC = () => {
         lists={activeLists}
         onSelectList={(id) => { setSelectedListId(id); setListViewMode('list'); setActiveView('list-detail'); setIsContentManagerOpen(false); }}
         onDeleteList={(id) => setLists(prev => prev.filter(l => l.id !== id))}
-        onCreateNewList={() => { /* stub */ setIsContentManagerOpen(false); }}
+        onCreateNewList={() => {
+          setIsContentManagerOpen(false);
+          setIsCreateListOpen(true);
+        }}
         onExportList={() => {}}
         lang={currentLang}
       />
@@ -701,6 +718,12 @@ export const App: React.FC = () => {
         onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
 
+      <CreateListModal
+        isOpen={isCreateListOpen}
+        onClose={() => setIsCreateListOpen(false)}
+        onCreate={handleCreateList}
+      />
+
       {/* Autonomous System Kernel Modal */}
       <AutonomousKernelModal
         isOpen={isKernelModalOpen}
@@ -727,7 +750,7 @@ export const App: React.FC = () => {
       )}
 
       {/* Global ⌘K Command Palette (Framer Motion Fluid Dynamics) */}
-      <CommandBar />
+      <CommandBar isOpen={isSearchOpen} onOpenChange={setIsSearchOpen} />
 
       {/* Smart OS-Aware PWA Install Widget */}
       <InstallWidget />

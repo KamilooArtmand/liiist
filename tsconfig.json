@@ -14,7 +14,10 @@
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@liiist/ui": ["./packages/ui/src/index.ts"]
+    }
   },
   "include": ["src", "server.ts"]
 }

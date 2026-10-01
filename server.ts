@@ -107,6 +107,10 @@ app.post('/api/directory/synthesize', async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Prompt is required' });
   }
 
+  if (!ai) {
+    return res.status(503).json({ error: 'AI service unavailable: GEMINI_API_KEY missing' });
+  }
+
   try {
     const systemPrompt = `You are Liiist Autonomous Cosmos OS — the omniscient directory of everything in the universe.
 Your mission is to synthesize an exhaustive, impeccably structured list based on the user prompt.
@@ -188,6 +192,10 @@ app.post('/api/directory/expand-node', async (req: Request, res: Response) => {
   const { nodeTitle, sublistPrompt, category = 'custom', language = 'en' } = req.body;
   if (!nodeTitle) {
     return res.status(400).json({ error: 'nodeTitle is required' });
+  }
+
+  if (!ai) {
+    return res.status(503).json({ error: 'AI service unavailable: GEMINI_API_KEY missing' });
   }
 
   try {
@@ -276,6 +284,10 @@ Key Traits:
     const userPrompt = historyText
       ? `${historyText}\nUser: ${message}\nLiiist AI Concierge:`
       : `User: ${message}\nLiiist AI Concierge:`;
+
+    if (!ai) {
+      return res.status(503).json({ error: 'AI service unavailable: GEMINI_API_KEY missing' });
+    }
 
     const response = await ai.models.generateContent({
       model: 'gemini-3.8-flash',
