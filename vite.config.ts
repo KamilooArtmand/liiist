@@ -6,6 +6,9 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  define: {
+    'process.env': {},
+  },
   resolve: {
     alias: {
       '@liiist/ui': path.resolve(__dirname, 'packages/ui/src'),

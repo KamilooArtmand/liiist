@@ -2,7 +2,6 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 
 export interface ListItem {
@@ -28,6 +27,8 @@ export const InfiniteVirtualizedList: React.FC<InfiniteVirtualizedListProps> = (
   const [isFetching, setIsFetching] = useState(false);
   const parentRef = useRef<HTMLDivElement>(null);
 
+  const hasNextPage = items.length < totalCount;
+
   // Tanstack Virtualizer for 60fps high-performance scrolling
   const rowVirtualizer = useVirtualizer({
     count: hasNextPage ? items.length + 1 : items.length,
@@ -36,7 +37,6 @@ export const InfiniteVirtualizedList: React.FC<InfiniteVirtualizedListProps> = (
     overscan: 10, // Render extra items outside viewport to prevent flickering
   });
 
-  const hasNextPage = items.length < totalCount;
   const virtualItems = rowVirtualizer.getVirtualItems();
 
   const loadMore = useCallback(async () => {
@@ -99,12 +99,10 @@ export const InfiniteVirtualizedList: React.FC<InfiniteVirtualizedListProps> = (
                   {/* Identity: The 'o' (Geometric Primitive Cover) */}
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-neutral-100 dark:bg-neutral-900 shrink-0 border border-neutral-200 dark:border-neutral-800 overflow-hidden relative z-10 flex items-center justify-center">
                     {item.cover_url ? (
-                      <Image
+                      <img
                         src={item.cover_url}
                         alt={item.title}
-                        fill
-                        className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                        sizes="56px"
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                         loading="lazy"
                       />
                     ) : (
