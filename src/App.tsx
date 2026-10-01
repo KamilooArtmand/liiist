@@ -36,8 +36,12 @@ import { COSMIC_SEEDS } from './data/cosmicSeeds';
 import { ListGroup } from './types';
 import { BreadcrumbSegment } from './components/CapsuleBreadcrumb';
 import { CommandBar, InstallWidget, BentoGrid, AuthUI } from '@liiist/ui';
+import { ModernLiiistExperience } from './components/ModernLiiistExperience';
 
 export const App: React.FC = () => {
+  // Experience Mode: Default to 'modern' (Linear/Framer monochromatic architecture)
+  const [experienceMode, setExperienceMode] = useState<'modern' | 'classic'>('modern');
+
   // Multilingual state
   const [currentLang, setCurrentLang] = useLocalStorage<SupportedLanguage>('liiist_lang', 'en');
   const t = TRANSLATIONS[currentLang];
@@ -387,8 +391,29 @@ export const App: React.FC = () => {
     }
   };
 
+  if (experienceMode === 'modern') {
+    return (
+      <ModernLiiistExperience
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+        onOpenClassicApp={() => setExperienceMode('classic')}
+      />
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen w-screen overflow-x-hidden bg-neutral-50 dark:bg-black font-sans text-neutral-900 dark:text-neutral-100 transition-colors">
+      {/* Banner to switch to Modern Monochromatic Architecture */}
+      <div className="w-full bg-black text-white dark:bg-white dark:text-black py-2 px-4 text-center text-xs font-bold uppercase tracking-wider flex items-center justify-between z-50">
+        <span>Viewing Classic Prototype</span>
+        <button 
+          onClick={() => setExperienceMode('modern')}
+          className="underline hover:opacity-80 transition cursor-pointer font-mono"
+        >
+          Switch to v2.0 Linear/Framer Experience →
+        </button>
+      </div>
+
       {/* Strict Minimal Top Header with Capsule Route Breadcrumb placed right between Logo and Search Icon */}
       <MinimalHeader
         onOpenUserMenu={() => setIsUserMenuOpen(true)}
